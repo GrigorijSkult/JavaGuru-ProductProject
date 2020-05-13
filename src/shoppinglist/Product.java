@@ -3,7 +3,7 @@ package shoppinglist;
 import java.math.BigDecimal;
 
 public class Product {
-
+//test
     private Long id;
     private String name;
     private BigDecimal price;
