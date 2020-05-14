@@ -1,15 +1,18 @@
-package shoppinglist;
+package shoppingList.UI;
+
+import shoppingList.domain.Product;
+import shoppingList.domain.ProductCategory;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-class ShoppingListApplication {
+public class ProductMainUI {
 
-    public static void main(String[] args) {
+    public void mainUI(){
         Map<Long, Product> productRepository = new HashMap<>();
-        Long productIdSequence = 0L;
+        Long productIdSequence = 1L;
         while (true) {
             Scanner scanner = new Scanner(System.in);
             try {
@@ -23,13 +26,13 @@ class ShoppingListApplication {
                         String name = scanner.nextLine();
                         System.out.println("Enter product price: ");
                         BigDecimal price = new BigDecimal(scanner.nextLine());
-                        Product product = new Product();
-                        product.setName(name);
-                        product.setPrice(price);
-                        product.setId(productIdSequence);
+                        Product product = new Product(productIdSequence,name, price, ProductCategory.NO_DATA);
+//                        product.setProductName(name);
+//                        product.setProductActualPrice(price);
+//                        product.setProductId(productIdSequence);
                         productRepository.put(productIdSequence, product);
                         productIdSequence++;
-                        System.out.println("Result: " + product.getId());
+                        System.out.println("Result: " + product.getProductId());
                     case 2:
                         System.out.println("Enter product id: ");
                         long id = scanner.nextLong();
