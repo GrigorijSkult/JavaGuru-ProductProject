@@ -2,15 +2,17 @@ package shoppingList.businessLogic.services;
 
 import shoppingList.businessLogic.services.exception.DbContainsSimilarProductException;
 import shoppingList.businessLogic.services.exception.ItemIDNofFoundException;
+import shoppingList.businessLogic.validations.ProductValidationService;
 import shoppingList.database.ProductRepositoryImp;
 import shoppingList.domain.Product;
 
 import java.util.Collections;
 import java.util.List;
 
-public class ProductService implements TemplateService<Product>{
+public class ProductService implements TemplateService<Product> {
 
     ProductRepositoryImp productRepositoryImp;
+    ProductValidationService validationService = new ProductValidationService();
 
     public ProductService(ProductRepositoryImp productRepositoryImp) {
         this.productRepositoryImp = productRepositoryImp;
@@ -18,21 +20,25 @@ public class ProductService implements TemplateService<Product>{
 
     @Override
     public boolean addProductService(Product newProduct) throws DbContainsSimilarProductException {
-        //validation of a new product
-        if (productRepositoryImp.doesDbContainsSimilarProduct(newProduct)){
-            throw new DbContainsSimilarProductException(newProduct);
-        }else {
-            productRepositoryImp.addProduct(newProduct);
-            return true;
+        if (validationService.isValid(newProduct)) {
+            if (productRepositoryImp.doesDbContainsSimilarProduct(newProduct)) {
+                throw new DbContainsSimilarProductException(newProduct);
+            } else {
+                productRepositoryImp.addProduct(newProduct);
+                return true;
+            }
+        }else{
+            System.out.println(validationService.errorMessage());
+            return false;
         }
     }
 
     @Override
     public boolean removeProductByIDService(Long id) throws ItemIDNofFoundException {
-        if(productRepositoryImp.doesDbContainsId(id)){
+        if (productRepositoryImp.doesDbContainsId(id)) {
             productRepositoryImp.removeProductByID(id);
             return true;
-        }else {
+        } else {
             throw new ItemIDNofFoundException(id);
         }
     }
@@ -50,16 +56,16 @@ public class ProductService implements TemplateService<Product>{
 
     @Override
     public Product findProductByID(Long id) throws ItemIDNofFoundException {
-        if(doesDbContainsIdService(id)){
+        if (doesDbContainsIdService(id)) {
             return productRepositoryImp.findProductByID(id);
-        }else{
+        } else {
             throw new ItemIDNofFoundException(id);
         }
     }
 
 
     //Additional methods
-    public boolean doesDbContainsIdService(Long id){
+    public boolean doesDbContainsIdService(Long id) {
         return productRepositoryImp.doesDbContainsId(id);
     }
 }
