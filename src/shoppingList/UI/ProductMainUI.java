@@ -50,6 +50,10 @@ public class ProductMainUI {
         RemoveProductByIdUI removeProductByIdUI = new RemoveProductByIdUI(productService);
         ListOfAllProductsUI listOfAllProductsUI = new ListOfAllProductsUI(productService);
         FindProductByIdUI findProductByIdUI = new FindProductByIdUI(productService);
+        /////////////
+        //For Test
+        DevelopmentFiles_AddProducts devAdd = new DevelopmentFiles_AddProducts(productService);
+        /////////////
 
         boolean continueProgram = true;
         do {
@@ -61,6 +65,7 @@ public class ProductMainUI {
                     "3. Show all products in the DB;" + "\n" +
                     "4. Delete product by product ID" + "\n" +
                     "8. End program." + "\n" +
+                    "9. [DEVELOPMENT] add 3 new products." + "\n" +
                     "");
             System.out.print("Select option: ");
             Scanner sc = new Scanner(System.in);
@@ -83,6 +88,9 @@ public class ProductMainUI {
                     //...
                     case 8:
                         continueProgram = false;
+                        break;
+                    case 9:
+                        devAdd.test();
                         break;
                     default:
                         // code block?

@@ -6,11 +6,12 @@ public class ProductDescriptionValidation implements ValidationForm<Product> {
 
     @Override
     public boolean isValid(Product product) {
-        return product.getProductDescription().isEmpty() || product.getProductDescription().length() <= 999;
+        return (product.getProductDescription() == null || (product.getProductDescription().isEmpty()))
+                || product.getProductDescription().length() <= 999;
     }
 
     public boolean isValid(String productDescription) {
-        return productDescription.isEmpty() || productDescription.length() <= 999;
+        return productDescription == null || productDescription.length() <= 999;
     }
 
 
