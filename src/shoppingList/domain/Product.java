@@ -15,8 +15,7 @@ public class Product implements TemplateDB {
     private String productDescription;
     private BigDecimal productActualPrice;
 
-    public Product(Long productId, String productName, BigDecimal productRegularPrice, ProductCategory productCategory) {
-        this.productId = productId;
+    public Product(String productName, BigDecimal productRegularPrice, ProductCategory productCategory) {
         this.productName = productName;
         this.productRegularPrice = productRegularPrice;
         this.productCategory = productCategory;
@@ -25,8 +24,7 @@ public class Product implements TemplateDB {
         this.productActualPrice = productRegularPrice;
     }
 
-    public Product(Long productId, String productName, BigDecimal productRegularPrice, ProductCategory productCategory, BigDecimal productDiscount, String productDescription) {
-        this.productId = productId;
+    public Product( String productName, BigDecimal productRegularPrice, ProductCategory productCategory, BigDecimal productDiscount, String productDescription) {
         this.productName = productName;
         this.productRegularPrice = productRegularPrice;
         this.productCategory = productCategory;

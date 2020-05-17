@@ -1,17 +1,15 @@
 package shoppingList.UI;
 
-import shoppingList.domain.Product;
-import shoppingList.domain.ProductCategory;
+import shoppingList.businessLogic.services.ProductService;
+import shoppingList.database.ProductRepositoryImp;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class ProductMainUI {
 
-    public void mainUI(){
-        Map<Long, Product> productRepository = new HashMap<>();
+    public void mainUI() {
+        //old logic
+        /*Map<Long, Product> productRepository = new HashMap<>();
         Long productIdSequence = 1L;
         while (true) {
             Scanner scanner = new Scanner(System.in);
@@ -44,6 +42,56 @@ public class ProductMainUI {
             } catch (Exception e) {
                 System.out.println("Error! Please try again.");
             }
-        }
+        }*/
+
+        //new logic
+        ProductService productService = new ProductService(new ProductRepositoryImp());
+        AddProductUI addProductUI = new AddProductUI(productService);
+        RemoveProductByIdUI removeProductByIdUI = new RemoveProductByIdUI(productService);
+        ListOfAllProductsUI listOfAllProductsUI = new ListOfAllProductsUI(productService);
+        FindProductByIdUI findProductByIdUI = new FindProductByIdUI(productService);
+
+        boolean continueProgram = true;
+        do {
+            System.out.print("Products DataBase" + "\n" +
+                    "-----------------" + "\n" +
+                    "Please choose your action:" + "\n" +
+                    "1. Add new product to the DB;" + "\n" +
+                    "2. Find product by ID;" + "\n" +
+                    "3. Show all products in the DB;" + "\n" +
+                    "4. Delete product by product ID" + "\n" +
+                    "8. End program." + "\n" +
+                    "");
+            System.out.print("Select option: ");
+            Scanner sc = new Scanner(System.in);
+            try {
+                String userChoiceString = sc.nextLine();
+                int userChoice = Integer.parseInt(userChoiceString);
+                switch (userChoice) {
+                    case 1:
+                        addProductUI.addProductUI();
+                        break;
+                    case 2:
+                        findProductByIdUI.findProductByID();
+                        break;
+                    case 3:
+                        listOfAllProductsUI.ListOfAllProducts();
+                        break;
+                    case 4:
+                        removeProductByIdUI.removeProductByIdUI();
+                        break;
+                    //...
+                    case 8:
+                        continueProgram = false;
+                        break;
+                    default:
+                        // code block?
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter correct value!");
+            }
+            System.out.println("-/-/-/--/-");
+        } while (continueProgram);
+        System.out.println("Program is stopped");
     }
 }
