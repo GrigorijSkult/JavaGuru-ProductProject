@@ -14,6 +14,5 @@ public class ListOfAllProductsUI {
         for (Product product : productService.listOfAllProductsService()) {
             System.out.println(product);
         }
-//        System.out.println("End of the product list;"); // is it necessary ?
     }
 }
