@@ -10,7 +10,7 @@ public class ListOfAllProductsUI {
         this.productService = productService;
     }
 
-    public void ListOfAllProducts() {
+    public void listOfAllProducts() {
         for (Product product : productService.listOfAllProductsService()) {
             System.out.println(product);
         }

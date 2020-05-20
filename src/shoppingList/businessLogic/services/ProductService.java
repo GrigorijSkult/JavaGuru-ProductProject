@@ -18,6 +18,7 @@ public class ProductService implements TemplateService<Product> {
         this.productRepositoryImp = productRepositoryImp;
     }
 
+    //Main methods
     @Override
     public boolean addProductService(Product newProduct) throws DbContainsSimilarProductException {
         if (validationService.isValid(newProduct)) {

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-public class Product implements TemplateDB {
+public class Product{
 
     private Long productId;
     private String productName;
