@@ -1,10 +1,12 @@
-package shoppingList.database;
+package shoppingList.repository;
+
+import shoppingList.domain.Product;
 
 import java.util.List;
 
 public interface Repository<T> {
 
-    void addProduct(T newProduct);
+    Product addProduct(T newProduct);
 
     void removeProductByID(Long id);
 
@@ -12,6 +14,6 @@ public interface Repository<T> {
 
     T findProductByID(Long id);
 
-//    void updateProductInformation();
+//    void updateProductInformation(Long id);
 
 }

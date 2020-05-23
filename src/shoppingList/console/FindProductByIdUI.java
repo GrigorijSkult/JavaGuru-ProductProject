@@ -1,7 +1,7 @@
-package shoppingList.UI;
+package shoppingList.console;
 
-import shoppingList.businessLogic.services.ProductService;
-import shoppingList.businessLogic.services.exception.ItemIDNofFoundException;
+import shoppingList.services.businessLogic.ProductService;
+import shoppingList.services.validations.exception.ItemIDNofFoundException;
 
 import java.util.Scanner;
 

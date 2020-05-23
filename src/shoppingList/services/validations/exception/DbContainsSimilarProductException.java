@@ -1,8 +1,8 @@
-package shoppingList.businessLogic.services.exception;
+package shoppingList.services.validations.exception;
 
 import shoppingList.domain.Product;
 
-public class DbContainsSimilarProductException extends Error{
+public class DbContainsSimilarProductException extends RuntimeException{
 
     Product similarProduct;
 

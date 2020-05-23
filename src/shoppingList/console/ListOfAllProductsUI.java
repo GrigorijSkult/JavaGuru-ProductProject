@@ -1,6 +1,6 @@
-package shoppingList.UI;
+package shoppingList.console;
 
-import shoppingList.businessLogic.services.ProductService;
+import shoppingList.services.businessLogic.ProductService;
 import shoppingList.domain.Product;
 
 public class ListOfAllProductsUI {

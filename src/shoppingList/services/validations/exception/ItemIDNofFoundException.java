@@ -1,6 +1,6 @@
-package shoppingList.businessLogic.services.exception;
+package shoppingList.services.validations.exception;
 
-public class ItemIDNofFoundException extends Error{
+public class ItemIDNofFoundException extends RuntimeException{
 
     private final Long itemNotFoundNumber;
 

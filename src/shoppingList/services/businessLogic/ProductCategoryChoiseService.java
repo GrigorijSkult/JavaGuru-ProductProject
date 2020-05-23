@@ -1,10 +1,16 @@
-package shoppingList.businessLogic.services;
+package shoppingList.services.businessLogic;
 
 import shoppingList.domain.ProductCategory;
+import shoppingList.services.validations.ProductCategoryValidation;
+import shoppingList.services.validations.exception.ProductValidationException;
 
 public class ProductCategoryChoiseService {
-    public ProductCategory productCategoryIntChoice(int productCategoryNumber) {
+
+    private final ProductCategoryValidation categoryValidation = new ProductCategoryValidation();
+
+    public ProductCategory productCategoryIntChoice(int productCategoryNumber) throws ProductValidationException {
         ProductCategory productCategory;
+        categoryValidation.categoryNumberIsValid(productCategoryNumber);
         switch (productCategoryNumber) {
             case 1:
                 productCategory = ProductCategory.MEAT_AND_MEAT_PRODUCTS;

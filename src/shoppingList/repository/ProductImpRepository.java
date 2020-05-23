@@ -1,4 +1,4 @@
-package shoppingList.database;
+package shoppingList.repository;
 
 import shoppingList.domain.Product;
 
@@ -7,16 +7,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ProductRepositoryImp implements Repository<Product> {
+public class ProductImpRepository implements Repository<Product> {
+
     private long newProductId = 1;
-    private Map<Long, Product> productsDB = new HashMap<>();
+    private final Map<Long, Product> productsDB = new HashMap<>();
 
     //Main methods
     @Override
-    public void addProduct(Product newProduct) {
+    public Product addProduct(Product newProduct) {
         newProduct.setProductId(newProductId);
         productsDB.put(newProductId, newProduct);
         newProductId++;
+        return newProduct;
     }
 
     @Override
@@ -33,7 +35,6 @@ public class ProductRepositoryImp implements Repository<Product> {
     public Product findProductByID(Long id) {
         return productsDB.get(id);
     }
-
 
     //Additional methods
     public boolean doesDbContainsSimilarProduct(Product product) {
