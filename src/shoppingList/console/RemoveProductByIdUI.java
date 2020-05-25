@@ -1,7 +1,7 @@
-package shoppingList.UI;
+package shoppingList.console;
 
-import shoppingList.businessLogic.services.ProductService;
-import shoppingList.businessLogic.services.exception.ItemIDNofFoundException;
+import shoppingList.services.businessLogic.ProductService;
+import shoppingList.services.validations.exception.ProductNotFoundException;
 
 import java.util.Scanner;
 
@@ -13,13 +13,13 @@ public class RemoveProductByIdUI {
         this.productService = productService;
     }
 
-    public void removeProductByIdUI(){
+    public void removeProductByIdUI() {
         System.out.print("Please enter the product ID number to be deleted:");
         Scanner sc = new Scanner(System.in);
         Long id = sc.nextLong();
         try {
             if (productService.doesDbContainsIdService(id)) {
-            System.out.println("You would like to delete: " + productService.findProductByID(id));
+                System.out.println("You would like to delete: " + productService.findProductByID(id));
                 System.out.print("Tap 'Y' for Yes or 'N' for No: ");
                 Scanner sca = new Scanner(System.in);
                 String scan = sca.nextLine();
@@ -29,11 +29,10 @@ public class RemoveProductByIdUI {
                 } else {
                     System.out.println("Operation is canceled. Product wont be deleted;");
                 }
-            }else{
-                throw new ItemIDNofFoundException(id);
+            } else {
+                throw new ProductNotFoundException(id);
             }
-        } catch (
-                ItemIDNofFoundException e) {
+        } catch (ProductNotFoundException e) {
             System.out.println("Product cant be deleted. " + e.getItemNotFoundMessage());
         }
     }

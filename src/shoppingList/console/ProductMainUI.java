@@ -1,7 +1,8 @@
-package shoppingList.UI;
+package shoppingList.console;
 
-import shoppingList.businessLogic.services.ProductService;
-import shoppingList.database.ProductRepositoryImp;
+import shoppingList.services.businessLogic.ProductCategoryChoiseService;
+import shoppingList.services.businessLogic.ProductService;
+import shoppingList.repository.ProductImpRepository;
 
 import java.util.Scanner;
 
@@ -9,8 +10,8 @@ public class ProductMainUI {
 
     public void mainUI() {
 
-        ProductService productService = new ProductService(new ProductRepositoryImp());
-        AddProductUI addProductUI = new AddProductUI(productService);
+        ProductService productService = new ProductService(new ProductImpRepository());
+        AddProductUI addProductUI = new AddProductUI(productService, new ProductCategoryChoiseService());
         RemoveProductByIdUI removeProductByIdUI = new RemoveProductByIdUI(productService);
         ListOfAllProductsUI listOfAllProductsUI = new ListOfAllProductsUI(productService);
         FindProductByIdUI findProductByIdUI = new FindProductByIdUI(productService);
@@ -56,8 +57,6 @@ public class ProductMainUI {
                     case 9:
                         devAdd.test();
                         break;
-                    default:
-                        // code block?
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Please enter correct value!");

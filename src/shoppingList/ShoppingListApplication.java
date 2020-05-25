@@ -1,6 +1,6 @@
 package shoppingList;
 
-import shoppingList.UI.ProductMainUI;
+import shoppingList.console.ProductMainUI;
 
 class ShoppingListApplication {
 
