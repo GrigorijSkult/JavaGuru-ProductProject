@@ -10,7 +10,7 @@ public class ProductCategoryChoiseService {
 
     public ProductCategory productCategoryIntChoice(int productCategoryNumber) throws ProductValidationException {
         ProductCategory productCategory;
-        categoryValidation.categoryNumberIsValid(productCategoryNumber);
+        categoryValidation.categoryNumberValidation(productCategoryNumber);
         switch (productCategoryNumber) {
             case 1:
                 productCategory = ProductCategory.MEAT_AND_MEAT_PRODUCTS;

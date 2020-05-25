@@ -1,7 +1,7 @@
 package shoppingList.services.businessLogic;
 
 import shoppingList.services.validations.exception.DbContainsSimilarProductException;
-import shoppingList.services.validations.exception.ItemIDNofFoundException;
+import shoppingList.services.validations.exception.ProductNotFoundException;
 import shoppingList.services.validations.ProductValidationService;
 import shoppingList.repository.ProductImpRepository;
 import shoppingList.domain.Product;
@@ -30,12 +30,12 @@ public class ProductService implements TemplateService<Product> {
     }
 
     @Override
-    public boolean removeProductByIDService(Long id) throws ItemIDNofFoundException {
+    public boolean removeProductByIDService(Long id) throws ProductNotFoundException {
         if (productImpRepository.doesDbContainsId(id)) {
             productImpRepository.removeProductByID(id);
             return true;
         } else {
-            throw new ItemIDNofFoundException(id);
+            throw new ProductNotFoundException(id);
         }
     }
 
@@ -51,12 +51,12 @@ public class ProductService implements TemplateService<Product> {
     }
 
     @Override
-    public Product findProductByID(Long id) throws ItemIDNofFoundException {
+    public Product findProductByID(Long id) throws ProductNotFoundException {
         Product product = productImpRepository.findProductByID(id);
         if (product != null) {
             return product;
         } else {
-            throw new ItemIDNofFoundException(id);
+            throw new ProductNotFoundException(id);
         }
     }
 

@@ -1,7 +1,7 @@
 package shoppingList.console;
 
 import shoppingList.services.businessLogic.ProductService;
-import shoppingList.services.validations.exception.ItemIDNofFoundException;
+import shoppingList.services.validations.exception.ProductNotFoundException;
 
 import java.util.Scanner;
 
@@ -19,7 +19,7 @@ public class FindProductByIdUI {
         Long id = sc.nextLong();
         try {
             System.out.println("Your product is:" + productService.findProductByID(id));
-        }catch (ItemIDNofFoundException e){
+        }catch (ProductNotFoundException e){
             System.out.println(e.getItemNotFoundMessage());
         }
     }

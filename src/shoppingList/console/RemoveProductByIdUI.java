@@ -1,7 +1,7 @@
 package shoppingList.console;
 
 import shoppingList.services.businessLogic.ProductService;
-import shoppingList.services.validations.exception.ItemIDNofFoundException;
+import shoppingList.services.validations.exception.ProductNotFoundException;
 
 import java.util.Scanner;
 
@@ -30,9 +30,9 @@ public class RemoveProductByIdUI {
                     System.out.println("Operation is canceled. Product wont be deleted;");
                 }
             } else {
-                throw new ItemIDNofFoundException(id);
+                throw new ProductNotFoundException(id);
             }
-        } catch (ItemIDNofFoundException e) {
+        } catch (ProductNotFoundException e) {
             System.out.println("Product cant be deleted. " + e.getItemNotFoundMessage());
         }
     }

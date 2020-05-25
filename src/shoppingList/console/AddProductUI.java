@@ -4,7 +4,6 @@ import shoppingList.domain.Product;
 import shoppingList.domain.ProductCategory;
 import shoppingList.services.businessLogic.ProductCategoryChoiseService;
 import shoppingList.services.businessLogic.ProductService;
-import shoppingList.services.validations.*;
 import shoppingList.services.validations.exception.DbContainsSimilarProductException;
 import shoppingList.services.validations.exception.ProductValidationException;
 
@@ -14,10 +13,11 @@ import java.util.Scanner;
 public class AddProductUI {
 
     ProductService productService;
-    private final ProductCategoryChoiseService productCategoryChoiseService = new ProductCategoryChoiseService();
+    ProductCategoryChoiseService productCategoryChoiseService;
 
-    public AddProductUI(ProductService productService) {
+    public AddProductUI(ProductService productService, ProductCategoryChoiseService productCategoryChoiseService) {
         this.productService = productService;
+        this.productCategoryChoiseService = productCategoryChoiseService;
     }
 
     public void addProductUI() {

@@ -20,10 +20,8 @@ public class ProductCategoryValidation implements ValidationRule<Product> {
         }
     }
 
-    public boolean categoryNumberIsValid(int productCategory) {
-        if (productCategory >= 0 && productCategory < ProductCategory.values().length) {
-            return true;
-        } else {
+    public void categoryNumberValidation(int productCategory) {
+        if (productCategory < 0 || productCategory > ProductCategory.values().length - 1) {
             throw new ProductValidationException("Product category number is incorrect");
         }
     }
