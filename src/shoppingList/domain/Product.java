@@ -86,7 +86,7 @@ public class Product{
     }
 
     public void setProductActualPrice() {
-        this.productActualPrice = productRegularPrice.multiply(productDiscount.divide(BigDecimal.valueOf(100), RoundingMode.HALF_UP));
+        this.productActualPrice = productRegularPrice.multiply(productDiscount.divide(BigDecimal.valueOf(100.00), RoundingMode.HALF_UP));
     }
 
     @Override
@@ -111,10 +111,10 @@ public class Product{
     public String toString() {
         return "ID = " + productId +
                 ", Product Name= '" + productName + '\'' +
-                ", Regular price= " + productRegularPrice.setScale(3, RoundingMode.HALF_UP) + " EUR" +
+                ", Regular price= " + productRegularPrice+ " EUR" +
                 ", Product category= '" + productCategory + '\'' +
-                ", Discount= " + productDiscount.setScale(3, RoundingMode.HALF_UP) + " %" +
-                ", Actual price= " + productActualPrice.setScale(3, RoundingMode.HALF_UP) + " EUR" +
+                ", Discount= " + productDiscount+ " %" +
+                ", Actual price= " + productActualPrice + " EUR" +
                 ", Description= '" + productDescription +
                 '\'' + ";";
     }

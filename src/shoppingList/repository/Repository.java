@@ -14,6 +14,4 @@ public interface Repository<T> {
 
     T findProductByID(Long id);
 
-//    void updateProductInformation(Long id);
-
 }
