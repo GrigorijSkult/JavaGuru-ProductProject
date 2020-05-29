@@ -1,7 +1,7 @@
 package shoppingList.console;
 
-import shoppingList.domain.Product;
 import shoppingList.domain.ProductCategory;
+import shoppingList.dto.ProductDto;
 import shoppingList.services.businessLogic.ProductCategoryChoiseService;
 import shoppingList.services.businessLogic.ProductService;
 import shoppingList.services.validations.exception.DbContainsSimilarProductException;
@@ -60,9 +60,9 @@ public class AddProductUI {
                 newProductDescription = null;
             }
 
-            Product newProduct = new Product(newProductName, newProductPrice, newProductCategory, newProductDiscount, newProductDescription);
-            productService.addProductService(newProduct);
-            System.out.println("New product is added to the DataBase: " + newProduct);
+            ProductDto newProductDto = new ProductDto(0L, newProductName, newProductPrice, newProductCategory,
+                    newProductDiscount, newProductDescription);
+            System.out.println("New product is added to the DataBase: " + productService.addProductService(newProductDto));
         } catch (NumberFormatException e) {
             System.out.println("Please enter discount number with 'dot'. [For example 15.5]");
         } catch (ProductValidationException e) {

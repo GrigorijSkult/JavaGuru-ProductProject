@@ -1,13 +1,13 @@
 package shoppingList.services.validations.exception;
 
-import shoppingList.domain.Product;
+import shoppingList.domain.ProductEntity;
 
 public class DbContainsSimilarProductException extends RuntimeException{
 
-    Product similarProduct;
+    ProductEntity similarProductEntity;
 
-    public DbContainsSimilarProductException(Product similarProduct){
-        this.similarProduct = similarProduct;
+    public DbContainsSimilarProductException(ProductEntity similarProductEntity){
+        this.similarProductEntity = similarProductEntity;
     }
 
     public String DbContainsSimilarProductExceptionMessage(){

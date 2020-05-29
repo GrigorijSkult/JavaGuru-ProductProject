@@ -1,36 +1,31 @@
-package shoppingList.domain;
+package shoppingList.dto;
+
+import shoppingList.domain.ProductCategory;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-public class Product{
+public class ProductDto {
 
     private Long productId;
     private String productName;
     private BigDecimal productRegularPrice;
     private ProductCategory productCategory;
-
     private BigDecimal productDiscount;
     private String productDescription;
     private BigDecimal productActualPrice;
 
-    public Product(String productName, BigDecimal productRegularPrice, ProductCategory productCategory) {
-        this.productName = productName;
-        this.productRegularPrice = productRegularPrice;
-        this.productCategory = productCategory;
-        this.productDiscount = BigDecimal.valueOf(0.00);
-        this.productDescription = null;
-        this.productActualPrice = productRegularPrice;
-    }
-
-    public Product( String productName, BigDecimal productRegularPrice, ProductCategory productCategory, BigDecimal productDiscount, String productDescription) {
+    public ProductDto(Long id, String productName, BigDecimal productRegularPrice, ProductCategory productCategory,
+                      BigDecimal productDiscount, String productDescription) {
+        this.productId = id;
         this.productName = productName;
         this.productRegularPrice = productRegularPrice;
         this.productCategory = productCategory;
         this.productDiscount = productDiscount;
         this.productDescription = productDescription;
-        this.productActualPrice = productRegularPrice.multiply(BigDecimal.valueOf(1.00).subtract(productDiscount.divide(BigDecimal.valueOf(100), RoundingMode.HALF_UP)));
+        this.productActualPrice = productRegularPrice.multiply
+                (BigDecimal.valueOf(1.00).subtract(productDiscount.divide(BigDecimal.valueOf(100), RoundingMode.HALF_UP)));
     }
 
     public Long getProductId() {
@@ -86,25 +81,26 @@ public class Product{
     }
 
     public void setProductActualPrice() {
-        this.productActualPrice = productRegularPrice.multiply(productDiscount.divide(BigDecimal.valueOf(100.00), RoundingMode.HALF_UP));
+        this.productActualPrice = productRegularPrice.multiply
+                (productDiscount.divide(BigDecimal.valueOf(100.00), RoundingMode.HALF_UP));
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return Objects.equals(productName, product.productName) &&
-                Objects.equals(productRegularPrice, product.productRegularPrice) &&
-                productCategory == product.productCategory &&
-                Objects.equals(productDiscount, product.productDiscount) &&
-                Objects.equals(productDescription, product.productDescription) &&
-                Objects.equals(productActualPrice, product.productActualPrice);
+        ProductDto that = (ProductDto) o;
+        return Objects.equals(productId, that.productId) &&
+                Objects.equals(productName, that.productName) &&
+                Objects.equals(productRegularPrice, that.productRegularPrice) &&
+                productCategory == that.productCategory &&
+                Objects.equals(productDiscount, that.productDiscount) &&
+                Objects.equals(productDescription, that.productDescription);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productName, productRegularPrice, productCategory, productDiscount, productDescription, productActualPrice);
+        return Objects.hash(productId, productName, productRegularPrice, productCategory, productDiscount, productDescription);
     }
 
     @Override

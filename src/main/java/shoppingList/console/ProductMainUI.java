@@ -15,10 +15,6 @@ public class ProductMainUI {
         RemoveProductByIdUI removeProductByIdUI = new RemoveProductByIdUI(productService);
         ListOfAllProductsUI listOfAllProductsUI = new ListOfAllProductsUI(productService);
         FindProductByIdUI findProductByIdUI = new FindProductByIdUI(productService);
-        /////////////
-        //For DEVELOPMENT
-        DevelopmentFiles_AddProducts devAdd = new DevelopmentFiles_AddProducts(productService);
-        /////////////
 
         boolean continueProgram = true;
         do {
@@ -29,8 +25,7 @@ public class ProductMainUI {
                     "2. Find product by ID;" + "\n" +
                     "3. Show all products in the DB;" + "\n" +
                     "4. Delete product by product ID" + "\n" +
-                    "8. End program." + "\n" +
-                    "9. [DEVELOPMENT] add 3 new products." + "\n" +
+                    "5. End program." + "\n" +
                     "");
             System.out.print("Select option: ");
             Scanner sc = new Scanner(System.in);
@@ -50,12 +45,8 @@ public class ProductMainUI {
                     case 4:
                         removeProductByIdUI.removeProductByIdUI();
                         break;
-                    //...
-                    case 8:
+                    case 5:
                         continueProgram = false;
-                        break;
-                    case 9:
-                        devAdd.test();
                         break;
                 }
             } catch (NumberFormatException e) {

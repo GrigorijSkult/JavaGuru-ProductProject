@@ -1,18 +1,22 @@
 package shoppingList.services.businessLogic;
 
+import shoppingList.dto.ProductDto;
+import shoppingList.mappers.ProductMapper;
 import shoppingList.services.validations.exception.DbContainsSimilarProductException;
 import shoppingList.services.validations.exception.ProductNotFoundException;
 import shoppingList.services.validations.ProductValidationService;
 import shoppingList.repository.ProductImpRepository;
-import shoppingList.domain.Product;
+import shoppingList.domain.ProductEntity;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ProductService implements TemplateService<Product> {
+public class ProductService implements TemplateService<ProductDto> {
 
-    ProductImpRepository productImpRepository;
-    ProductValidationService validationService = new ProductValidationService();
+    private ProductImpRepository productImpRepository;
+    private ProductValidationService validationService = new ProductValidationService();
+    private ProductMapper productMapper = new ProductMapper();
 
     public ProductService(ProductImpRepository productImpRepository) {
         this.productImpRepository = productImpRepository;
@@ -20,12 +24,14 @@ public class ProductService implements TemplateService<Product> {
 
     //Main methods
     @Override
-    public Product addProductService(Product newProduct) throws DbContainsSimilarProductException{
-         validationService.validate(newProduct);
-        if (productImpRepository.doesDbContainsSimilarProduct(newProduct)) {
-            throw new DbContainsSimilarProductException(newProduct);
+    public ProductDto addProductService(ProductDto newProductDto) throws DbContainsSimilarProductException {
+        validationService.validate(newProductDto);
+        ProductEntity newProductEntity = productMapper.productToEntity(newProductDto);
+        if (productImpRepository.doesDbContainsSimilarProduct(newProductEntity)) {
+            throw new DbContainsSimilarProductException(newProductEntity);
         } else {
-            return productImpRepository.addProduct(newProduct);
+            ProductEntity savedProductEntity = productImpRepository.addProduct(newProductEntity);
+            return productMapper.productToDto(savedProductEntity);
         }
     }
 
@@ -40,21 +46,25 @@ public class ProductService implements TemplateService<Product> {
     }
 
     @Override
-    public List<Product> listOfAllProductsService() {
+    public List<ProductDto> listOfAllProductsService() {
         if (productImpRepository.listOfAllProducts().isEmpty()) {
             System.out.println("DataBase is empty");
             return Collections.emptyList();
         } else {
             System.out.println("Product DataBase:");
-            return productImpRepository.listOfAllProducts();
+            List<ProductDto> allProductDtoList = new ArrayList<>();
+            for (ProductEntity value : productImpRepository.listOfAllProducts()) {
+                allProductDtoList.add(productMapper.productToDto(value));
+            }
+            return allProductDtoList;
         }
     }
 
     @Override
-    public Product findProductByID(Long id) throws ProductNotFoundException {
-        Product product = productImpRepository.findProductByID(id);
-        if (product != null) {
-            return product;
+    public ProductDto findProductByID(Long id) throws ProductNotFoundException {
+        ProductEntity productEntity = productImpRepository.findProductByID(id);
+        if (productEntity != null) {
+            return productMapper.productToDto(productEntity);
         } else {
             throw new ProductNotFoundException(id);
         }

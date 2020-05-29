@@ -1,7 +1,7 @@
 package shoppingList.console;
 
+import shoppingList.dto.ProductDto;
 import shoppingList.services.businessLogic.ProductService;
-import shoppingList.domain.Product;
 
 public class ListOfAllProductsUI {
     ProductService productService;
@@ -11,8 +11,8 @@ public class ListOfAllProductsUI {
     }
 
     public void listOfAllProducts() {
-        for (Product product : productService.listOfAllProductsService()) {
-            System.out.println(product);
+        for (ProductDto productDto : productService.listOfAllProductsService()) {
+            System.out.println(productDto);
         }
     }
 }

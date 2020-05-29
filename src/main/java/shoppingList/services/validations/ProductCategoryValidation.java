@@ -1,16 +1,17 @@
 package shoppingList.services.validations;
 
-import shoppingList.domain.Product;
+import shoppingList.domain.ProductEntity;
 import shoppingList.domain.ProductCategory;
+import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.exception.ProductValidationException;
 
-public class ProductCategoryValidation implements ValidationRule<Product> {
+public class ProductCategoryValidation implements ValidationRule<ProductEntity> {
 
     @Override
-    public void validate(Product product) {
+    public void validate(ProductDto productDto) {
         boolean isValid = false;
         for (ProductCategory value : ProductCategory.values()) {
-            if (product.getProductCategory().equals(value)) {
+            if (productDto.getProductCategory().equals(value)) {
                 isValid = true;
                 break;
             }
