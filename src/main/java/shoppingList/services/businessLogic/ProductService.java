@@ -14,15 +14,16 @@ import java.util.List;
 
 public class ProductService implements TemplateService<ProductDto> {
 
-    private ProductImpRepository productImpRepository;
-    private ProductValidationService validationService = new ProductValidationService();
-    private ProductMapper productMapper = new ProductMapper();
+    private final ProductImpRepository productImpRepository;
+    private final ProductValidationService validationService;
+    private final ProductMapper productMapper;
 
-    public ProductService(ProductImpRepository productImpRepository) {
+    public ProductService(ProductImpRepository productImpRepository, ProductValidationService validationService, ProductMapper productMapper) {
         this.productImpRepository = productImpRepository;
+        this.validationService = validationService;
+        this.productMapper = productMapper;
     }
 
-    //Main methods
     @Override
     public ProductDto addProductService(ProductDto newProductDto) throws DbContainsSimilarProductException {
         validationService.validate(newProductDto);
@@ -68,11 +69,5 @@ public class ProductService implements TemplateService<ProductDto> {
         } else {
             throw new ProductNotFoundException(id);
         }
-    }
-
-
-    //Additional methods
-    public boolean doesDbContainsIdService(Long id) {
-        return productImpRepository.doesDbContainsId(id);
     }
 }

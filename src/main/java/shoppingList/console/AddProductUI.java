@@ -60,8 +60,12 @@ public class AddProductUI {
                 newProductDescription = null;
             }
 
-            ProductDto newProductDto = new ProductDto(0L, newProductName, newProductPrice, newProductCategory,
-                    newProductDiscount, newProductDescription);
+            ProductDto newProductDto = new ProductDto();
+            newProductDto.setProductName(newProductName);
+            newProductDto.setProductRegularPrice(newProductPrice);
+            newProductDto.setProductCategory(newProductCategory);
+            newProductDto.setProductDiscount(newProductDiscount);
+            newProductDto.setProductDescription(newProductDescription);
             System.out.println("New product is added to the DataBase: " + productService.addProductService(newProductDto));
         } catch (NumberFormatException e) {
             System.out.println("Please enter discount number with 'dot'. [For example 15.5]");

@@ -18,19 +18,15 @@ public class RemoveProductByIdUI {
         Scanner sc = new Scanner(System.in);
         Long id = sc.nextLong();
         try {
-            if (productService.doesDbContainsIdService(id)) {
-                System.out.println("You would like to delete: " + productService.findProductByID(id));
-                System.out.print("Tap 'Y' for Yes or 'N' for No: ");
-                Scanner sca = new Scanner(System.in);
-                String scan = sca.nextLine();
-                if (scan.startsWith("Y") || scan.startsWith("y")) {
-                    productService.removeProductByIDService(id);
-                    System.out.println("Product is deleted;");
-                } else {
-                    System.out.println("Operation is canceled. Product wont be deleted;");
-                }
+            System.out.println("You would like to delete: " + productService.findProductByID(id));
+            System.out.print("Tap 'Y' for Yes or 'N' for No: ");
+            Scanner sca = new Scanner(System.in);
+            String scan = sca.nextLine();
+            if (scan.startsWith("Y") || scan.startsWith("y")) {
+                productService.removeProductByIDService(id);
+                System.out.println("Product is deleted;");
             } else {
-                throw new ProductNotFoundException(id);
+                System.out.println("Operation is canceled. Product wont be deleted;");
             }
         } catch (ProductNotFoundException e) {
             System.out.println("Product cant be deleted. " + e.getItemNotFoundMessage());

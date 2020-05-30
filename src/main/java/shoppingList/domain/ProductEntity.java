@@ -21,7 +21,7 @@ public class ProductEntity {
         this.productCategory = productCategory;
         this.productDiscount = BigDecimal.valueOf(0.00);
         this.productDescription = null;
-        this.productActualPrice = productRegularPrice;
+        this.productActualPrice = productRegularPrice.setScale(3, RoundingMode.HALF_UP);
     }
 
     public ProductEntity(Long id, String productName, BigDecimal productRegularPrice, ProductCategory productCategory,
@@ -32,8 +32,6 @@ public class ProductEntity {
         this.productCategory = productCategory;
         this.productDiscount = productDiscount;
         this.productDescription = productDescription;
-        this.productActualPrice = productRegularPrice.multiply
-                (BigDecimal.valueOf(1.00).subtract(productDiscount.divide(BigDecimal.valueOf(100), RoundingMode.HALF_UP)));
     }
 
     public Long getProductId() {
@@ -89,8 +87,12 @@ public class ProductEntity {
     }
 
     public void setProductActualPrice() {
-        this.productActualPrice = productRegularPrice.multiply
-                (productDiscount.divide(BigDecimal.valueOf(100.00), RoundingMode.HALF_UP));
+        if(productDiscount.equals(BigDecimal.valueOf(0.00))){
+            this.productActualPrice = productRegularPrice;
+        }else {
+            this.productActualPrice =  productRegularPrice.multiply
+                    (BigDecimal.valueOf(1.00).subtract(productDiscount.divide(BigDecimal.valueOf(100), RoundingMode.HALF_UP))).setScale(3, RoundingMode.HALF_UP);
+        }
     }
 
     @Override
