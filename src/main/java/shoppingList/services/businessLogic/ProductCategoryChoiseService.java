@@ -25,7 +25,7 @@ public class ProductCategoryChoiseService {
                 productCategory = ProductCategory.SEASONING_GOODS;
                 break;
             case 5:
-                productCategory = ProductCategory.EdibleFats;
+                productCategory = ProductCategory.EDIBLE_FATS;
                 break;
             case 6:
                 productCategory = ProductCategory.MILK_PRODUCTS;

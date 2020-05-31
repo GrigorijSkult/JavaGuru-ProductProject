@@ -5,7 +5,7 @@ public enum  ProductCategory {
     FRUITS,
     VEGETABLES,
     SEASONING_GOODS,
-    EdibleFats,
+    EDIBLE_FATS,
     MILK_PRODUCTS,
     GRAIN_AND_FLOUR_PRODUCTS,
     FISH_AND_FISH_PRODUCTS,

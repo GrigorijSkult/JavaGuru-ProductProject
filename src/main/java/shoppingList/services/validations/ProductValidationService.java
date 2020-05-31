@@ -5,13 +5,11 @@ import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.exception.ProductValidationException;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ProductValidationService implements ValidationRule<ProductEntity> {
 
-    private final Set<ValidationRule<ProductEntity>> validationRules = new HashSet<>();
+    private final List<ValidationRule<ProductEntity>> validationRules = new ArrayList<>();
     private final List<String> errorLogs = new ArrayList<>();
 
     public ProductValidationService() {
