@@ -80,6 +80,15 @@ public class ProductImpRepositoryTest {
         assertFalse(repository.doesDbContainsId(2L));
     }
 
+    @Test
+    public void updateProduct() {
+        repository.addProduct(newProductEntity());
+        ProductEntity updatedProduct = new ProductEntity(5L, "Banana", BigDecimal.valueOf(48.46), ProductCategory.MEAT_AND_MEAT_PRODUCTS, BigDecimal.valueOf(20.0), "Latvija");
+        ProductEntity result = repository.updateProduct(1L, updatedProduct);
+
+        assertEquals(updatedProduct, result);
+    }
+
     private ProductEntity newProductEntity() {
         return new ProductEntity(0L, "Banana pack", BigDecimal.valueOf(22.46), ProductCategory.FRUITS, BigDecimal.valueOf(25.0), "Poland");
     }

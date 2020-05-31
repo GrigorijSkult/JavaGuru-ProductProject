@@ -13,10 +13,12 @@ public class ProductMainUI {
     public void mainUI() {
 
         ProductService productService = new ProductService(new ProductImpRepository(), new ProductValidationService(), new ProductMapper());
-        AddProductUI addProductUI = new AddProductUI(productService, new ProductCategoryChoiseService());
+        ProductCategoryChoiseService productCategoryChoiseService = new ProductCategoryChoiseService();
+        AddProductUI addProductUI = new AddProductUI(productService, productCategoryChoiseService);
         RemoveProductByIdUI removeProductByIdUI = new RemoveProductByIdUI(productService);
         ListOfAllProductsUI listOfAllProductsUI = new ListOfAllProductsUI(productService);
         FindProductByIdUI findProductByIdUI = new FindProductByIdUI(productService);
+        UpdateProductUI updateProductUI = new UpdateProductUI(productService, productCategoryChoiseService);
 
         boolean continueProgram = true;
         do {
@@ -27,7 +29,8 @@ public class ProductMainUI {
                     "2. Find product by ID;" + "\n" +
                     "3. Show all products in the DB;" + "\n" +
                     "4. Delete product by product ID" + "\n" +
-                    "5. End program." + "\n" +
+                    "5. Update product by product ID" + "\n" +
+                    "6. End program." + "\n" +
                     "");
             System.out.print("Select option: ");
             Scanner sc = new Scanner(System.in);
@@ -48,6 +51,9 @@ public class ProductMainUI {
                         removeProductByIdUI.removeProductByIdUI();
                         break;
                     case 5:
+                        updateProductUI.updateProduct();
+                        break;
+                    case 6:
                         continueProgram = false;
                         break;
                 }

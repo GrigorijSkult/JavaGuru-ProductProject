@@ -70,4 +70,20 @@ public class ProductService implements TemplateService<ProductDto> {
             throw new ProductNotFoundException(id);
         }
     }
+
+    @Override
+    public ProductDto updateProductService(Long id, ProductDto updatedProductDto) throws ProductNotFoundException, DbContainsSimilarProductException {
+        if (productImpRepository.doesDbContainsId(id)) {
+            validationService.validate(updatedProductDto);
+            ProductEntity updatedProductEntity = productMapper.productToEntity(updatedProductDto);
+            if (productImpRepository.doesDbContainsSimilarProduct(updatedProductEntity)) {
+                throw new DbContainsSimilarProductException(updatedProductEntity);
+            } else {
+                ProductEntity updatedProduct = productImpRepository.updateProduct(id, updatedProductEntity);
+                return productMapper.productToDto(updatedProduct);
+            }
+        } else {
+            throw new ProductNotFoundException(id);
+        }
+    }
 }

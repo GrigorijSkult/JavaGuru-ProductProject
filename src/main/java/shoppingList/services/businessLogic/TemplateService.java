@@ -15,4 +15,6 @@ public interface TemplateService<T> {
     List<T> listOfAllProductsService();
 
     T findProductByID(Long id) throws ProductNotFoundException;
+
+    ProductDto updateProductService(Long id, ProductDto updatedProductDto) throws ProductNotFoundException, DbContainsSimilarProductException;
 }

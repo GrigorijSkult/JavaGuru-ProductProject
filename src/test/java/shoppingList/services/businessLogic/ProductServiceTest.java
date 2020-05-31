@@ -105,6 +105,32 @@ public class ProductServiceTest {
         victim.findProductByID(1L);
     }
 
+    @Test(expected = ProductNotFoundException.class)
+    public void updateProductServiceProductNotFoundException() {
+        when(productImpRepository.doesDbContainsId(anyLong())).thenReturn(false);
+        victim.updateProductService(1L, productDto(1L));
+    }
+
+    @Test(expected = DbContainsSimilarProductException.class)
+    public void updateProductServiceDbContainsSimilarProductException() {
+        when(productImpRepository.doesDbContainsId(anyLong())).thenReturn(true);
+        when(productImpRepository.doesDbContainsSimilarProduct(any())).thenReturn(true);
+        victim.updateProductService(1L, productDto(1L));
+
+        verify(validationService).validate(any());
+    }
+
+    @Test
+    public void updateProductService() {
+        when(productImpRepository.doesDbContainsId(anyLong())).thenReturn(true);
+        when(productImpRepository.doesDbContainsSimilarProduct(any())).thenReturn(false);
+        when(productMapper.productToDto(any())).thenReturn(productDto(1L));
+        ProductDto result = victim.updateProductService(1L, productDto(5L));
+
+        verify(validationService).validate(any());
+        assertEquals(productDto(1L), result);
+    }
+
     private ProductEntity productEntity() {
         return new ProductEntity(5L, "Banana pack", BigDecimal.valueOf(22.46), ProductCategory.FRUITS, BigDecimal.valueOf(25.0), "Poland");
     }

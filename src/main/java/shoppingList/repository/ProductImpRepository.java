@@ -38,6 +38,12 @@ public class ProductImpRepository implements Repository<ProductEntity> {
         return productsDB.get(id);
     }
 
+    @Override
+    public ProductEntity updateProduct(Long id, ProductEntity updatedProduct) {
+        productsDB.replace(id, updatedProduct);
+        return updatedProduct;
+    }
+
     //Additional methods
     public boolean doesDbContainsSimilarProduct(ProductEntity productEntity) {
         for (ProductEntity value : productsDB.values()) {
