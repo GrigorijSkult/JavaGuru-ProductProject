@@ -1,12 +1,11 @@
 package shoppingList.services.validations;
 
-import shoppingList.domain.ProductEntity;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.exception.ProductValidationException;
 
 import java.math.BigDecimal;
 
-public class ProductDiscountValidation implements ValidationRule<ProductEntity> {
+public class ProductDiscountValidation implements ValidationRule<ProductDto> {
 
     public String discountRangeErrorMessage = "Product discount value must be in the range from 0 to 100;";
     public String discountPriceErrorMessage = "A discount can be set for products with a price greater than 20.00;";

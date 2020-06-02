@@ -45,16 +45,16 @@ public class ProductImpRepository implements Repository<ProductEntity> {
     }
 
     //Additional methods
-    public boolean doesDbContainsSimilarProduct(ProductEntity productEntity) {
-        for (ProductEntity value : productsDB.values()) {
-            if (value.equals(productEntity)) {
+    public boolean existsByName(ProductEntity productEntity) {
+        for (ProductEntity value : productsDB.values()){
+            if (value.getProductName().equals(productEntity.getProductName())){
                 return true;
             }
         }
         return false;
     }
 
-    public boolean doesDbContainsId(Long id) {
+    public boolean existsById(Long id) {
         return productsDB.containsKey(id);
     }
 }

@@ -1,12 +1,11 @@
 package shoppingList.services.validations;
 
-import shoppingList.domain.ProductEntity;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.exception.ProductValidationException;
 
 import java.math.BigDecimal;
 
-public class ProductPriceValidation implements ValidationRule<ProductEntity> {
+public class ProductPriceValidation implements ValidationRule<ProductDto> {
 
     String errorMessage = "Product price must be greater than 0";
 

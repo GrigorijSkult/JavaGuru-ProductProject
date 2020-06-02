@@ -1,11 +1,10 @@
 package shoppingList.services.validations;
 
-import shoppingList.domain.ProductEntity;
 import shoppingList.domain.ProductCategory;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.exception.ProductValidationException;
 
-public class ProductCategoryValidation implements ValidationRule<ProductEntity> {
+public class ProductCategoryValidation implements ValidationRule<ProductDto> {
 
     public String errorMessage = "Product category is incorrect";
 

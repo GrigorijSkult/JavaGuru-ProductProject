@@ -1,10 +1,9 @@
 package shoppingList.services.validations;
 
-import shoppingList.domain.ProductEntity;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.exception.ProductValidationException;
 
-public class ProductDescriptionValidation implements ValidationRule<ProductEntity> {
+public class ProductDescriptionValidation implements ValidationRule<ProductDto> {
 
     public String errorMessage = "Product`s description should be shorter then 100 symbols;";
 

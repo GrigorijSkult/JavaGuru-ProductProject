@@ -7,8 +7,6 @@ import shoppingList.services.validations.exception.ProductValidationException;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
-
 public class ProductDescriptionValidationTest {
 
     private final ProductDescriptionValidation descriptionValidation = new ProductDescriptionValidation();
@@ -41,7 +39,6 @@ public class ProductDescriptionValidationTest {
         productDto.setProductCategory(ProductCategory.FRUITS);
         productDto.setProductDiscount(BigDecimal.valueOf(25.0));
         productDto.setProductDescription(description);
-        productDto.setProductActualPrice();
         return productDto;
     }
 }

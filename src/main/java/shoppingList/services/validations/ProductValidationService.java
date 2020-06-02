@@ -1,15 +1,14 @@
 package shoppingList.services.validations;
 
-import shoppingList.domain.ProductEntity;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.exception.ProductValidationException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductValidationService implements ValidationRule<ProductEntity> {
+public class ProductValidationService implements ValidationRule<ProductDto> {
 
-    private final List<ValidationRule<ProductEntity>> validationRules = new ArrayList<>();
+    private final List<ValidationRule<ProductDto>> validationRules = new ArrayList<>();
     private final List<String> errorLogs = new ArrayList<>();
 
     public ProductValidationService() {
@@ -23,7 +22,7 @@ public class ProductValidationService implements ValidationRule<ProductEntity> {
     @Override
     public void validate(ProductDto productDto) {
         errorLogs.clear();
-        for (ValidationRule<ProductEntity> rule : validationRules) {
+        for (ValidationRule<ProductDto> rule : validationRules) {
             try {
                 rule.validate(productDto);
             } catch (ProductValidationException e) {

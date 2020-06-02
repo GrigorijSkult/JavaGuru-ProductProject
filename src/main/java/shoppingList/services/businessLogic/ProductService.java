@@ -28,7 +28,7 @@ public class ProductService implements TemplateService<ProductDto> {
     public ProductDto addProductService(ProductDto newProductDto) throws DbContainsSimilarProductException {
         validationService.validate(newProductDto);
         ProductEntity newProductEntity = productMapper.productToEntity(newProductDto);
-        if (productImpRepository.doesDbContainsSimilarProduct(newProductEntity)) {
+        if (productImpRepository.existsByName(newProductEntity)) {
             throw new DbContainsSimilarProductException(newProductEntity);
         } else {
             ProductEntity savedProductEntity = productImpRepository.addProduct(newProductEntity);
@@ -38,7 +38,7 @@ public class ProductService implements TemplateService<ProductDto> {
 
     @Override
     public boolean removeProductByIDService(Long id) throws ProductNotFoundException {
-        if (productImpRepository.doesDbContainsId(id)) {
+        if (productImpRepository.existsById(id)) {
             productImpRepository.removeProductByID(id);
             return true;
         } else {
@@ -73,10 +73,10 @@ public class ProductService implements TemplateService<ProductDto> {
 
     @Override
     public ProductDto updateProductService(Long id, ProductDto updatedProductDto) throws ProductNotFoundException, DbContainsSimilarProductException {
-        if (productImpRepository.doesDbContainsId(id)) {
+        if (productImpRepository.existsById(id)) {
             validationService.validate(updatedProductDto);
             ProductEntity updatedProductEntity = productMapper.productToEntity(updatedProductDto);
-            if (productImpRepository.doesDbContainsSimilarProduct(updatedProductEntity)) {
+            if (productImpRepository.existsByName(updatedProductEntity)) {
                 throw new DbContainsSimilarProductException(updatedProductEntity);
             } else {
                 ProductEntity updatedProduct = productImpRepository.updateProduct(id, updatedProductEntity);

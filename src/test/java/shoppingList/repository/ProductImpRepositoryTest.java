@@ -32,18 +32,17 @@ public class ProductImpRepositoryTest {
         repository.addProduct(newProductEntity());
         repository.removeProductByID(1L);
 
-        assertFalse(repository.doesDbContainsSimilarProduct(dbProductEntity()));
+        assertFalse(repository.existsByName(dbProductEntity()));
     }
 
     @Test
     public void listOfAllProducts() {
-        ProductEntity apple = new ProductEntity(0L, "Apple", BigDecimal.valueOf(0.25), ProductCategory.FRUITS);
+        ProductEntity apple = new ProductEntity(0L, "Banana pack", BigDecimal.valueOf(22.46), ProductCategory.FRUITS, BigDecimal.valueOf(25.0), "Poland");
         repository.addProduct(newProductEntity());
         repository.addProduct(apple);
 
         List<ProductEntity> entityList = new ArrayList<>();
         entityList.add(dbProductEntity());
-        apple.setProductId(2L);
         entityList.add(apple);
 
         assertEquals(entityList, repository.listOfAllProducts());
@@ -60,24 +59,24 @@ public class ProductImpRepositoryTest {
     public void doesDbContainsSimilarProductTrue() {
         repository.addProduct(newProductEntity());
 
-        assertTrue(repository.doesDbContainsSimilarProduct(newProductEntity()));
+        assertTrue(repository.existsByName(newProductEntity()));
     }
 
     @Test
     public void doesDbContainsSimilarProductFalse() {
-        assertFalse(repository.doesDbContainsSimilarProduct(newProductEntity()));
+        assertFalse(repository.existsByName(newProductEntity()));
     }
 
     @Test
     public void doesDbContainsIdTrue() {
         repository.addProduct(newProductEntity());
 
-        assertTrue(repository.doesDbContainsId(1L));
+        assertTrue(repository.existsById(1L));
     }
 
     @Test
     public void doesDbContainsIdFalse() {
-        assertFalse(repository.doesDbContainsId(2L));
+        assertFalse(repository.existsById(2L));
     }
 
     @Test

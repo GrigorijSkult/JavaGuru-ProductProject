@@ -3,7 +3,6 @@ package shoppingList.dto;
 import shoppingList.domain.ProductCategory;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Objects;
 
 public class ProductDto {
@@ -68,13 +67,8 @@ public class ProductDto {
         return productActualPrice;
     }
 
-    public void setProductActualPrice() {
-        if(productDiscount.equals(BigDecimal.valueOf(0.00))){
-            this.productActualPrice = productRegularPrice.setScale(3, RoundingMode.HALF_UP);
-        }else {
-            this.productActualPrice =  productRegularPrice.multiply
-                    (BigDecimal.valueOf(1.00).subtract(productDiscount.divide(BigDecimal.valueOf(100), RoundingMode.HALF_UP))).setScale(3, RoundingMode.HALF_UP);
-        }
+    public void setProductActualPrice(BigDecimal productActualPrice) {
+        this.productActualPrice = productActualPrice;
     }
 
     @Override
@@ -99,9 +93,9 @@ public class ProductDto {
     public String toString() {
         return "ID = " + productId +
                 ", Product Name= '" + productName + '\'' +
-                ", Regular price= " + productRegularPrice+ " EUR" +
+                ", Regular price= " + productRegularPrice + " EUR" +
                 ", Product category= '" + productCategory + '\'' +
-                ", Discount= " + productDiscount+ " %" +
+                ", Discount= " + productDiscount + " %" +
                 ", Actual price= " + productActualPrice + " EUR" +
                 ", Description= '" + productDescription +
                 '\'' + ";";

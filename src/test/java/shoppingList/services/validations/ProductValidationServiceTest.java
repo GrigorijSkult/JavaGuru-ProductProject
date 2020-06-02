@@ -49,7 +49,6 @@ public class ProductValidationServiceTest {
         productDto.setProductCategory(ProductCategory.FRUITS);
         productDto.setProductDiscount(BigDecimal.valueOf(25.0));
         productDto.setProductDescription("Poland");
-        productDto.setProductActualPrice();
         return productDto;
     }
 
@@ -62,7 +61,6 @@ public class ProductValidationServiceTest {
         productDto.setProductDiscount(BigDecimal.valueOf(125.0));
         productDto.setProductDescription("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum " +
                 "has been the industry's standard dummy text.");
-        productDto.setProductActualPrice();
         return productDto;
     }
 }

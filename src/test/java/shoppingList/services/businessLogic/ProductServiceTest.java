@@ -43,7 +43,7 @@ public class ProductServiceTest {
     public void addProductService() {
         when(productMapper.productToEntity(any())).thenReturn(productEntity());
         when(productMapper.productToDto(any())).thenReturn(productDto(1L));
-        when(productImpRepository.doesDbContainsSimilarProduct(any())).thenReturn(false);
+        when(productImpRepository.existsByName(any())).thenReturn(false);
         ProductDto dto = victim.addProductService(productDto(5L));
 
         verify(validationService).validate(any());
@@ -52,7 +52,7 @@ public class ProductServiceTest {
 
     @Test(expected = DbContainsSimilarProductException.class)
     public void addProductServiceDbContainsSimilarProductException() {
-        when(productImpRepository.doesDbContainsSimilarProduct(any())).thenReturn(true);
+        when(productImpRepository.existsByName(any())).thenReturn(true);
         victim.addProductService(productDto(null));
 
         verify(validationService).validate(any());
@@ -60,14 +60,14 @@ public class ProductServiceTest {
 
     @Test
     public void removeProductByIDService() {
-        when(productImpRepository.doesDbContainsId(anyLong())).thenReturn(true);
+        when(productImpRepository.existsById(anyLong())).thenReturn(true);
 
         assertTrue(victim.removeProductByIDService(1L));
     }
 
     @Test(expected = ProductNotFoundException.class)
     public void removeProductByIDServiceProductNotFoundException() {
-        when(productImpRepository.doesDbContainsId(anyLong())).thenReturn(false);
+        when(productImpRepository.existsById(anyLong())).thenReturn(false);
         victim.removeProductByIDService(1L);
     }
 
@@ -107,14 +107,14 @@ public class ProductServiceTest {
 
     @Test(expected = ProductNotFoundException.class)
     public void updateProductServiceProductNotFoundException() {
-        when(productImpRepository.doesDbContainsId(anyLong())).thenReturn(false);
+        when(productImpRepository.existsById(anyLong())).thenReturn(false);
         victim.updateProductService(1L, productDto(1L));
     }
 
     @Test(expected = DbContainsSimilarProductException.class)
     public void updateProductServiceDbContainsSimilarProductException() {
-        when(productImpRepository.doesDbContainsId(anyLong())).thenReturn(true);
-        when(productImpRepository.doesDbContainsSimilarProduct(any())).thenReturn(true);
+        when(productImpRepository.existsById(anyLong())).thenReturn(true);
+        when(productImpRepository.existsByName(any())).thenReturn(true);
         victim.updateProductService(1L, productDto(1L));
 
         verify(validationService).validate(any());
@@ -122,8 +122,8 @@ public class ProductServiceTest {
 
     @Test
     public void updateProductService() {
-        when(productImpRepository.doesDbContainsId(anyLong())).thenReturn(true);
-        when(productImpRepository.doesDbContainsSimilarProduct(any())).thenReturn(false);
+        when(productImpRepository.existsById(anyLong())).thenReturn(true);
+        when(productImpRepository.existsByName(any())).thenReturn(false);
         when(productMapper.productToDto(any())).thenReturn(productDto(1L));
         ProductDto result = victim.updateProductService(1L, productDto(5L));
 
@@ -143,7 +143,6 @@ public class ProductServiceTest {
         productDto.setProductCategory(ProductCategory.FRUITS);
         productDto.setProductDiscount(BigDecimal.valueOf(25.0));
         productDto.setProductDescription("Poland");
-        productDto.setProductActualPrice();
         return productDto;
     }
 }

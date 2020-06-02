@@ -41,7 +41,6 @@ public class ProductDiscountValidationTest {
         productDto.setProductCategory(ProductCategory.FRUITS);
         productDto.setProductDiscount(BigDecimal.valueOf(discount));
         productDto.setProductDescription("Poland");
-        productDto.setProductActualPrice();
         return productDto;
     }
 }

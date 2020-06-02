@@ -2,6 +2,7 @@ package shoppingList.mappers;
 
 import shoppingList.domain.ProductEntity;
 import shoppingList.dto.ProductDto;
+import shoppingList.services.businessLogic.ProductActualPriceCalculation;
 
 public class ProductMapper {
 
@@ -13,14 +14,12 @@ public class ProductMapper {
         productDto.setProductCategory(productEntity.getProductCategory());
         productDto.setProductDiscount(productEntity.getProductDiscount());
         productDto.setProductDescription(productEntity.getProductDescription());
-        productDto.setProductActualPrice();
+        productDto.setProductActualPrice(new ProductActualPriceCalculation().calculateProductActualPrice(productDto));
         return productDto;
     }
 
     public ProductEntity productToEntity(ProductDto productDto){
-        ProductEntity productEntity = new ProductEntity(productDto.getProductId(), productDto.getProductName(), productDto.getProductRegularPrice(),
+        return new ProductEntity(productDto.getProductId(), productDto.getProductName(), productDto.getProductRegularPrice(),
                 productDto.getProductCategory(), productDto.getProductDiscount(), productDto.getProductDescription());
-        productEntity.setProductActualPrice();
-        return productEntity;
     }
 }

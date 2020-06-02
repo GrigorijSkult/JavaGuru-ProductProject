@@ -7,8 +7,6 @@ import shoppingList.services.validations.exception.ProductValidationException;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
-
 
 public class ProductNameValidationTest {
 
@@ -47,7 +45,6 @@ public class ProductNameValidationTest {
         productDto.setProductCategory(ProductCategory.FRUITS);
         productDto.setProductDiscount(BigDecimal.valueOf(25.0));
         productDto.setProductDescription("Poland");
-        productDto.setProductActualPrice();
         return productDto;
     }
 }
