@@ -8,16 +8,13 @@ import java.util.List;
 
 public class ProductValidationService implements ValidationRule<ProductDto> {
 
-    private final List<ValidationRule<ProductDto>> validationRules = new ArrayList<>();
-    private final List<String> errorLogs = new ArrayList<>();
+    private final List<ValidationRule<ProductDto>> validationRules;
 
-    public ProductValidationService() {
-        validationRules.add(new ProductNameValidation());
-        validationRules.add(new ProductPriceValidation());
-        validationRules.add(new ProductCategoryValidation());
-        validationRules.add(new ProductDiscountValidation());
-        validationRules.add(new ProductDescriptionValidation());
+    public ProductValidationService(List<ValidationRule<ProductDto>> validationRules) {
+        this.validationRules = validationRules;
     }
+
+    private final List<String> errorLogs = new ArrayList<>();
 
     @Override
     public void validate(ProductDto productDto) {

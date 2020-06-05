@@ -1,19 +1,21 @@
 package shoppingList.console;
 
-import shoppingList.mappers.ProductMapper;
 import shoppingList.services.businessLogic.ProductCategoryChoiseService;
 import shoppingList.services.businessLogic.ProductService;
-import shoppingList.repository.ProductImpRepository;
-import shoppingList.services.validations.ProductValidationService;
 
 import java.util.Scanner;
 
 public class ProductMainUI {
 
-    public void mainUI() {
+    ProductService productService;
+    ProductCategoryChoiseService productCategoryChoiseService;
 
-        ProductService productService = new ProductService(new ProductImpRepository(), new ProductValidationService(), new ProductMapper());
-        ProductCategoryChoiseService productCategoryChoiseService = new ProductCategoryChoiseService();
+    public ProductMainUI(ProductService productService, ProductCategoryChoiseService productCategoryChoiseService) {
+        this.productService = productService;
+        this.productCategoryChoiseService = productCategoryChoiseService;
+    }
+
+    public void mainUI() {
         AddProductUI addProductUI = new AddProductUI(productService, productCategoryChoiseService);
         RemoveProductByIdUI removeProductByIdUI = new RemoveProductByIdUI(productService);
         ListOfAllProductsUI listOfAllProductsUI = new ListOfAllProductsUI(productService);

@@ -1,5 +1,6 @@
 package shoppingList.services.validations;
 
+import org.junit.Before;
 import org.junit.Test;
 import shoppingList.domain.ProductCategory;
 import shoppingList.dto.ProductDto;
@@ -13,7 +14,17 @@ import static org.junit.Assert.*;
 
 public class ProductValidationServiceTest {
 
-    private final ProductValidationService productValidationService = new ProductValidationService();
+    private final List<ValidationRule<ProductDto>> validationRules = new ArrayList<>();
+    private final ProductValidationService productValidationService = new ProductValidationService(validationRules);
+
+    @Before
+    public void initialization() {
+        validationRules.add(new ProductNameValidation());
+        validationRules.add(new ProductPriceValidation());
+        validationRules.add(new ProductCategoryValidation());
+        validationRules.add(new ProductDiscountValidation());
+        validationRules.add(new ProductDescriptionValidation());
+    }
 
     @Test
     public void validateCorrect() {
