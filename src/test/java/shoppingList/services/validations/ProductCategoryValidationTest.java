@@ -1,46 +1,55 @@
 package shoppingList.services.validations;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.MockitoJUnitRunner;
 import shoppingList.domain.ProductCategory;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.exception.ProductValidationException;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ProductCategoryValidationTest {
 
-    private final ProductCategoryValidation productCategoryValidation = new ProductCategoryValidation();
+    @InjectMocks
+    private ProductCategoryValidation victim;
 
     @Test
     public void validateCorrect() {
-        productCategoryValidation.validate(productDto());
+        victim.validate(productDto());
     }
 
-    @Test(expected = ProductValidationException.class)
+    @Test
     public void categoryNumberValidationExceptionLessThanLowerLimit() {
-        productCategoryValidation.categoryNumberValidation(-1);
+        assertThatThrownBy(() -> victim.categoryNumberValidation(-1))
+                .isInstanceOf(ProductValidationException.class)
+                .hasMessage("Product category number is incorrect");
     }
 
     @Test
     public void categoryNumberValidationLowerAllowedLimit() {
-        productCategoryValidation.categoryNumberValidation(1);
+        victim.categoryNumberValidation(1);
     }
 
     @Test
     public void categoryNumberValidationMiddleAllowedLimit() {
-        productCategoryValidation.categoryNumberValidation((ProductCategory.values().length - 1) / 2);
+        victim.categoryNumberValidation((ProductCategory.values().length - 1) / 2);
     }
 
     @Test
     public void categoryNumberValidationUpperAllowedLimit() {
-        productCategoryValidation.categoryNumberValidation(ProductCategory.values().length - 1);
+        victim.categoryNumberValidation(ProductCategory.values().length - 1);
     }
 
-    @Test(expected = ProductValidationException.class)
+    @Test
     public void categoryNumberValidationExceptionMoreThanUpperLimit() {
-        productCategoryValidation.categoryNumberValidation(ProductCategory.values().length);
+        assertThatThrownBy(() -> victim.categoryNumberValidation(ProductCategory.values().length))
+                .isInstanceOf(ProductValidationException.class)
+                .hasMessage("Product category number is incorrect");
     }
 
     private ProductDto productDto() {

@@ -2,9 +2,8 @@ package shoppingList.console;
 
 import shoppingList.domain.ProductCategory;
 import shoppingList.dto.ProductDto;
-import shoppingList.services.businessLogic.ProductCategoryChoiseService;
+import shoppingList.services.businessLogic.ProductCategoryChoiceService;
 import shoppingList.services.businessLogic.ProductService;
-import shoppingList.services.validations.exception.DbContainsSimilarProductException;
 import shoppingList.services.validations.exception.ProductValidationException;
 
 import java.math.BigDecimal;
@@ -13,11 +12,11 @@ import java.util.Scanner;
 public class AddProductUI {
 
     ProductService productService;
-    ProductCategoryChoiseService productCategoryChoiseService;
+    ProductCategoryChoiceService productCategoryChoiceService;
 
-    public AddProductUI(ProductService productService, ProductCategoryChoiseService productCategoryChoiseService) {
+    public AddProductUI(ProductService productService, ProductCategoryChoiceService productCategoryChoiceService) {
         this.productService = productService;
-        this.productCategoryChoiseService = productCategoryChoiseService;
+        this.productCategoryChoiceService = productCategoryChoiceService;
     }
 
     public void addProductUI() {
@@ -37,13 +36,13 @@ public class AddProductUI {
             BigDecimal newProductPrice = BigDecimal.valueOf(Double.parseDouble(sc.nextLine()));
 
             for (int i = 1; i < ProductCategory.values().length; i++) {
-                System.out.println(i + ". " + productCategoryChoiseService.productCategoryIntChoice(i));
+                System.out.println(i + ". " + productCategoryChoiceService.productCategoryIntChoice(i));
             }
             System.out.println("Or press '0' to set 'NoData' category");
             System.out.print("3. Please enter new product category:");
             String userInputString = sc.nextLine();
             int categoryChoice = Integer.parseInt(userInputString);
-            ProductCategory newProductCategory = productCategoryChoiseService.productCategoryIntChoice(categoryChoice);
+            ProductCategory newProductCategory = productCategoryChoiceService.productCategoryIntChoice(categoryChoice);
 
             System.out.print("4. [OPTIONAL] Please enter new product discount: ");
             String enteredValue = sc.nextLine();
@@ -71,8 +70,6 @@ public class AddProductUI {
             System.out.println("Please enter discount number with 'dot'. [For example 15.5]");
         } catch (ProductValidationException e) {
             System.out.println("Product cant be added: " + e.getMessage());
-        } catch (DbContainsSimilarProductException e) {
-            System.out.println("Product cant be added: " + e.DbContainsSimilarProductExceptionMessage());
         }
     }
 }

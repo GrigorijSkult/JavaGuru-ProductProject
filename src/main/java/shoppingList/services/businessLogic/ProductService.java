@@ -2,7 +2,6 @@ package shoppingList.services.businessLogic;
 
 import shoppingList.dto.ProductDto;
 import shoppingList.mappers.ProductMapper;
-import shoppingList.services.validations.exception.DbContainsSimilarProductException;
 import shoppingList.services.validations.exception.ProductNotFoundException;
 import shoppingList.services.validations.ProductValidationService;
 import shoppingList.repository.ProductImpRepository;
@@ -25,15 +24,11 @@ public class ProductService implements TemplateService<ProductDto> {
     }
 
     @Override
-    public ProductDto addProductService(ProductDto newProductDto) throws DbContainsSimilarProductException {
+    public ProductDto addProductService(ProductDto newProductDto) {
         validationService.validate(newProductDto);
         ProductEntity newProductEntity = productMapper.productToEntity(newProductDto);
-        if (productImpRepository.existsByName(newProductEntity)) {
-            throw new DbContainsSimilarProductException(newProductEntity);
-        } else {
-            ProductEntity savedProductEntity = productImpRepository.addProduct(newProductEntity);
-            return productMapper.productToDto(savedProductEntity);
-        }
+        ProductEntity savedProductEntity = productImpRepository.addProduct(newProductEntity);
+        return productMapper.productToDto(savedProductEntity);
     }
 
     @Override
@@ -72,16 +67,11 @@ public class ProductService implements TemplateService<ProductDto> {
     }
 
     @Override
-    public ProductDto updateProductService(Long id, ProductDto updatedProductDto) throws ProductNotFoundException, DbContainsSimilarProductException {
+    public ProductDto updateProductService(Long id, ProductDto updatedProductDto) throws ProductNotFoundException {
         if (productImpRepository.existsById(id)) {
             validationService.validate(updatedProductDto);
             ProductEntity updatedProductEntity = productMapper.productToEntity(updatedProductDto);
-            if (productImpRepository.existsByName(updatedProductEntity)) {
-                throw new DbContainsSimilarProductException(updatedProductEntity);
-            } else {
-                ProductEntity updatedProduct = productImpRepository.updateProduct(id, updatedProductEntity);
-                return productMapper.productToDto(updatedProduct);
-            }
+            return productMapper.productToDto(productImpRepository.updateProduct(id, updatedProductEntity));
         } else {
             throw new ProductNotFoundException(id);
         }

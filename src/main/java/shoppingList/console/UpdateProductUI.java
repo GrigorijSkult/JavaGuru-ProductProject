@@ -1,9 +1,8 @@
 package shoppingList.console;
 
 import shoppingList.dto.ProductDto;
-import shoppingList.services.businessLogic.ProductCategoryChoiseService;
+import shoppingList.services.businessLogic.ProductCategoryChoiceService;
 import shoppingList.services.businessLogic.ProductService;
-import shoppingList.services.validations.exception.DbContainsSimilarProductException;
 import shoppingList.services.validations.exception.ProductNotFoundException;
 import shoppingList.services.validations.exception.ProductValidationException;
 
@@ -13,11 +12,11 @@ import java.util.Scanner;
 public class UpdateProductUI {
 
     private final ProductService productService;
-    private final ProductCategoryChoiseService productCategoryChoiseService;
+    private final ProductCategoryChoiceService productCategoryChoiceService;
 
-    public UpdateProductUI(ProductService productService, ProductCategoryChoiseService productCategoryChoiseService) {
+    public UpdateProductUI(ProductService productService, ProductCategoryChoiceService productCategoryChoiceService) {
         this.productService = productService;
-        this.productCategoryChoiseService = productCategoryChoiseService;
+        this.productCategoryChoiceService = productCategoryChoiceService;
     }
 
     public void updateProduct() {
@@ -49,7 +48,7 @@ public class UpdateProductUI {
                 String userInputString = scanner.nextLine();
                 if (!userInputString.isEmpty()) {
                     int categoryChoice = Integer.parseInt(userInputString);
-                    updatedProductDto.setProductCategory(productCategoryChoiseService.productCategoryIntChoice(categoryChoice));
+                    updatedProductDto.setProductCategory(productCategoryChoiceService.productCategoryIntChoice(categoryChoice));
                 }
 
                 System.out.print("4. Please enter updated product discount: ");
@@ -71,8 +70,6 @@ public class UpdateProductUI {
             System.out.println("Please enter discount number with 'dot'. [For example 15.5]");
         } catch (ProductValidationException e) {
             System.out.println("Product cant be updated: " + e.getMessage());
-        } catch (DbContainsSimilarProductException e) {
-            System.out.println("Product cant be updated: " + e.DbContainsSimilarProductExceptionMessage());
         } catch (ProductNotFoundException e) {
             System.out.println("Product cant be updated. " + e.getItemNotFoundMessage());
         }

@@ -1,6 +1,6 @@
 package shoppingList.console;
 
-import shoppingList.services.businessLogic.ProductCategoryChoiseService;
+import shoppingList.services.businessLogic.ProductCategoryChoiceService;
 import shoppingList.services.businessLogic.ProductService;
 
 import java.util.Scanner;
@@ -8,19 +8,19 @@ import java.util.Scanner;
 public class ProductMainUI {
 
     ProductService productService;
-    ProductCategoryChoiseService productCategoryChoiseService;
+    ProductCategoryChoiceService productCategoryChoiceService;
 
-    public ProductMainUI(ProductService productService, ProductCategoryChoiseService productCategoryChoiseService) {
+    public ProductMainUI(ProductService productService, ProductCategoryChoiceService productCategoryChoiceService) {
         this.productService = productService;
-        this.productCategoryChoiseService = productCategoryChoiseService;
+        this.productCategoryChoiceService = productCategoryChoiceService;
     }
 
     public void mainUI() {
-        AddProductUI addProductUI = new AddProductUI(productService, productCategoryChoiseService);
+        AddProductUI addProductUI = new AddProductUI(productService, productCategoryChoiceService);
         RemoveProductByIdUI removeProductByIdUI = new RemoveProductByIdUI(productService);
         ListOfAllProductsUI listOfAllProductsUI = new ListOfAllProductsUI(productService);
         FindProductByIdUI findProductByIdUI = new FindProductByIdUI(productService);
-        UpdateProductUI updateProductUI = new UpdateProductUI(productService, productCategoryChoiseService);
+        UpdateProductUI updateProductUI = new UpdateProductUI(productService, productCategoryChoiceService);
 
         boolean continueProgram = true;
         do {
