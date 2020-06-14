@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 import shoppingList.domain.ProductCategory;
 import shoppingList.dto.ProductDto;
+import shoppingList.services.validations.discountValidation.ProductDiscountValidation;
 import shoppingList.services.validations.exception.ProductValidationException;
 
 import java.math.BigDecimal;

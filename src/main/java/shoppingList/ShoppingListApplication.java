@@ -7,6 +7,8 @@ import shoppingList.repository.ProductImpRepository;
 import shoppingList.services.businessLogic.ProductCategoryChoiceService;
 import shoppingList.services.businessLogic.ProductService;
 import shoppingList.services.validations.*;
+import shoppingList.services.validations.discountValidation.ProductDiscountValidation;
+import shoppingList.services.validations.nameValidation.ProductNameValidation;
 
 import java.util.ArrayList;
 import java.util.List;

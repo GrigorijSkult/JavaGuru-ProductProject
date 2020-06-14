@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class ProductMainUI {
 
-    ProductService productService;
-    ProductCategoryChoiceService productCategoryChoiceService;
+    private final ProductService productService;
+    private final ProductCategoryChoiceService productCategoryChoiceService;
 
     public ProductMainUI(ProductService productService, ProductCategoryChoiceService productCategoryChoiceService) {
         this.productService = productService;

@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class AddProductUI {
 
-    ProductService productService;
-    ProductCategoryChoiceService productCategoryChoiceService;
+    private final ProductService productService;
+    private final ProductCategoryChoiceService productCategoryChoiceService;
 
     public AddProductUI(ProductService productService, ProductCategoryChoiceService productCategoryChoiceService) {
         this.productService = productService;

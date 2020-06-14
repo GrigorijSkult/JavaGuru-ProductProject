@@ -15,7 +15,7 @@ import static junit.framework.TestCase.assertEquals;
 public class ProductActualPriceCalculationTest {
 
     @InjectMocks
-    ProductDto victim;
+    private ProductDto victim;
 
     @Test
     public void calculateProductActualPriceNoDiscount() {

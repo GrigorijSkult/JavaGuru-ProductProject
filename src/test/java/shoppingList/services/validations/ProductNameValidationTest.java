@@ -10,6 +10,7 @@ import shoppingList.dto.ProductDto;
 import shoppingList.mappers.ProductMapper;
 import shoppingList.repository.ProductImpRepository;
 import shoppingList.services.validations.exception.ProductValidationException;
+import shoppingList.services.validations.nameValidation.ProductNameValidation;
 
 import java.math.BigDecimal;
 
