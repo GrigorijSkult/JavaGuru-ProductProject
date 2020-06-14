@@ -11,7 +11,6 @@ import shoppingList.dto.ProductDto;
 import shoppingList.mappers.ProductMapper;
 import shoppingList.repository.ProductImpRepository;
 import shoppingList.services.validations.ProductValidationService;
-import shoppingList.services.validations.exception.DbContainsSimilarProductException;
 import shoppingList.services.validations.exception.ProductNotFoundException;
 
 import java.math.BigDecimal;
@@ -21,6 +20,7 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
@@ -43,19 +43,10 @@ public class ProductServiceTest {
     public void addProductService() {
         when(productMapper.productToEntity(any())).thenReturn(productEntity());
         when(productMapper.productToDto(any())).thenReturn(productDto(1L));
-        when(productImpRepository.existsByName(any())).thenReturn(false);
         ProductDto dto = victim.addProductService(productDto(5L));
 
         verify(validationService).validate(any());
         assertEquals(productDto(1L), dto);
-    }
-
-    @Test(expected = DbContainsSimilarProductException.class)
-    public void addProductServiceDbContainsSimilarProductException() {
-        when(productImpRepository.existsByName(any())).thenReturn(true);
-        victim.addProductService(productDto(null));
-
-        verify(validationService).validate(any());
     }
 
     @Test
@@ -65,10 +56,12 @@ public class ProductServiceTest {
         assertTrue(victim.removeProductByIDService(1L));
     }
 
-    @Test(expected = ProductNotFoundException.class)
+    @Test
     public void removeProductByIDServiceProductNotFoundException() {
         when(productImpRepository.existsById(anyLong())).thenReturn(false);
-        victim.removeProductByIDService(1L);
+
+        assertThatThrownBy(() -> victim.removeProductByIDService(1L))
+                .isInstanceOf(ProductNotFoundException.class);
     }
 
     @Test
@@ -99,36 +92,30 @@ public class ProductServiceTest {
         assertEquals(productDto(1L), victim.findProductByID(1L));
     }
 
-    @Test(expected = ProductNotFoundException.class)
+    @Test
     public void findProductByIDProductNotFoundException() {
         when(productImpRepository.findProductByID(anyLong())).thenReturn(null);
-        victim.findProductByID(1L);
-    }
 
-    @Test(expected = ProductNotFoundException.class)
-    public void updateProductServiceProductNotFoundException() {
-        when(productImpRepository.existsById(anyLong())).thenReturn(false);
-        victim.updateProductService(1L, productDto(1L));
-    }
-
-    @Test(expected = DbContainsSimilarProductException.class)
-    public void updateProductServiceDbContainsSimilarProductException() {
-        when(productImpRepository.existsById(anyLong())).thenReturn(true);
-        when(productImpRepository.existsByName(any())).thenReturn(true);
-        victim.updateProductService(1L, productDto(1L));
-
-        verify(validationService).validate(any());
+        assertThatThrownBy(() -> victim.findProductByID(1L))
+                .isInstanceOf(ProductNotFoundException.class);
     }
 
     @Test
     public void updateProductService() {
         when(productImpRepository.existsById(anyLong())).thenReturn(true);
-        when(productImpRepository.existsByName(any())).thenReturn(false);
         when(productMapper.productToDto(any())).thenReturn(productDto(1L));
         ProductDto result = victim.updateProductService(1L, productDto(5L));
 
         verify(validationService).validate(any());
         assertEquals(productDto(1L), result);
+    }
+
+    @Test
+    public void updateProductServiceProductNotFoundException() {
+        when(productImpRepository.existsById(anyLong())).thenReturn(false);
+
+        assertThatThrownBy(() -> victim.updateProductService(1L, productDto(1L)))
+                .isInstanceOf(ProductNotFoundException.class);
     }
 
     private ProductEntity productEntity() {

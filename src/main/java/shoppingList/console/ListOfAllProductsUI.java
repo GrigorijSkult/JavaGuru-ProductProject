@@ -4,7 +4,8 @@ import shoppingList.dto.ProductDto;
 import shoppingList.services.businessLogic.ProductService;
 
 public class ListOfAllProductsUI {
-    ProductService productService;
+
+    private final ProductService productService;
 
     public ListOfAllProductsUI(ProductService productService) {
         this.productService = productService;

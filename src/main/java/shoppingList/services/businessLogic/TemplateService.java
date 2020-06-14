@@ -1,14 +1,13 @@
 package shoppingList.services.businessLogic;
 
 import shoppingList.dto.ProductDto;
-import shoppingList.services.validations.exception.DbContainsSimilarProductException;
 import shoppingList.services.validations.exception.ProductNotFoundException;
 
 import java.util.List;
 
 public interface TemplateService<T> {
 
-    ProductDto addProductService(ProductDto newProductDto) throws DbContainsSimilarProductException;
+    ProductDto addProductService(ProductDto newProductDto);
 
     boolean removeProductByIDService(Long id) throws ProductNotFoundException;
 
@@ -16,5 +15,5 @@ public interface TemplateService<T> {
 
     T findProductByID(Long id) throws ProductNotFoundException;
 
-    ProductDto updateProductService(Long id, ProductDto updatedProductDto) throws ProductNotFoundException, DbContainsSimilarProductException;
+    ProductDto updateProductService(Long id, ProductDto updatedProductDto) throws ProductNotFoundException;
 }

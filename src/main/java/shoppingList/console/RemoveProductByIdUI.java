@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class RemoveProductByIdUI {
 
-    ProductService productService;
+    private final ProductService productService;
 
     public RemoveProductByIdUI(ProductService productService) {
         this.productService = productService;

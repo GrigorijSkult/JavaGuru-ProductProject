@@ -1,21 +1,29 @@
 package shoppingList.services.validations;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.MockitoJUnitRunner;
 import shoppingList.domain.ProductCategory;
 import shoppingList.dto.ProductDto;
+import shoppingList.services.validations.discountValidation.ProductDiscountValidation;
 import shoppingList.services.validations.exception.ProductValidationException;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ProductDiscountValidationTest {
 
-    private final ProductDiscountValidation discountValidation = new ProductDiscountValidation();
+    @InjectMocks
+    private ProductDiscountValidation discountValidation;
 
-    @Test(expected = ProductValidationException.class)
+    @Test
     public void validateExceptionLessThanLowerLimit() {
-        discountValidation.validate(productDto(20.00, -0.01));
+        assertThatThrownBy(() -> discountValidation.validate(productDto(20.00, -0.01)))
+                .isInstanceOf(ProductValidationException.class)
+                .hasMessage("[Product discount value must be in the range from 0 to 100]");
     }
 
     @Test
@@ -23,14 +31,18 @@ public class ProductDiscountValidationTest {
         discountValidation.validate(productDto(21.00, 25.00));
     }
 
-    @Test(expected = ProductValidationException.class)
+    @Test
     public void validateExceptionMoreThanUpperLimit() {
-        discountValidation.validate(productDto(20.00, 100.01));
+        assertThatThrownBy(() -> discountValidation.validate(productDto(20.00, 100.01)))
+                .isInstanceOf(ProductValidationException.class)
+                .hasMessage("[Product discount value must be in the range from 0 to 100]");
     }
 
-    @Test(expected = ProductValidationException.class)
+    @Test
     public void validateExceptionProductPrice() {
-        discountValidation.validate(productDto(19.85, 25.05));
+        assertThatThrownBy(() -> discountValidation.validate(productDto(19.85, 25.05)))
+                .isInstanceOf(ProductValidationException.class)
+                .hasMessage("[A discount can be set for products with a price greater than 20.00]");
     }
 
     private ProductDto productDto(Double price, Double discount) {

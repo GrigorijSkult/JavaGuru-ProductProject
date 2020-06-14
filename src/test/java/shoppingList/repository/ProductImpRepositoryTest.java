@@ -1,7 +1,9 @@
 package shoppingList.repository;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.MockitoJUnitRunner;
 import shoppingList.domain.ProductCategory;
 import shoppingList.domain.ProductEntity;
 
@@ -9,18 +11,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ProductImpRepositoryTest {
 
+    @InjectMocks
     private ProductImpRepository repository;
-
-    @Before
-    public void initialization() {
-        repository = new ProductImpRepository();
-    }
 
     @Test
     public void addProduct() {
@@ -56,36 +53,36 @@ public class ProductImpRepositoryTest {
     }
 
     @Test
-    public void doesDbContainsSimilarProductTrue() {
-        repository.addProduct(newProductEntity());
-
-        assertTrue(repository.existsByName(newProductEntity()));
-    }
-
-    @Test
-    public void doesDbContainsSimilarProductFalse() {
-        assertFalse(repository.existsByName(newProductEntity()));
-    }
-
-    @Test
-    public void doesDbContainsIdTrue() {
-        repository.addProduct(newProductEntity());
-
-        assertTrue(repository.existsById(1L));
-    }
-
-    @Test
-    public void doesDbContainsIdFalse() {
-        assertFalse(repository.existsById(2L));
-    }
-
-    @Test
     public void updateProduct() {
         repository.addProduct(newProductEntity());
         ProductEntity updatedProduct = new ProductEntity(5L, "Banana", BigDecimal.valueOf(48.46), ProductCategory.MEAT_AND_MEAT_PRODUCTS, BigDecimal.valueOf(20.0), "Latvija");
         ProductEntity result = repository.updateProduct(1L, updatedProduct);
 
         assertEquals(updatedProduct, result);
+    }
+
+    @Test
+    public void existsByNameTrue() {
+        repository.addProduct(newProductEntity());
+
+        assertTrue(repository.existsByName(newProductEntity()));
+    }
+
+    @Test
+    public void existsByNameFalse() {
+        assertFalse(repository.existsByName(newProductEntity()));
+    }
+
+    @Test
+    public void existsByIdTrue() {
+        repository.addProduct(newProductEntity());
+
+        assertTrue(repository.existsById(1L));
+    }
+
+    @Test
+    public void existsByIdFalse() {
+        assertFalse(repository.existsById(2L));
     }
 
     private ProductEntity newProductEntity() {

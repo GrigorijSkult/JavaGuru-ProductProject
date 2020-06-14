@@ -1,34 +1,44 @@
 package shoppingList.services.validations;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.MockitoJUnitRunner;
 import shoppingList.domain.ProductCategory;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.exception.ProductValidationException;
 
 import java.math.BigDecimal;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+
+@RunWith(MockitoJUnitRunner.class)
 public class ProductDescriptionValidationTest {
 
-    private final ProductDescriptionValidation descriptionValidation = new ProductDescriptionValidation();
+    @InjectMocks
+    private ProductDescriptionValidation victim;
 
     @Test
     public void validateCorrect() {
-        descriptionValidation.validate(productDto("Poland"));
+        victim.validate(productDto("Poland"));
     }
 
     @Test
     public void validateMiddleLimitAllowed() {
-        descriptionValidation.validate(productDto("Lorem Ipsum is simply dummy text of the"));
+        victim.validate(productDto("Lorem Ipsum is simply dummy text of the"));
     }
 
     @Test
     public void validateUpperLimitAllowed() {
-        descriptionValidation.validate(productDto("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the"));
+        victim.validate(productDto("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the"));
     }
 
-    @Test(expected = ProductValidationException.class)
+    @Test
     public void validateExceptionMoreThanUpperLimit() {
-        descriptionValidation.validate(productDto("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text."));
+        assertThatThrownBy(() -> victim.validate(productDto("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.")))
+                .isInstanceOf(ProductValidationException.class)
+                .hasMessage("Product`s description should be shorter then 100 symbols");
+
     }
 
     private ProductDto productDto(String description) {

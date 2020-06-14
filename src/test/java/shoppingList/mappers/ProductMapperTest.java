@@ -2,6 +2,7 @@ package shoppingList.mappers;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 import shoppingList.domain.ProductCategory;
 import shoppingList.domain.ProductEntity;
@@ -14,7 +15,8 @@ import static junit.framework.TestCase.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
 public class ProductMapperTest {
 
-    private final ProductMapper productMapper = new ProductMapper();
+    @InjectMocks
+    private ProductMapper productMapper;
 
     @Test
     public void productToDto() {

@@ -6,8 +6,6 @@ import shoppingList.services.validations.exception.ProductValidationException;
 
 public class ProductCategoryValidation implements ValidationRule<ProductDto> {
 
-    public String errorMessage = "Product category is incorrect";
-
     @Override
     public void validate(ProductDto productDto) {
         boolean isValid = false;
@@ -18,7 +16,7 @@ public class ProductCategoryValidation implements ValidationRule<ProductDto> {
             }
         }
         if (!isValid) {
-            throw new ProductValidationException(errorMessage);
+            throw new ProductValidationException("Product category is incorrect");
         }
     }
 

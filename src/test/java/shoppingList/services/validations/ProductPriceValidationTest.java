@@ -1,24 +1,32 @@
 package shoppingList.services.validations;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.MockitoJUnitRunner;
 import shoppingList.domain.ProductCategory;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.exception.ProductValidationException;
 
 import java.math.BigDecimal;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+@RunWith(MockitoJUnitRunner.class)
 public class ProductPriceValidationTest {
 
-    private final ProductPriceValidation productPriceValidation = new ProductPriceValidation();
+    @InjectMocks
+    private ProductPriceValidation victim;
 
-    @Test(expected = ProductValidationException.class)
+    @Test
     public void validateExceptionLessThanLowerLimit() {
-        productPriceValidation.validate(productDto(-0.01));
+        assertThatThrownBy(() -> victim.validate(productDto(-0.01)))
+                .isInstanceOf(ProductValidationException.class)
+                .hasMessage("Product price must be greater than 0");
     }
 
     @Test
     public void validateLowerLimitAllowed() {
-        productPriceValidation.validate(productDto(0.01));
+        victim.validate(productDto(0.01));
     }
 
     private ProductDto productDto(Double price) {

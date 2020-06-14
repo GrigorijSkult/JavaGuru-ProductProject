@@ -4,7 +4,7 @@ import shoppingList.domain.ProductCategory;
 import shoppingList.services.validations.ProductCategoryValidation;
 import shoppingList.services.validations.exception.ProductValidationException;
 
-public class ProductCategoryChoiseService {
+public class ProductCategoryChoiceService {
 
     private final ProductCategoryValidation categoryValidation = new ProductCategoryValidation();
 
