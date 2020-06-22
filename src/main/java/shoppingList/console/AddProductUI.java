@@ -9,7 +9,7 @@ import shoppingList.services.validations.exception.ProductValidationException;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-public class AddProductUI {
+public class AddProductUI implements UserInterfaceUnit {
 
     private final ProductService productService;
     private final ProductCategoryChoiceService productCategoryChoiceService;
@@ -19,7 +19,8 @@ public class AddProductUI {
         this.productCategoryChoiceService = productCategoryChoiceService;
     }
 
-    public void addProductUI() {
+    @Override
+    public void execute() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Rules for adding a new product:" + "\n" +
                 " *Product name cannot be less than 3 characters and more than 32;" + "\n" +
@@ -71,5 +72,10 @@ public class AddProductUI {
         } catch (ProductValidationException e) {
             System.out.println("Product cant be added: " + e.getMessage());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Add new product to the DB;";
     }
 }

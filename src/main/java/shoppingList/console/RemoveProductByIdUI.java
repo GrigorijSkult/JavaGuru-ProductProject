@@ -5,7 +5,7 @@ import shoppingList.services.validations.exception.ProductNotFoundException;
 
 import java.util.Scanner;
 
-public class RemoveProductByIdUI {
+public class RemoveProductByIdUI implements UserInterfaceUnit {
 
     private final ProductService productService;
 
@@ -13,7 +13,8 @@ public class RemoveProductByIdUI {
         this.productService = productService;
     }
 
-    public void removeProductByIdUI() {
+    @Override
+    public void execute() {
         System.out.print("Please enter the product ID number to be deleted:");
         Scanner sc = new Scanner(System.in);
         Long id = sc.nextLong();
@@ -31,5 +32,10 @@ public class RemoveProductByIdUI {
         } catch (ProductNotFoundException e) {
             System.out.println("Product cant be deleted. " + e.getItemNotFoundMessage());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Delete product by product ID;";
     }
 }

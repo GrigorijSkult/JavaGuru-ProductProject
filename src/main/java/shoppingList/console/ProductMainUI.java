@@ -41,19 +41,19 @@ public class ProductMainUI {
                 int userChoice = Integer.parseInt(userChoiceString);
                 switch (userChoice) {
                     case 1:
-                        addProductUI.addProductUI();
+                        addProductUI.execute();
                         break;
                     case 2:
-                        findProductByIdUI.findProductByID();
+                        findProductByIdUI.execute();
                         break;
                     case 3:
-                        listOfAllProductsUI.listOfAllProducts();
+                        listOfAllProductsUI.execute();
                         break;
                     case 4:
-                        removeProductByIdUI.removeProductByIdUI();
+                        removeProductByIdUI.execute();
                         break;
                     case 5:
-                        updateProductUI.updateProduct();
+                        updateProductUI.execute();
                         break;
                     case 6:
                         continueProgram = false;

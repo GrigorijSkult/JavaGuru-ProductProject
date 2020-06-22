@@ -9,7 +9,7 @@ import shoppingList.services.validations.exception.ProductValidationException;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-public class UpdateProductUI {
+public class UpdateProductUI implements UserInterfaceUnit {
 
     private final ProductService productService;
     private final ProductCategoryChoiceService productCategoryChoiceService;
@@ -19,7 +19,8 @@ public class UpdateProductUI {
         this.productCategoryChoiceService = productCategoryChoiceService;
     }
 
-    public void updateProduct() {
+    @Override
+    public void execute() {
         System.out.print("Please enter product ID number to be updated:");
         Scanner sc = new Scanner(System.in);
         Long id = sc.nextLong();
@@ -73,5 +74,10 @@ public class UpdateProductUI {
         } catch (ProductNotFoundException e) {
             System.out.println("Product cant be updated. " + e.getItemNotFoundMessage());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Update product by product ID";
     }
 }

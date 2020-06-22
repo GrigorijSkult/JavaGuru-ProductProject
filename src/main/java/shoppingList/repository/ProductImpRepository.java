@@ -12,7 +12,6 @@ public class ProductImpRepository implements Repository<ProductEntity> {
     private long newProductId = 1;
     private final Map<Long, ProductEntity> productsDB = new HashMap<>();
 
-    //Main methods
     @Override
     public ProductEntity addProduct(ProductEntity newProductEntity) {
         ProductEntity productEntityCopy = new ProductEntity(newProductId, newProductEntity.getProductName(),
@@ -44,7 +43,7 @@ public class ProductImpRepository implements Repository<ProductEntity> {
         return updatedProduct;
     }
 
-    //Additional methods
+    @Override
     public boolean existsByName(ProductEntity productEntity) {
         for (ProductEntity value : productsDB.values()){
             if (value.getProductName().equals(productEntity.getProductName())){
@@ -54,6 +53,7 @@ public class ProductImpRepository implements Repository<ProductEntity> {
         return false;
     }
 
+    @Override
     public boolean existsById(Long id) {
         return productsDB.containsKey(id);
     }
