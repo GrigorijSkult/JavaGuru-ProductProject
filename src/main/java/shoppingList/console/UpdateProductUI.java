@@ -1,5 +1,6 @@
 package shoppingList.console;
 
+import org.springframework.stereotype.Component;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.businessLogic.ProductCategoryChoiceService;
 import shoppingList.services.businessLogic.ProductService;
@@ -9,6 +10,7 @@ import shoppingList.services.validations.exception.ProductValidationException;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+@Component
 public class UpdateProductUI implements UserInterfaceUnit {
 
     private final ProductService productService;
@@ -78,6 +80,6 @@ public class UpdateProductUI implements UserInterfaceUnit {
 
     @Override
     public String toString() {
-        return "Update product by product ID";
+        return "Update product by product ID;";
     }
 }

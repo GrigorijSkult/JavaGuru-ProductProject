@@ -1,11 +1,14 @@
 package shoppingList.services.validations;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.exception.ProductValidationException;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ProductValidationService implements ValidationRule<ProductDto> {
 
     private final List<ValidationRule<ProductDto>> validationRules;

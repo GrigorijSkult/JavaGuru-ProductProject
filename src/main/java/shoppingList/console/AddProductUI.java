@@ -1,5 +1,6 @@
 package shoppingList.console;
 
+import org.springframework.stereotype.Component;
 import shoppingList.domain.ProductCategory;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.businessLogic.ProductCategoryChoiceService;
@@ -9,6 +10,7 @@ import shoppingList.services.validations.exception.ProductValidationException;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+@Component
 public class AddProductUI implements UserInterfaceUnit {
 
     private final ProductService productService;

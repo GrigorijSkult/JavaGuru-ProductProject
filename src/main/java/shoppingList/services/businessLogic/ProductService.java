@@ -1,5 +1,7 @@
 package shoppingList.services.businessLogic;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import shoppingList.dto.ProductDto;
 import shoppingList.mappers.ProductMapper;
 import shoppingList.services.validations.exception.ProductNotFoundException;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Service
 public class ProductService implements TemplateService<ProductDto> {
 
     private final ProductImpRepository productImpRepository;

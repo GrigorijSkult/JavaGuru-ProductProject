@@ -1,10 +1,12 @@
 package shoppingList.console;
 
+import org.springframework.stereotype.Component;
 import shoppingList.services.businessLogic.ProductService;
 import shoppingList.services.validations.exception.ProductNotFoundException;
 
 import java.util.Scanner;
 
+@Component
 public class FindProductByIdUI implements UserInterfaceUnit {
 
     private final ProductService productService;

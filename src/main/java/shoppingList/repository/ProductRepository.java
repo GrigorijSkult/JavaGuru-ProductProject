@@ -2,7 +2,7 @@ package shoppingList.repository;
 
 import java.util.List;
 
-public interface Repository<T> {
+public interface ProductRepository<T> {
 
     T addProduct(T newProduct);
 

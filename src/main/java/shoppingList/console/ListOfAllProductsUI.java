@@ -1,8 +1,10 @@
 package shoppingList.console;
 
+import org.springframework.stereotype.Component;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.businessLogic.ProductService;
 
+@Component
 public class ListOfAllProductsUI implements UserInterfaceUnit {
 
     private final ProductService productService;

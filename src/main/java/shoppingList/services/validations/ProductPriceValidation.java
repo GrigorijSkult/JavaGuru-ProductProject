@@ -1,10 +1,12 @@
 package shoppingList.services.validations;
 
+import org.springframework.stereotype.Component;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.exception.ProductValidationException;
 
 import java.math.BigDecimal;
 
+@Component
 public class ProductPriceValidation implements ValidationRule<ProductDto> {
 
     @Override

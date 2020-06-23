@@ -1,8 +1,10 @@
 package shoppingList.services.validations;
 
+import org.springframework.stereotype.Component;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.exception.ProductValidationException;
 
+@Component
 public class ProductDescriptionValidation implements ValidationRule<ProductDto> {
 
     @Override

@@ -1,5 +1,6 @@
 package shoppingList.services.validations.discountValidation;
 
+import org.springframework.stereotype.Component;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.ValidationRule;
 import shoppingList.services.validations.exception.ProductValidationException;
@@ -7,6 +8,7 @@ import shoppingList.services.validations.exception.ProductValidationException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ProductDiscountValidation implements ValidationRule<ProductDto> {
 
     @Override

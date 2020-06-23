@@ -1,9 +1,11 @@
 package shoppingList.services.businessLogic;
 
+import org.springframework.stereotype.Service;
 import shoppingList.domain.ProductCategory;
 import shoppingList.services.validations.ProductCategoryValidation;
 import shoppingList.services.validations.exception.ProductValidationException;
 
+@Service
 public class ProductCategoryChoiceService {
 
     private final ProductCategoryValidation categoryValidation = new ProductCategoryValidation();

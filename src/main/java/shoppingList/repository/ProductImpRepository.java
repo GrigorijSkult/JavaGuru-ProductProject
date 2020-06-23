@@ -1,5 +1,6 @@
 package shoppingList.repository;
 
+import org.springframework.stereotype.Repository;
 import shoppingList.domain.ProductEntity;
 
 import java.util.ArrayList;
@@ -7,7 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ProductImpRepository implements Repository<ProductEntity> {
+@Repository
+public class ProductImpRepository implements ProductRepository<ProductEntity> {
 
     private long newProductId = 1;
     private final Map<Long, ProductEntity> productsDB = new HashMap<>();
