@@ -2,7 +2,7 @@ package shoppingList.repository;
 
 import java.util.List;
 
-public interface Repository<T> {
+public interface ProductRepository<T> {
 
     T addProduct(T newProduct);
 
@@ -13,4 +13,8 @@ public interface Repository<T> {
     T findProductByID(Long id);
 
     T updateProduct(Long id, T updatedProduct);
+
+    boolean existsByName (T productEntity);
+
+    boolean existsById (Long Id);
 }

@@ -1,9 +1,11 @@
 package shoppingList.mappers;
 
+import org.springframework.stereotype.Component;
 import shoppingList.domain.ProductEntity;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.businessLogic.ProductActualPriceCalculation;
 
+@Component
 public class ProductMapper {
 
     public ProductDto productToDto(ProductEntity productEntity){

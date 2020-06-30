@@ -1,5 +1,6 @@
 package shoppingList.repository;
 
+import org.springframework.stereotype.Repository;
 import shoppingList.domain.ProductEntity;
 
 import java.util.ArrayList;
@@ -7,12 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ProductImpRepository implements Repository<ProductEntity> {
+@Repository
+public class ProductImpRepository implements ProductRepository<ProductEntity> {
 
     private long newProductId = 1;
     private final Map<Long, ProductEntity> productsDB = new HashMap<>();
 
-    //Main methods
     @Override
     public ProductEntity addProduct(ProductEntity newProductEntity) {
         ProductEntity productEntityCopy = new ProductEntity(newProductId, newProductEntity.getProductName(),
@@ -44,7 +45,7 @@ public class ProductImpRepository implements Repository<ProductEntity> {
         return updatedProduct;
     }
 
-    //Additional methods
+    @Override
     public boolean existsByName(ProductEntity productEntity) {
         for (ProductEntity value : productsDB.values()){
             if (value.getProductName().equals(productEntity.getProductName())){
@@ -54,6 +55,7 @@ public class ProductImpRepository implements Repository<ProductEntity> {
         return false;
     }
 
+    @Override
     public boolean existsById(Long id) {
         return productsDB.containsKey(id);
     }

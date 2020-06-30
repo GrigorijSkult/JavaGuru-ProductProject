@@ -1,5 +1,6 @@
 package shoppingList.services.validations.nameValidation;
 
+import org.springframework.stereotype.Component;
 import shoppingList.dto.ProductDto;
 import shoppingList.mappers.ProductMapper;
 import shoppingList.repository.ProductImpRepository;
@@ -9,6 +10,7 @@ import shoppingList.services.validations.exception.ProductValidationException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ProductNameValidation implements ValidationRule<ProductDto> {
 
     private final ProductImpRepository productImpRepository;

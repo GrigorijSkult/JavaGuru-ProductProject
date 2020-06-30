@@ -1,9 +1,11 @@
 package shoppingList.services.validations;
 
+import org.springframework.stereotype.Component;
 import shoppingList.domain.ProductCategory;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.exception.ProductValidationException;
 
+@Component
 public class ProductCategoryValidation implements ValidationRule<ProductDto> {
 
     @Override

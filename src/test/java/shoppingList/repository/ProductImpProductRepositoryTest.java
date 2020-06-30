@@ -14,7 +14,7 @@ import java.util.List;
 import static junit.framework.TestCase.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProductImpRepositoryTest {
+public class ProductImpProductRepositoryTest {
 
     @InjectMocks
     private ProductImpRepository repository;
