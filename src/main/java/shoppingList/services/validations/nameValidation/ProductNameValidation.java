@@ -1,9 +1,10 @@
 package shoppingList.services.validations.nameValidation;
 
 import org.springframework.stereotype.Component;
+import shoppingList.domain.ProductEntity;
 import shoppingList.dto.ProductDto;
 import shoppingList.mappers.ProductMapper;
-import shoppingList.repository.ProductImpRepository;
+import shoppingList.repository.ProductRepository;
 import shoppingList.services.validations.ValidationRule;
 import shoppingList.services.validations.exception.ProductValidationException;
 
@@ -13,11 +14,11 @@ import java.util.List;
 @Component
 public class ProductNameValidation implements ValidationRule<ProductDto> {
 
-    private final ProductImpRepository productImpRepository;
+    private final ProductRepository<ProductEntity> productRepository;
     private final ProductMapper productMapper;
 
-    public ProductNameValidation(ProductImpRepository productImpRepository, ProductMapper productMapper) {
-        this.productImpRepository = productImpRepository;
+    public ProductNameValidation(ProductRepository<ProductEntity> productRepository, ProductMapper productMapper) {
+        this.productRepository = productRepository;
         this.productMapper = productMapper;
     }
 
@@ -26,7 +27,7 @@ public class ProductNameValidation implements ValidationRule<ProductDto> {
         List<String> errorLogs = new ArrayList<>();
         List<ValidationRule<ProductDto>> validationRules = new ArrayList<>();
         validationRules.add(new ProductNameLengthValidation());
-        validationRules.add(new ProductUniqueNameValidation(productImpRepository, productMapper));
+        validationRules.add(new ProductUniqueNameValidation(productRepository, productMapper));
 
         for (ValidationRule<ProductDto> rule : validationRules) {
             try {

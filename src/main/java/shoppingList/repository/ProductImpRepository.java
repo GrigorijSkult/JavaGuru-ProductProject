@@ -1,5 +1,6 @@
 package shoppingList.repository;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import shoppingList.domain.ProductEntity;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
+@Profile("inmemory")
 public class ProductImpRepository implements ProductRepository<ProductEntity> {
 
     private long newProductId = 1;

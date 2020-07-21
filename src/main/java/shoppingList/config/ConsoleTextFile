@@ -1,0 +1,70 @@
+CREATE TABLE students_info(
+    student_code VARCHAR(10) NOT NULL,
+    name VARCHAR(30) NOT NULL,
+    surname VARCHAR(30) NOT NULL,
+
+    PRIMARY KEY (student_code),
+    UNIQUE (student_code)
+);
+
+CREATE TABLE education_programs(
+    ID INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+
+    PRIMARY KEY (ID),
+    UNIQUE (name)
+);
+
+CREATE TABLE education_lessons_info(
+    ID INT NOT NULL AUTO_INCREMENT,
+    education_lesson_name VARCHAR(50) NOT NULL,
+    related_education_program_ID INT NOT NULL,
+
+    PRIMARY KEY (ID),
+    FOREIGN KEY (related_education_program_ID) REFERENCES education_programs(ID)
+);
+
+CREATE TABLE  students_education_programs(
+    student_code VARCHAR(10) NOT NULL,
+    education_program_ID INT NOT NULL,
+
+    PRIMARY KEY (student_code, education_program_ID),
+    FOREIGN KEY (student_code) REFERENCES students_info(student_code),
+    FOREIGN KEY (education_program_ID) REFERENCES education_programs(ID)
+);
+
+INSERT INTO students_info (student_code, name , surname)VALUES ('112X3','Petja', 'Ivanov');
+INSERT INTO students_info (student_code,name, surname)VALUES ('113X3','Vasja', 'Ivanov');
+INSERT INTO students_info (student_code,name, surname)VALUES ('114X3','Oleg', 'Tarasov');
+INSERT INTO students_info (student_code,name, surname)VALUES ('115X3','Masha', 'NeIvanova');
+
+INSERT INTO  education_programs (name) VALUES ('MTAF');
+INSERT INTO  education_programs (name) VALUES ('DIFT');
+
+INSERT INTO education_lessons_info (education_lesson_name, related_education_program_ID) VALUES ('Math', 1);
+INSERT INTO education_lessons_info (education_lesson_name, related_education_program_ID) VALUES ('Analysis', 1);
+INSERT INTO education_lessons_info (education_lesson_name, related_education_program_ID) VALUES ('Domino', 2);
+INSERT INTO education_lessons_info (education_lesson_name, related_education_program_ID) VALUES ('Football', 2);
+
+INSERT INTO students_education_programs(student_code, education_program_ID)VALUES ('112X3',1);
+INSERT INTO students_education_programs(student_code, education_program_ID)VALUES ('113X3',1);
+INSERT INTO students_education_programs(student_code, education_program_ID)VALUES ('114X3',2);
+INSERT INTO students_education_programs(student_code, education_program_ID)VALUES ('115X3',1);
+
+SELECT a.student_code, b.name, GROUP_CONCAT(DISTINCT c.education_lesson_name ORDER BY c.education_lesson_name ASC SEPARATOR ', ') AS education_lesson_name
+FROM students_education_programs
+left join students_info a ON students_education_programs.student_code = a.student_code
+left join education_programs b ON students_education_programs.education_program_ID = b.ID
+left join education_lessons_info c ON students_education_programs.education_program_ID = c.related_education_program_ID
+GROUP BY a.student_code;
+
+SELECT a.student_code, b.name, c.education_lesson_name FROM students_education_programs
+left join students_info a ON students_education_programs.student_code = a.student_code
+left join education_programs b ON students_education_programs.education_program_ID = b.ID
+left join education_lessons_info c ON students_education_programs.education_program_ID = c.related_education_program_ID;
+
+SELECT * FROM students_info;
+SELECT * FROM education_programs;
+SELECT * FROM students_education_programs;
+SELECT * FROM education_lessons_info;
+

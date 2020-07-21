@@ -1,13 +1,12 @@
 package shoppingList.services.businessLogic;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import shoppingList.domain.ProductEntity;
 import shoppingList.dto.ProductDto;
 import shoppingList.mappers.ProductMapper;
-import shoppingList.services.validations.exception.ProductNotFoundException;
+import shoppingList.repository.ProductRepository;
 import shoppingList.services.validations.ProductValidationService;
-import shoppingList.repository.ProductImpRepository;
-import shoppingList.domain.ProductEntity;
+import shoppingList.services.validations.exception.ProductNotFoundException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,12 +15,12 @@ import java.util.List;
 @Service
 public class ProductService implements TemplateService<ProductDto> {
 
-    private final ProductImpRepository productImpRepository;
+    private final ProductRepository<ProductEntity> productRepository;
     private final ProductValidationService validationService;
     private final ProductMapper productMapper;
 
-    public ProductService(ProductImpRepository productImpRepository, ProductValidationService validationService, ProductMapper productMapper) {
-        this.productImpRepository = productImpRepository;
+    public ProductService(ProductRepository<ProductEntity> productRepository, ProductValidationService validationService, ProductMapper productMapper) {
+        this.productRepository = productRepository;
         this.validationService = validationService;
         this.productMapper = productMapper;
     }
@@ -30,14 +29,14 @@ public class ProductService implements TemplateService<ProductDto> {
     public ProductDto addProductService(ProductDto newProductDto) {
         validationService.validate(newProductDto);
         ProductEntity newProductEntity = productMapper.productToEntity(newProductDto);
-        ProductEntity savedProductEntity = productImpRepository.addProduct(newProductEntity);
+        ProductEntity savedProductEntity = productRepository.addProduct(newProductEntity);
         return productMapper.productToDto(savedProductEntity);
     }
 
     @Override
     public boolean removeProductByIDService(Long id) throws ProductNotFoundException {
-        if (productImpRepository.existsById(id)) {
-            productImpRepository.removeProductByID(id);
+        if (productRepository.existsById(id)) {
+            productRepository.removeProductByID(id);
             return true;
         } else {
             throw new ProductNotFoundException(id);
@@ -46,13 +45,13 @@ public class ProductService implements TemplateService<ProductDto> {
 
     @Override
     public List<ProductDto> listOfAllProductsService() {
-        if (productImpRepository.listOfAllProducts().isEmpty()) {
+        if (productRepository.listOfAllProducts().isEmpty()) {
             System.out.println("DataBase is empty");
             return Collections.emptyList();
         } else {
             System.out.println("Product DataBase:");
             List<ProductDto> allProductDtoList = new ArrayList<>();
-            for (ProductEntity value : productImpRepository.listOfAllProducts()) {
+            for (ProductEntity value : productRepository.listOfAllProducts()) {
                 allProductDtoList.add(productMapper.productToDto(value));
             }
             return allProductDtoList;
@@ -61,7 +60,7 @@ public class ProductService implements TemplateService<ProductDto> {
 
     @Override
     public ProductDto findProductByID(Long id) throws ProductNotFoundException {
-        ProductEntity productEntity = productImpRepository.findProductByID(id);
+        ProductEntity productEntity = productRepository.findProductByID(id);
         if (productEntity != null) {
             return productMapper.productToDto(productEntity);
         } else {
@@ -71,10 +70,10 @@ public class ProductService implements TemplateService<ProductDto> {
 
     @Override
     public ProductDto updateProductService(Long id, ProductDto updatedProductDto) throws ProductNotFoundException {
-        if (productImpRepository.existsById(id)) {
+        if (productRepository.existsById(id)) {
             validationService.validate(updatedProductDto);
             ProductEntity updatedProductEntity = productMapper.productToEntity(updatedProductDto);
-            return productMapper.productToDto(productImpRepository.updateProduct(id, updatedProductEntity));
+            return productMapper.productToDto(productRepository.updateProduct(id, updatedProductEntity));
         } else {
             throw new ProductNotFoundException(id);
         }
