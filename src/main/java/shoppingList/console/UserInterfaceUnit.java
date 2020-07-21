@@ -4,4 +4,6 @@ public interface UserInterfaceUnit {
 
     void execute();
 
+    String title();
+
 }

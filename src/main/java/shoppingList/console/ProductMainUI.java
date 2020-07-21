@@ -26,7 +26,7 @@ public class ProductMainUI {
             Scanner scanner = new Scanner(System.in);
             try {
                 for (int i = 0; i < interfaceUnitList.size(); i++) {
-                    System.out.println((i + 1) + ". " + interfaceUnitList.get(i));
+                    System.out.println((i + 1) + ". " + interfaceUnitList.get(i).title());
                 }
                 System.out.print("Select option: ");
                 int userChoice = scanner.nextInt();

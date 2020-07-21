@@ -77,7 +77,7 @@ public class AddProductUI implements UserInterfaceUnit {
     }
 
     @Override
-    public String toString() {
+    public String title() {
         return "Add new product to the DB;";
     }
 }
