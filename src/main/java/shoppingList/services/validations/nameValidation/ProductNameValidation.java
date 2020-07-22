@@ -1,7 +1,6 @@
 package shoppingList.services.validations.nameValidation;
 
 import org.springframework.stereotype.Component;
-import shoppingList.domain.ProductEntity;
 import shoppingList.dto.ProductDto;
 import shoppingList.mappers.ProductMapper;
 import shoppingList.repository.ProductRepository;
@@ -14,10 +13,10 @@ import java.util.List;
 @Component
 public class ProductNameValidation implements ValidationRule<ProductDto> {
 
-    private final ProductRepository<ProductEntity> productRepository;
+    private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
-    public ProductNameValidation(ProductRepository<ProductEntity> productRepository, ProductMapper productMapper) {
+    public ProductNameValidation(ProductRepository productRepository, ProductMapper productMapper) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
     }

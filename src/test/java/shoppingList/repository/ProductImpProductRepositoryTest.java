@@ -10,6 +10,7 @@ import shoppingList.domain.ProductEntity;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static junit.framework.TestCase.*;
 
@@ -27,8 +28,9 @@ public class ProductImpProductRepositoryTest {
     @Test
     public void removeProductByID() {
         repository.addProduct(newProductEntity());
-        repository.removeProductByID(1L);
+        Optional<ProductEntity> product = repository.removeProductByID(1L);
 
+        assertEquals(dbProductEntity(), product.get());
         assertFalse(repository.existsByName(dbProductEntity()));
     }
 
@@ -49,16 +51,16 @@ public class ProductImpProductRepositoryTest {
     public void findProductByID() {
         repository.addProduct(newProductEntity());
 
-        assertEquals(dbProductEntity(), repository.findProductByID(1L));
+        assertEquals(dbProductEntity(), repository.findProductByID(1L).get());
     }
 
     @Test
     public void updateProduct() {
         repository.addProduct(newProductEntity());
         ProductEntity updatedProduct = new ProductEntity(5L, "Banana", BigDecimal.valueOf(48.46), ProductCategory.MEAT_AND_MEAT_PRODUCTS, BigDecimal.valueOf(20.0), "Latvija");
-        ProductEntity result = repository.updateProduct(1L, updatedProduct);
+        Optional<ProductEntity> result = repository.updateProduct(1L, updatedProduct);
 
-        assertEquals(updatedProduct, result);
+        assertEquals(updatedProduct, result.get());
     }
 
     @Test

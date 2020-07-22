@@ -4,14 +4,11 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import shoppingList.domain.ProductEntity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 @Profile("inmemory")
-public class ProductImpRepository implements ProductRepository<ProductEntity> {
+public class ProductImpRepository implements ProductRepository {
 
     private long newProductId = 1;
     private final Map<Long, ProductEntity> productsDB = new HashMap<>();
@@ -27,8 +24,8 @@ public class ProductImpRepository implements ProductRepository<ProductEntity> {
     }
 
     @Override
-    public void removeProductByID(Long id) {
-        productsDB.remove(id);
+    public Optional<ProductEntity> removeProductByID(Long id) {
+        return Optional.ofNullable(productsDB.remove(id));
     }
 
     @Override
@@ -37,20 +34,20 @@ public class ProductImpRepository implements ProductRepository<ProductEntity> {
     }
 
     @Override
-    public ProductEntity findProductByID(Long id) {
-        return productsDB.get(id);
+    public Optional<ProductEntity> findProductByID(Long id) {
+        return Optional.ofNullable(productsDB.get(id));
     }
 
     @Override
-    public ProductEntity updateProduct(Long id, ProductEntity updatedProduct) {
+    public Optional<ProductEntity> updateProduct(Long id, ProductEntity updatedProduct) {
         productsDB.replace(id, updatedProduct);
-        return updatedProduct;
+        return Optional.of(updatedProduct);
     }
 
     @Override
     public boolean existsByName(ProductEntity productEntity) {
-        for (ProductEntity value : productsDB.values()){
-            if (value.getProductName().equals(productEntity.getProductName())){
+        for (ProductEntity value : productsDB.values()) {
+            if (value.getProductName().equals(productEntity.getProductName())) {
                 return true;
             }
         }

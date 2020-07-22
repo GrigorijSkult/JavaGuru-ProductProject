@@ -9,10 +9,10 @@ import shoppingList.services.validations.exception.ProductValidationException;
 
 public class ProductUniqueNameValidation implements ValidationRule<ProductDto> {
 
-    private final ProductRepository<ProductEntity> productRepository;
+    private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
-    public ProductUniqueNameValidation(ProductRepository<ProductEntity> productRepository, ProductMapper productMapper) {
+    public ProductUniqueNameValidation(ProductRepository productRepository, ProductMapper productMapper) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
     }

@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
@@ -86,7 +87,7 @@ public class ProductServiceTest {
 
     @Test
     public void findProductByID() {
-        when(productImpRepository.findProductByID(anyLong())).thenReturn(productEntity());
+        when(productImpRepository.findProductByID(anyLong())).thenReturn(Optional.of(productEntity()));
         when(productMapper.productToDto(any())).thenReturn(productDto(1L));
 
         assertEquals(productDto(1L), victim.findProductByID(1L));
@@ -94,7 +95,7 @@ public class ProductServiceTest {
 
     @Test
     public void findProductByIDProductNotFoundException() {
-        when(productImpRepository.findProductByID(anyLong())).thenReturn(null);
+        when(productImpRepository.findProductByID(anyLong())).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> victim.findProductByID(1L))
                 .isInstanceOf(ProductNotFoundException.class);
@@ -103,6 +104,8 @@ public class ProductServiceTest {
     @Test
     public void updateProductService() {
         when(productImpRepository.existsById(anyLong())).thenReturn(true);
+        when(productMapper.productToEntity(any())).thenReturn(productEntity());
+        when(productImpRepository.updateProduct(anyLong(), any())).thenReturn(Optional.of(productEntity()));
         when(productMapper.productToDto(any())).thenReturn(productDto(1L));
         ProductDto result = victim.updateProductService(1L, productDto(5L));
 

@@ -4,11 +4,12 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import shoppingList.domain.ProductEntity;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Repository
 @Profile("mysql")
-public class DatabaseProductImpRepository implements ProductRepository<ProductEntity> {
+public class DatabaseProductImpRepository implements ProductRepository {
 
     @Override
     public ProductEntity addProduct(ProductEntity newProduct) {
@@ -16,23 +17,23 @@ public class DatabaseProductImpRepository implements ProductRepository<ProductEn
     }
 
     @Override
-    public void removeProductByID(Long id) {
-
+    public Optional<ProductEntity> removeProductByID(Long id) {
+        return Optional.empty();
     }
 
     @Override
-    public List<ProductEntity> listOfAllProducts() {
+    public ArrayList<ProductEntity> listOfAllProducts() {
         return null;
     }
 
     @Override
-    public ProductEntity findProductByID(Long id) {
-        return null;
+    public Optional<ProductEntity> findProductByID(Long id) {
+        return Optional.empty();
     }
 
     @Override
-    public ProductEntity updateProduct(Long id, ProductEntity updatedProduct) {
-        return null;
+    public Optional<ProductEntity> updateProduct(Long id, ProductEntity updatedProduct) {
+        return Optional.empty();
     }
 
     @Override

@@ -11,15 +11,16 @@ import shoppingList.services.validations.exception.ProductNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService implements TemplateService<ProductDto> {
 
-    private final ProductRepository<ProductEntity> productRepository;
+    private final ProductRepository productRepository;
     private final ProductValidationService validationService;
     private final ProductMapper productMapper;
 
-    public ProductService(ProductRepository<ProductEntity> productRepository, ProductValidationService validationService, ProductMapper productMapper) {
+    public ProductService(ProductRepository productRepository, ProductValidationService validationService, ProductMapper productMapper) {
         this.productRepository = productRepository;
         this.validationService = validationService;
         this.productMapper = productMapper;
@@ -60,9 +61,9 @@ public class ProductService implements TemplateService<ProductDto> {
 
     @Override
     public ProductDto findProductByID(Long id) throws ProductNotFoundException {
-        ProductEntity productEntity = productRepository.findProductByID(id);
-        if (productEntity != null) {
-            return productMapper.productToDto(productEntity);
+        Optional<ProductEntity> productEntity = productRepository.findProductByID(id);
+        if (productEntity.isPresent()) {
+            return productMapper.productToDto(productEntity.get());
         } else {
             throw new ProductNotFoundException(id);
         }
@@ -73,7 +74,7 @@ public class ProductService implements TemplateService<ProductDto> {
         if (productRepository.existsById(id)) {
             validationService.validate(updatedProductDto);
             ProductEntity updatedProductEntity = productMapper.productToEntity(updatedProductDto);
-            return productMapper.productToDto(productRepository.updateProduct(id, updatedProductEntity));
+            return productMapper.productToDto(productRepository.updateProduct(id, updatedProductEntity).get());
         } else {
             throw new ProductNotFoundException(id);
         }
