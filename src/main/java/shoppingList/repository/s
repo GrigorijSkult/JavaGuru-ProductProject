@@ -10,12 +10,13 @@ import shoppingList.domain.ProductEntity;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 @Profile("mysql")
-public class DatabaseProductImpRepository implements ProductRepository{
+public class DatabaseProductImpRepository implements ProductRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -47,44 +48,42 @@ public class DatabaseProductImpRepository implements ProductRepository{
         );
     }
 
-    @Override//no
+    @Override
     public Optional<ProductEntity> removeProductByID(Long id) {
         return Optional.empty();
     }
 
-    @Override//no
-    public List<ProductEntity> listOfAllProducts() {
-        String query = "SELECT * FROM products";
-        return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(ProductEntity.class));
+    @Override
+    public ArrayList<ProductEntity> listOfAllProducts() {
+        return null;
     }
 
-    @Override//no
+    @Override
     public Optional<ProductEntity> findProductByID(Long id) {
-        String query = "SELECT * FROM products WHERE id=?";
-        ProductEntity productEntities = jdbcTemplate.queryForObject(query, new Object[]{id}, new BeanPropertyRowMapper<>(ProductEntity.class));
-        return Optional.ofNullable(productEntities);
+//        String query = "";
+        return Optional.empty();
     }
 
-    @Override//no
+    @Override
     public Optional<ProductEntity> updateProduct(Long id, ProductEntity updatedProduct) {
         return Optional.empty();
     }
 
-    @Override//no
+    @Override
     public boolean existsByName(ProductEntity productEntity) {
         //query problem (SQL Injection)
         String query = "SELECT * FROM products WHERE name=" + "VALUES (?)";
-        jdbcTemplate.update(connection -> {
+        jdbcTemplate.query(connection -> {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            //////////////////////
             preparedStatement.setString(1, productEntity.getProductName());
             return preparedStatement;
         });
-        List<ProductEntity> productEntities = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(ProductEntity.class));
+        List<ProductEntity> productEntities = jdbcTemplate.query(query, new BeanPropertyRowMapper<ProductEntity>());
         return !productEntities.isEmpty();
-//        return false;
     }
 
-    @Override//no
+    @Override
     public boolean existsById(Long Id) {
         return false;
     }

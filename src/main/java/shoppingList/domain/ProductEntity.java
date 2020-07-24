@@ -5,12 +5,15 @@ import java.util.Objects;
 
 public class ProductEntity {
 
-    private final Long productId;
-    private final String productName;
-    private final BigDecimal productRegularPrice;
-    private final ProductCategory productCategory;
-    private final BigDecimal productDiscount;
-    private final String productDescription;
+    private Long productId;
+    private String productName;
+    private BigDecimal productRegularPrice;
+    private ProductCategory productCategory;
+    private BigDecimal productDiscount;
+    private String productDescription;
+
+    public ProductEntity() {
+    }
 
     public ProductEntity(Long id, String productName, BigDecimal productRegularPrice, ProductCategory productCategory,
                          BigDecimal productDiscount, String productDescription) {
@@ -19,6 +22,30 @@ public class ProductEntity {
         this.productRegularPrice = productRegularPrice;
         this.productCategory = productCategory;
         this.productDiscount = productDiscount;
+        this.productDescription = productDescription;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public void setProductRegularPrice(BigDecimal productRegularPrice) {
+        this.productRegularPrice = productRegularPrice;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    public void setProductDiscount(BigDecimal productDiscount) {
+        this.productDiscount = productDiscount;
+    }
+
+    public void setProductDescription(String productDescription) {
         this.productDescription = productDescription;
     }
 
