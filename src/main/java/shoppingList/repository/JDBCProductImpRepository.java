@@ -10,21 +10,20 @@ import shoppingList.domain.ProductEntity;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 @Profile("mysql")
-public class DatabaseProductImpRepository implements ProductRepository {
+public class JDBCProductImpRepository implements ProductRepository{
 
     private final JdbcTemplate jdbcTemplate;
 
-    public DatabaseProductImpRepository(JdbcTemplate jdbcTemplate) {
+    public JDBCProductImpRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override
+    @Override//ok
     public ProductEntity addProduct(ProductEntity newProduct) {
         String query = "INSERT INTO products (name, regular_price, category, discount, description)" +
                 "VALUES (?, ?, ?, ?, ?)";
@@ -48,42 +47,44 @@ public class DatabaseProductImpRepository implements ProductRepository {
         );
     }
 
-    @Override
+    @Override//no
     public Optional<ProductEntity> removeProductByID(Long id) {
         return Optional.empty();
     }
 
-    @Override
-    public ArrayList<ProductEntity> listOfAllProducts() {
-        return null;
+    @Override//no
+    public List<ProductEntity> listOfAllProducts() {
+        String query = "SELECT * FROM products";
+        return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(ProductEntity.class));
     }
 
-    @Override
+    @Override//no
     public Optional<ProductEntity> findProductByID(Long id) {
-//        String query = "";
-        return Optional.empty();
+        String query = "SELECT * FROM products WHERE id=?";
+        ProductEntity productEntities = jdbcTemplate.queryForObject(query, new Object[]{id}, new BeanPropertyRowMapper<>(ProductEntity.class));
+        return Optional.ofNullable(productEntities);
     }
 
-    @Override
+    @Override//no
     public Optional<ProductEntity> updateProduct(Long id, ProductEntity updatedProduct) {
         return Optional.empty();
     }
 
-    @Override
+    @Override//no
     public boolean existsByName(ProductEntity productEntity) {
         //query problem (SQL Injection)
         String query = "SELECT * FROM products WHERE name=" + "VALUES (?)";
-        jdbcTemplate.query(connection -> {
+        jdbcTemplate.update(connection -> {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            //////////////////////
             preparedStatement.setString(1, productEntity.getProductName());
             return preparedStatement;
         });
-        List<ProductEntity> productEntities = jdbcTemplate.query(query, new BeanPropertyRowMapper<ProductEntity>());
+        List<ProductEntity> productEntities = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(ProductEntity.class));
         return !productEntities.isEmpty();
+//        return false;
     }
 
-    @Override
+    @Override//no
     public boolean existsById(Long Id) {
         return false;
     }
