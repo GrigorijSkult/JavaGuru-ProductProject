@@ -58,9 +58,9 @@ public class ProductImpProductRepositoryTest {
     public void updateProduct() {
         repository.addProduct(newProductEntity());
         ProductEntity updatedProduct = new ProductEntity(5L, "Banana", BigDecimal.valueOf(48.46), ProductCategory.MEAT_AND_MEAT_PRODUCTS, BigDecimal.valueOf(20.0), "Latvija");
-        Optional<ProductEntity> result = repository.updateProduct(1L, updatedProduct);
+        ProductEntity result = repository.updateProduct(1L, updatedProduct);
 
-        assertEquals(updatedProduct, result.get());
+        assertEquals(updatedProduct, result);
     }
 
     @Test

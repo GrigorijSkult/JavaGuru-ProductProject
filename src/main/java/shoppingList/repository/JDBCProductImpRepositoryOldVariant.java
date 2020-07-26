@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Profile("mysql_old")
+@Profile("mysql")
 public class JDBCProductImpRepositoryOldVariant implements ProductRepository {
 
     @Value("${database.url}")
@@ -29,19 +29,19 @@ public class JDBCProductImpRepositoryOldVariant implements ProductRepository {
         Connection connection = null;
         try {
             connection = getConnection();
-            String query = "INSERT INTO products (name, regular_price, category, discount, description)" +
+            String query = "INSERT INTO products (name, regularPrice, category, discount, description)" +
                     "VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, newProduct.getProductName());
-            preparedStatement.setBigDecimal(2, newProduct.getProductRegularPrice());
-            preparedStatement.setString(3, String.valueOf(newProduct.getProductCategory()));
-            preparedStatement.setBigDecimal(4, newProduct.getProductDiscount());
-            preparedStatement.setString(5, newProduct.getProductDescription());
+            preparedStatement.setString(1, newProduct.getName());
+            preparedStatement.setBigDecimal(2, newProduct.getRegularPrice());
+            preparedStatement.setString(3, String.valueOf(newProduct.getCategory()));
+            preparedStatement.setBigDecimal(4, newProduct.getDiscount());
+            preparedStatement.setString(5, newProduct.getDescription());
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()) {
-                newProduct.setProductId(rs.getLong(1));
+                newProduct.setId(rs.getLong(1));
             }
         } catch (Throwable e) {
             System.out.println("Exception while trying to get list of products from DB");
@@ -66,12 +66,12 @@ public class JDBCProductImpRepositoryOldVariant implements ProductRepository {
             ProductEntity product = null;
             if (resultSet.next()) {
                 product = new ProductEntity();
-                product.setProductId(resultSet.getLong("id"));
-                product.setProductName(resultSet.getString("name"));
-                product.setProductRegularPrice(resultSet.getBigDecimal("regular_price"));
-                product.setProductCategory(ProductCategory.valueOf(resultSet.getString("category")));
-                product.setProductDiscount(resultSet.getBigDecimal("discount"));
-                product.setProductDescription(resultSet.getString("description"));
+                product.setId(resultSet.getLong("id"));
+                product.setName(resultSet.getString("name"));
+                product.setRegularPrice(resultSet.getBigDecimal("regularPrice"));
+                product.setCategory(ProductCategory.valueOf(resultSet.getString("category")));
+                product.setDiscount(resultSet.getBigDecimal("discount"));
+                product.setDescription(resultSet.getString("description"));
             }
             return Optional.ofNullable(product);
         } catch (Throwable e) {
@@ -116,12 +116,12 @@ public class JDBCProductImpRepositoryOldVariant implements ProductRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 ProductEntity product = new ProductEntity();
-                product.setProductId(resultSet.getLong("id"));
-                product.setProductName(resultSet.getString("name"));
-                product.setProductRegularPrice(resultSet.getBigDecimal("regular_price"));
-                product.setProductCategory(ProductCategory.valueOf(resultSet.getString("category")));
-                product.setProductDiscount(resultSet.getBigDecimal("discount"));
-                product.setProductDescription(resultSet.getString("description"));
+                product.setId(resultSet.getLong("id"));
+                product.setName(resultSet.getString("name"));
+                product.setRegularPrice(resultSet.getBigDecimal("regularPrice"));
+                product.setCategory(ProductCategory.valueOf(resultSet.getString("category")));
+                product.setDiscount(resultSet.getBigDecimal("discount"));
+                product.setDescription(resultSet.getString("description"));
                 products.add(product);
             }
         } catch (Throwable e) {
@@ -135,9 +135,27 @@ public class JDBCProductImpRepositoryOldVariant implements ProductRepository {
     }
 
     @Override
-    public Optional<ProductEntity> updateProduct(Long id, ProductEntity updatedProduct) {
-
-        return Optional.empty();
+    public ProductEntity updateProduct(Long id, ProductEntity updatedProduct) {
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            String query = "UPDATE products SET name = ?, regularPrice = ?, category = ?, discount = ?, description = ? WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, updatedProduct.getName());
+            preparedStatement.setBigDecimal(2, updatedProduct.getRegularPrice());
+            preparedStatement.setString(3, String.valueOf(updatedProduct.getCategory()));
+            preparedStatement.setBigDecimal(4, updatedProduct.getDiscount());
+            preparedStatement.setString(5, updatedProduct.getDescription());
+            preparedStatement.setLong(6, updatedProduct.getId());
+            preparedStatement.executeUpdate();
+        } catch (Throwable e) {
+            System.out.println("Exception while trying to update product");
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            closeConnection(connection);
+        }
+        return null;
     }
 
     @Override
@@ -148,7 +166,7 @@ public class JDBCProductImpRepositoryOldVariant implements ProductRepository {
             String query = "SELECT * FROM products WHERE name=?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, productEntity.getProductName());
+            preparedStatement.setString(1, productEntity.getName());
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next();
         } catch (Throwable e) {

@@ -5,72 +5,72 @@ import java.util.Objects;
 
 public class ProductEntity {
 
-    private Long productId;
-    private String productName;
-    private BigDecimal productRegularPrice;
-    private ProductCategory productCategory;
-    private BigDecimal productDiscount;
-    private String productDescription;
+    private Long id;
+    private String name;
+    private BigDecimal regularPrice;
+    private ProductCategory category;
+    private BigDecimal discount;
+    private String description;
 
     public ProductEntity() {
     }
 
-    public ProductEntity(Long id, String productName, BigDecimal productRegularPrice, ProductCategory productCategory,
-                         BigDecimal productDiscount, String productDescription) {
-        this.productId = id;
-        this.productName = productName;
-        this.productRegularPrice = productRegularPrice;
-        this.productCategory = productCategory;
-        this.productDiscount = productDiscount;
-        this.productDescription = productDescription;
+    public ProductEntity(Long id, String name, BigDecimal regularPrice, ProductCategory category,
+                         BigDecimal discount, String description) {
+        this.id = id;
+        this.name = name;
+        this.regularPrice = regularPrice;
+        this.category = category;
+        this.discount = discount;
+        this.description = description;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setProductRegularPrice(BigDecimal productRegularPrice) {
-        this.productRegularPrice = productRegularPrice;
+    public void setRegularPrice(BigDecimal regularPrice) {
+        this.regularPrice = regularPrice;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
+    public void setCategory(ProductCategory category) {
+        this.category = category;
     }
 
-    public void setProductDiscount(BigDecimal productDiscount) {
-        this.productDiscount = productDiscount;
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Long getId() {
+        return id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public BigDecimal getProductRegularPrice() {
-        return productRegularPrice;
+    public BigDecimal getRegularPrice() {
+        return regularPrice;
     }
 
-    public ProductCategory getProductCategory() {
-        return productCategory;
+    public ProductCategory getCategory() {
+        return category;
     }
 
-    public BigDecimal getProductDiscount() {
-        return productDiscount;
+    public BigDecimal getDiscount() {
+        return discount;
     }
 
-    public String getProductDescription() {
-        return productDescription;
+    public String getDescription() {
+        return description;
     }
 
     @Override
@@ -78,26 +78,26 @@ public class ProductEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductEntity productEntity = (ProductEntity) o;
-        return Objects.equals(productName, productEntity.productName) &&
-                Objects.equals(productRegularPrice, productEntity.productRegularPrice) &&
-                productCategory == productEntity.productCategory &&
-                Objects.equals(productDiscount, productEntity.productDiscount) &&
-                Objects.equals(productDescription, productEntity.productDescription);
+        return Objects.equals(name, productEntity.name) &&
+                Objects.equals(regularPrice, productEntity.regularPrice) &&
+                category == productEntity.category &&
+                Objects.equals(discount, productEntity.discount) &&
+                Objects.equals(description, productEntity.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productName, productRegularPrice, productCategory, productDiscount, productDescription);
+        return Objects.hash(name, regularPrice, category, discount, description);
     }
 
     @Override
     public String toString() {
-        return "ID = " + productId +
-                ", Product Name= '" + productName + '\'' +
-                ", Regular price= " + productRegularPrice + " EUR" +
-                ", Product category= '" + productCategory + '\'' +
-                ", Discount= " + productDiscount + " %" +
-                ", Description= '" + productDescription +
+        return "ID = " + id +
+                ", Product Name= '" + name + '\'' +
+                ", Regular price= " + regularPrice + " EUR" +
+                ", Product category= '" + category + '\'' +
+                ", Discount= " + discount + " %" +
+                ", Description= '" + description +
                 '\'' + ";";
     }
 }

@@ -105,7 +105,7 @@ public class ProductServiceTest {
     public void updateProductService() {
         when(productImpRepository.existsById(anyLong())).thenReturn(true);
         when(productMapper.productToEntity(any())).thenReturn(productEntity());
-        when(productImpRepository.updateProduct(anyLong(), any())).thenReturn(Optional.of(productEntity()));
+        when(productImpRepository.updateProduct(anyLong(), any())).thenReturn(productEntity());
         when(productMapper.productToDto(any())).thenReturn(productDto(1L));
         ProductDto result = victim.updateProductService(1L, productDto(5L));
 

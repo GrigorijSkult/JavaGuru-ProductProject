@@ -32,7 +32,7 @@ public class ProductMapperTest {
         ProductEntity result = productMapper.productToEntity(productDto(5L));
 
         assertEquals(productEntity(), result);
-        assertEquals(productEntity().getProductId(), result.getProductId());
+        assertEquals(productEntity().getId(), result.getId());
     }
 
     private ProductEntity productEntity() {

@@ -10,12 +10,12 @@ public class ProductMapper {
 
     public ProductDto productToDto(ProductEntity productEntity){
         ProductDto productDto = new ProductDto();
-        productDto.setProductId(productEntity.getProductId());
-        productDto.setProductName(productEntity.getProductName());
-        productDto.setProductRegularPrice(productEntity.getProductRegularPrice());
-        productDto.setProductCategory(productEntity.getProductCategory());
-        productDto.setProductDiscount(productEntity.getProductDiscount());
-        productDto.setProductDescription(productEntity.getProductDescription());
+        productDto.setProductId(productEntity.getId());
+        productDto.setProductName(productEntity.getName());
+        productDto.setProductRegularPrice(productEntity.getRegularPrice());
+        productDto.setProductCategory(productEntity.getCategory());
+        productDto.setProductDiscount(productEntity.getDiscount());
+        productDto.setProductDescription(productEntity.getDescription());
         productDto.setProductActualPrice(new ProductActualPriceCalculation().calculateProductActualPrice(productDto));
         return productDto;
     }

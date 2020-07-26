@@ -15,9 +15,9 @@ public class ProductImpRepository implements ProductRepository {
 
     @Override
     public ProductEntity addProduct(ProductEntity newProductEntity) {
-        ProductEntity productEntityCopy = new ProductEntity(newProductId, newProductEntity.getProductName(),
-                newProductEntity.getProductRegularPrice(), newProductEntity.getProductCategory(), newProductEntity.getProductDiscount(),
-                newProductEntity.getProductDescription());
+        ProductEntity productEntityCopy = new ProductEntity(newProductId, newProductEntity.getName(),
+                newProductEntity.getRegularPrice(), newProductEntity.getCategory(), newProductEntity.getDiscount(),
+                newProductEntity.getDescription());
         productsDB.put(newProductId, productEntityCopy);
         newProductId++;
         return productEntityCopy;
@@ -39,15 +39,15 @@ public class ProductImpRepository implements ProductRepository {
     }
 
     @Override
-    public Optional<ProductEntity> updateProduct(Long id, ProductEntity updatedProduct) {
+    public ProductEntity updateProduct(Long id, ProductEntity updatedProduct) {
         productsDB.replace(id, updatedProduct);
-        return Optional.of(updatedProduct);
+        return updatedProduct;
     }
 
     @Override
     public boolean existsByName(ProductEntity productEntity) {
         for (ProductEntity value : productsDB.values()) {
-            if (value.getProductName().equals(productEntity.getProductName())) {
+            if (value.getName().equals(productEntity.getName())) {
                 return true;
             }
         }

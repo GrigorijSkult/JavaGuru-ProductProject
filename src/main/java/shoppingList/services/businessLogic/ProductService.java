@@ -74,7 +74,7 @@ public class ProductService implements TemplateService<ProductDto> {
         if (productRepository.existsById(id)) {
             validationService.validate(updatedProductDto);
             ProductEntity updatedProductEntity = productMapper.productToEntity(updatedProductDto);
-            return productMapper.productToDto(productRepository.updateProduct(id, updatedProductEntity).get());
+            return productMapper.productToDto((productRepository.updateProduct(id, updatedProductEntity)));
         } else {
             throw new ProductNotFoundException(id);
         }
