@@ -10,8 +10,8 @@ public class ProductDiscountRangeValidation implements ValidationRule<ProductDto
 
     @Override
     public void validate(ProductDto productDto) {
-        if (productDto.getProductDiscount().compareTo(BigDecimal.valueOf(0.00)) < 0
-                || productDto.getProductDiscount().compareTo(BigDecimal.valueOf(100.00)) > 0) {
+        if (productDto.getDiscount().compareTo(BigDecimal.valueOf(0.00)) < 0
+                || productDto.getDiscount().compareTo(BigDecimal.valueOf(100.00)) > 0) {
             throw new ProductValidationException("Product discount value must be in the range from 0 to 100");
         }
     }

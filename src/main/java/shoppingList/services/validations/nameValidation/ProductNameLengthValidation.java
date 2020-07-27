@@ -8,7 +8,7 @@ public class ProductNameLengthValidation implements ValidationRule<ProductDto> {
 
     @Override
     public void validate(ProductDto productDto) {
-        if (productDto.getProductName().length() < 3 || productDto.getProductName().length() > 32) {
+        if (productDto.getName().length() < 3 || productDto.getName().length() > 32) {
             throw new ProductValidationException("Product name cannot be less than 3 characters and more than 32");
         }
     }

@@ -10,7 +10,6 @@ import shoppingList.domain.ProductEntity;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static junit.framework.TestCase.*;
 
@@ -18,7 +17,7 @@ import static junit.framework.TestCase.*;
 public class ProductImpProductRepositoryTest {
 
     @InjectMocks
-    private ProductImpRepository repository;
+    private InMemoryProductImpRepository repository;
 
     @Test
     public void addProduct() {
@@ -28,9 +27,9 @@ public class ProductImpProductRepositoryTest {
     @Test
     public void removeProductByID() {
         repository.addProduct(newProductEntity());
-        Optional<ProductEntity> product = repository.removeProductByID(1L);
+        boolean product = repository.removeProductByID(1L);
 
-        assertEquals(dbProductEntity(), product.get());
+        assertTrue(product);
         assertFalse(repository.existsByName(dbProductEntity()));
     }
 

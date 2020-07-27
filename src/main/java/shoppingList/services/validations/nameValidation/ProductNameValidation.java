@@ -38,6 +38,5 @@ public class ProductNameValidation implements ValidationRule<ProductDto> {
         if (!errorLogs.isEmpty()) {
             throw new ProductValidationException(errorLogs.toString());
         }
-
     }
 }

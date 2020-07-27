@@ -12,7 +12,7 @@ public class ProductCategoryValidation implements ValidationRule<ProductDto> {
     public void validate(ProductDto productDto) {
         boolean isValid = false;
         for (ProductCategory value : ProductCategory.values()) {
-            if (productDto.getProductCategory().equals(value)) {
+            if (productDto.getCategory().equals(value)) {
                 isValid = true;
                 break;
             }

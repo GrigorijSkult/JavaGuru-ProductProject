@@ -8,7 +8,7 @@ import java.util.*;
 
 @Repository
 @Profile("inmemory")
-public class ProductImpRepository implements ProductRepository {
+public class InMemoryProductImpRepository implements ProductRepository {
 
     private long newProductId = 1;
     private final Map<Long, ProductEntity> productsDB = new HashMap<>();
@@ -24,8 +24,9 @@ public class ProductImpRepository implements ProductRepository {
     }
 
     @Override
-    public Optional<ProductEntity> removeProductByID(Long id) {
-        return Optional.ofNullable(productsDB.remove(id));
+    public boolean removeProductByID(Long id) {
+        productsDB.remove(id);
+        return true;
     }
 
     @Override

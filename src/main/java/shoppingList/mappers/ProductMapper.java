@@ -10,18 +10,18 @@ public class ProductMapper {
 
     public ProductDto productToDto(ProductEntity productEntity){
         ProductDto productDto = new ProductDto();
-        productDto.setProductId(productEntity.getId());
-        productDto.setProductName(productEntity.getName());
-        productDto.setProductRegularPrice(productEntity.getRegularPrice());
-        productDto.setProductCategory(productEntity.getCategory());
-        productDto.setProductDiscount(productEntity.getDiscount());
-        productDto.setProductDescription(productEntity.getDescription());
-        productDto.setProductActualPrice(new ProductActualPriceCalculation().calculateProductActualPrice(productDto));
+        productDto.setId(productEntity.getId());
+        productDto.setName(productEntity.getName());
+        productDto.setRegularPrice(productEntity.getRegularPrice());
+        productDto.setCategory(productEntity.getCategory());
+        productDto.setDiscount(productEntity.getDiscount());
+        productDto.setDescription(productEntity.getDescription());
+        productDto.setActualPrice(new ProductActualPriceCalculation().calculateProductActualPrice(productDto));
         return productDto;
     }
 
     public ProductEntity productToEntity(ProductDto productDto){
-        return new ProductEntity(productDto.getProductId(), productDto.getProductName(), productDto.getProductRegularPrice(),
-                productDto.getProductCategory(), productDto.getProductDiscount(), productDto.getProductDescription());
+        return new ProductEntity(productDto.getId(), productDto.getName(), productDto.getRegularPrice(),
+                productDto.getCategory(), productDto.getDiscount(), productDto.getDescription());
     }
 }

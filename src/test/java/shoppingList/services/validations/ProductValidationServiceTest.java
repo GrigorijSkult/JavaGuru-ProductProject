@@ -9,7 +9,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import shoppingList.domain.ProductCategory;
 import shoppingList.dto.ProductDto;
 import shoppingList.mappers.ProductMapper;
-import shoppingList.repository.ProductImpRepository;
+import shoppingList.repository.InMemoryProductImpRepository;
 import shoppingList.services.validations.discountValidation.ProductDiscountValidation;
 import shoppingList.services.validations.exception.ProductValidationException;
 import shoppingList.services.validations.nameValidation.ProductNameValidation;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 public class ProductValidationServiceTest {
 
     @Mock
-    private ProductImpRepository productImpRepository;
+    private InMemoryProductImpRepository inMemoryProductImpRepository;
     @Mock
     private ProductMapper productMapper;
 
@@ -37,7 +37,7 @@ public class ProductValidationServiceTest {
 
     @Before
     public void initialization() {
-        validationRules.add(new ProductNameValidation(productImpRepository,productMapper));
+        validationRules.add(new ProductNameValidation(inMemoryProductImpRepository,productMapper));
         validationRules.add(new ProductPriceValidation());
         validationRules.add(new ProductCategoryValidation());
         validationRules.add(new ProductDiscountValidation());
@@ -51,7 +51,7 @@ public class ProductValidationServiceTest {
 
     @Test
     public void validateMassagesExceptions() {
-        when(productImpRepository.existsByName(any())).thenReturn(true);
+        when(inMemoryProductImpRepository.existsByName(any())).thenReturn(true);
 
         List<String> actualErrorLogs = new ArrayList<>();
         try {
@@ -76,23 +76,23 @@ public class ProductValidationServiceTest {
 
     private ProductDto productDto() {
         ProductDto productDto = new ProductDto();
-        productDto.setProductId(1L);
-        productDto.setProductName("Banana package");
-        productDto.setProductRegularPrice(BigDecimal.valueOf(22.46));
-        productDto.setProductCategory(ProductCategory.FRUITS);
-        productDto.setProductDiscount(BigDecimal.valueOf(25.0));
-        productDto.setProductDescription("Poland");
+        productDto.setId(1L);
+        productDto.setName("Banana package");
+        productDto.setRegularPrice(BigDecimal.valueOf(22.46));
+        productDto.setCategory(ProductCategory.FRUITS);
+        productDto.setDiscount(BigDecimal.valueOf(25.0));
+        productDto.setDescription("Poland");
         return productDto;
     }
 
     private ProductDto productDtoIncorrect() {
         ProductDto productDto = new ProductDto();
-        productDto.setProductId(1L);
-        productDto.setProductName("B");
-        productDto.setProductRegularPrice(BigDecimal.valueOf(-1.2));
-        productDto.setProductCategory(ProductCategory.FRUITS);
-        productDto.setProductDiscount(BigDecimal.valueOf(125.0));
-        productDto.setProductDescription("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum " +
+        productDto.setId(1L);
+        productDto.setName("B");
+        productDto.setRegularPrice(BigDecimal.valueOf(-1.2));
+        productDto.setCategory(ProductCategory.FRUITS);
+        productDto.setDiscount(BigDecimal.valueOf(125.0));
+        productDto.setDescription("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum " +
                 "has been the industry's standard dummy text.");
         return productDto;
     }

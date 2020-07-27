@@ -38,32 +38,32 @@ public class UpdateProductUI implements UserInterfaceUnit {
                 System.out.print("1. Please enter updated product name: ");
                 String productName = scanner.nextLine();
                 if (!productName.isEmpty()) {
-                    updatedProductDto.setProductName(productName);
+                    updatedProductDto.setName(productName);
                 }
 
                 System.out.print("2. Please enter updated product price: ");
                 String productPrice = scanner.nextLine();
                 if (!productPrice.isEmpty()) {
-                    updatedProductDto.setProductRegularPrice(BigDecimal.valueOf(Double.parseDouble(productPrice)));
+                    updatedProductDto.setRegularPrice(BigDecimal.valueOf(Double.parseDouble(productPrice)));
                 }
 
                 System.out.print("3. Please enter updated product category:");
                 String userInputString = scanner.nextLine();
                 if (!userInputString.isEmpty()) {
                     int categoryChoice = Integer.parseInt(userInputString);
-                    updatedProductDto.setProductCategory(productCategoryChoiceService.productCategoryIntChoice(categoryChoice));
+                    updatedProductDto.setCategory(productCategoryChoiceService.productCategoryIntChoice(categoryChoice));
                 }
 
                 System.out.print("4. Please enter updated product discount: ");
                 String productDiscount = scanner.nextLine();
                 if (!productDiscount.isEmpty()) {
-                    updatedProductDto.setProductDiscount(BigDecimal.valueOf(Double.parseDouble(productDiscount)));
+                    updatedProductDto.setDiscount(BigDecimal.valueOf(Double.parseDouble(productDiscount)));
                 }
 
                 System.out.print("5. Please enter new product description: ");
                 String productDescription = scanner.nextLine();
                 if (!productDescription.isEmpty()) {
-                    updatedProductDto.setProductDescription(productDescription);
+                    updatedProductDto.setDescription(productDescription);
                 }
                 System.out.println("Product is updated : " + productService.updateProductService(id, updatedProductDto));
             } else {

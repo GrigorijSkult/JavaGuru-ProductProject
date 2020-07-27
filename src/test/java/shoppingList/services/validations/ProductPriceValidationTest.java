@@ -31,12 +31,12 @@ public class ProductPriceValidationTest {
 
     private ProductDto productDto(Double price) {
         ProductDto productDto = new ProductDto();
-        productDto.setProductId(1L);
-        productDto.setProductName("Banana pack");
-        productDto.setProductRegularPrice(BigDecimal.valueOf(price));
-        productDto.setProductCategory(ProductCategory.FRUITS);
-        productDto.setProductDiscount(BigDecimal.valueOf(25.0));
-        productDto.setProductDescription("Poland");
+        productDto.setId(1L);
+        productDto.setName("Banana pack");
+        productDto.setRegularPrice(BigDecimal.valueOf(price));
+        productDto.setCategory(ProductCategory.FRUITS);
+        productDto.setDiscount(BigDecimal.valueOf(25.0));
+        productDto.setDescription("Poland");
         return productDto;
     }
 }

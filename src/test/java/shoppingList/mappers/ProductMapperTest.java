@@ -23,8 +23,8 @@ public class ProductMapperTest {
         ProductDto result = productMapper.productToDto(productEntity());
 
         assertEquals(productDto(5L), result);
-        assertEquals(productDto(5L).getProductId(), result.getProductId());
-        assertEquals(BigDecimal.valueOf(16.845), result.getProductActualPrice());
+        assertEquals(productDto(5L).getId(), result.getId());
+        assertEquals(BigDecimal.valueOf(16.845), result.getActualPrice());
     }
 
     @Test
@@ -42,12 +42,12 @@ public class ProductMapperTest {
 
     private ProductDto productDto(Long id) {
         ProductDto productDto = new ProductDto();
-        productDto.setProductId(id);
-        productDto.setProductName("Banana pack");
-        productDto.setProductRegularPrice(BigDecimal.valueOf(22.46));
-        productDto.setProductCategory(ProductCategory.FRUITS);
-        productDto.setProductDiscount(BigDecimal.valueOf(25.0));
-        productDto.setProductDescription("Poland");
+        productDto.setId(id);
+        productDto.setName("Banana pack");
+        productDto.setRegularPrice(BigDecimal.valueOf(22.46));
+        productDto.setCategory(ProductCategory.FRUITS);
+        productDto.setDiscount(BigDecimal.valueOf(25.0));
+        productDto.setDescription("Poland");
         return productDto;
     }
 }

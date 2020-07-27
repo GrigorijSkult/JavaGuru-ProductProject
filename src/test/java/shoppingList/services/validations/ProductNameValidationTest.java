@@ -8,7 +8,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import shoppingList.domain.ProductCategory;
 import shoppingList.dto.ProductDto;
 import shoppingList.mappers.ProductMapper;
-import shoppingList.repository.ProductImpRepository;
+import shoppingList.repository.InMemoryProductImpRepository;
 import shoppingList.services.validations.exception.ProductValidationException;
 import shoppingList.services.validations.nameValidation.ProductNameValidation;
 
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 public class ProductNameValidationTest {
 
     @Mock
-    private ProductImpRepository productImpRepository;
+    private InMemoryProductImpRepository inMemoryProductImpRepository;
     @Mock
     private ProductMapper productMapper;
 
@@ -60,7 +60,7 @@ public class ProductNameValidationTest {
 
     @Test
     public void validateExceptionNotUniqueName() {
-        when(productImpRepository.existsByName(any())).thenReturn(true);
+        when(inMemoryProductImpRepository.existsByName(any())).thenReturn(true);
         assertThatThrownBy(() -> victim.validate(productDto("Potato")))
                 .isInstanceOf(ProductValidationException.class)
                 .hasMessage("[Product name should be unique]");
@@ -68,7 +68,7 @@ public class ProductNameValidationTest {
 
     @Test
     public void validateExceptionNotUniqueNameAndMoreThanUpperLimit() {
-        when(productImpRepository.existsByName(any())).thenReturn(true);
+        when(inMemoryProductImpRepository.existsByName(any())).thenReturn(true);
         assertThatThrownBy(() -> victim.validate(productDto("qwertyuiopasdfghjklzxcvbnmqqqqqqq")))
                 .isInstanceOf(ProductValidationException.class)
                 .hasMessage("[Product name cannot be less than 3 characters and more than 32, Product name should be unique]");
@@ -76,12 +76,12 @@ public class ProductNameValidationTest {
 
     private ProductDto productDto(String name) {
         ProductDto productDto = new ProductDto();
-        productDto.setProductId(1L);
-        productDto.setProductName(name);
-        productDto.setProductRegularPrice(BigDecimal.valueOf(22.46));
-        productDto.setProductCategory(ProductCategory.FRUITS);
-        productDto.setProductDiscount(BigDecimal.valueOf(25.0));
-        productDto.setProductDescription("Poland");
+        productDto.setId(1L);
+        productDto.setName(name);
+        productDto.setRegularPrice(BigDecimal.valueOf(22.46));
+        productDto.setCategory(ProductCategory.FRUITS);
+        productDto.setDiscount(BigDecimal.valueOf(25.0));
+        productDto.setDescription("Poland");
         return productDto;
     }
 }
