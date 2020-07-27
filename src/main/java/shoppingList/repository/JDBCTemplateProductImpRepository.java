@@ -2,12 +2,12 @@ package shoppingList.repository;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import shoppingList.domain.ProductEntity;
+import shoppingList.mappers.ProductEntityRowMapper;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Repository
 @Profile("mysql_JdbcTemplate")
-public class JDBCTemplateProductImpRepository implements ProductRepository{
+public class JDBCTemplateProductImpRepository implements ProductRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -51,10 +51,10 @@ public class JDBCTemplateProductImpRepository implements ProductRepository{
     @Override
     public Optional<ProductEntity> findProductByID(Long id) {
         String query = "SELECT * FROM products WHERE id=?";
-        try{
-            ProductEntity entity = jdbcTemplate.queryForObject(query, new Object[]{id}, new BeanPropertyRowMapper<>(ProductEntity.class));
+        try {
+            ProductEntity entity = jdbcTemplate.queryForObject(query, new Object[]{id}, new ProductEntityRowMapper());
             return Optional.ofNullable(entity);
-        }catch (EmptyResultDataAccessException e){
+        } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
     }
@@ -75,7 +75,7 @@ public class JDBCTemplateProductImpRepository implements ProductRepository{
     @Override
     public List<ProductEntity> listOfAllProducts() {
         String query = "SELECT * FROM products";
-        return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(ProductEntity.class));
+        return jdbcTemplate.query(query, new ProductEntityRowMapper());
     }
 
     @Override//no!
@@ -83,7 +83,7 @@ public class JDBCTemplateProductImpRepository implements ProductRepository{
         String query = "UPDATE products SET name = ?, regularPrice = ?, category = ?, discount = ?, description = ? WHERE id = ?";
 
         updatedProduct.setId(id);
-        jdbcTemplate.update(connection ->{
+        jdbcTemplate.update(connection -> {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, updatedProduct.getName());
             preparedStatement.setBigDecimal(2, updatedProduct.getRegularPrice());
@@ -98,19 +98,21 @@ public class JDBCTemplateProductImpRepository implements ProductRepository{
     }
 
     @Override
-    public boolean existsByName(ProductEntity productEntity) {
-        //query problem (SQL Injection)-is solved?
+    public Optional<ProductEntity> findProductByName(String name) {
         String query = "SELECT * FROM products WHERE name=?";
-        List<ProductEntity> productEntities = jdbcTemplate.query(query, new Object[]{productEntity.getName()}, new BeanPropertyRowMapper<>(ProductEntity.class));
-        return !productEntities.isEmpty();
-
+        try {
+            ProductEntity entity = jdbcTemplate.queryForObject(query, new Object[]{name}, new ProductEntityRowMapper());
+            return Optional.ofNullable(entity);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
 
     @Override
     public boolean existsById(Long id) {
         //query problem (SQL Injection)-is solved?
         String query = "SELECT * FROM products WHERE id=?";
-        ProductEntity productEntitie = jdbcTemplate.queryForObject(query, new Object[]{id}, new BeanPropertyRowMapper<>(ProductEntity.class));
+        ProductEntity productEntitie = jdbcTemplate.queryForObject(query, new Object[]{id}, new ProductEntityRowMapper());
         return productEntitie != null;
     }
 }

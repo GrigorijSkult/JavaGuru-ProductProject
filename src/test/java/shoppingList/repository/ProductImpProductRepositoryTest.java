@@ -10,6 +10,7 @@ import shoppingList.domain.ProductEntity;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static junit.framework.TestCase.*;
 
@@ -30,7 +31,7 @@ public class ProductImpProductRepositoryTest {
         boolean product = repository.removeProductByID(1L);
 
         assertTrue(product);
-        assertFalse(repository.existsByName(dbProductEntity()));
+        assertFalse(repository.existsById(1L));
     }
 
     @Test
@@ -63,15 +64,15 @@ public class ProductImpProductRepositoryTest {
     }
 
     @Test
-    public void existsByNameTrue() {
+    public void findProductByNameTrue() {
         repository.addProduct(newProductEntity());
 
-        assertTrue(repository.existsByName(newProductEntity()));
+        assertEquals(Optional.of(dbProductEntity()), repository.findProductByName("Banana pack"));
     }
 
     @Test
-    public void existsByNameFalse() {
-        assertFalse(repository.existsByName(newProductEntity()));
+    public void findProductByNameFalse() {
+        assertEquals(Optional.empty(), repository.findProductByName("Banana pack"));
     }
 
     @Test

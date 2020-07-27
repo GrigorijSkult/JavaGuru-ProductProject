@@ -17,7 +17,7 @@ public interface ProductRepository {
 
     ProductEntity updateProduct(Long id, ProductEntity updatedProduct);
 
-    boolean existsByName(ProductEntity productEntity);
+    Optional<ProductEntity> findProductByName(String name);
 
     boolean existsById(Long Id);
 }

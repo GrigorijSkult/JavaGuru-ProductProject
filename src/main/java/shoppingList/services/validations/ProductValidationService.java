@@ -1,6 +1,5 @@
 package shoppingList.services.validations;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shoppingList.dto.ProductDto;
 import shoppingList.services.validations.exception.ProductValidationException;

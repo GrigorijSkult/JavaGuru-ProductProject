@@ -46,13 +46,13 @@ public class InMemoryProductImpRepository implements ProductRepository {
     }
 
     @Override
-    public boolean existsByName(ProductEntity productEntity) {
+    public Optional<ProductEntity> findProductByName(String name) {
         for (ProductEntity value : productsDB.values()) {
-            if (value.getName().equals(productEntity.getName())) {
-                return true;
+            if (value.getName().equals(name)) {
+                return Optional.of(value);
             }
         }
-        return false;
+        return Optional.empty();
     }
 
     @Override

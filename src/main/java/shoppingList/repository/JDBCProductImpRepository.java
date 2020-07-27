@@ -160,18 +160,28 @@ public class JDBCProductImpRepository implements ProductRepository {
     }
 
     @Override
-    public boolean existsByName(ProductEntity productEntity) {
+    public Optional<ProductEntity> findProductByName(String name) {
         Connection connection = null;
         try {
             connection = getConnection();
-            String query = "SELECT * FROM products WHERE name=?";
+            String query = "SELECT * FROM products WHERE name = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, productEntity.getName());
+            preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next();
+            ProductEntity product = null;
+            if (resultSet.next()) {
+                product = new ProductEntity();
+                product.setId(resultSet.getLong("id"));
+                product.setName(resultSet.getString("name"));
+                product.setRegularPrice(resultSet.getBigDecimal("regularPrice"));
+                product.setCategory(ProductCategory.valueOf(resultSet.getString("category")));
+                product.setDiscount(resultSet.getBigDecimal("discount"));
+                product.setDescription(resultSet.getString("description"));
+            }
+            return Optional.ofNullable(product);
         } catch (Throwable e) {
-            System.out.println("Exception while trying to delete product by ID in DB");
+            System.out.println("Exception while trying to find product in by ID DB");
             e.printStackTrace();
             throw new RuntimeException(e);
         } finally {

@@ -7,6 +7,8 @@ import shoppingList.repository.ProductRepository;
 import shoppingList.services.validations.ValidationRule;
 import shoppingList.services.validations.exception.ProductValidationException;
 
+import java.util.Optional;
+
 public class ProductUniqueNameValidation implements ValidationRule<ProductDto> {
 
     private final ProductRepository productRepository;
@@ -20,9 +22,13 @@ public class ProductUniqueNameValidation implements ValidationRule<ProductDto> {
     @Override
     public void validate(ProductDto productDto) {
         ProductEntity entity = productMapper.productToEntity(productDto);
-        if (productRepository.existsByName(entity)) {
-            throw new ProductValidationException("Product name should be unique");
+        Optional<ProductEntity> productByName = productRepository.findProductByName(entity.getName());
+        if (productByName.isPresent()) {
+            if (!productByName.get().getId().equals(productDto.getId())) {
+                throw new ProductValidationException("Product name should be unique");
+            }
         }
     }
 }
+
 
