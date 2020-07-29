@@ -72,8 +72,8 @@ public class ProductValidationServiceTest {
         expectedErrorLogs.add("[Product name cannot be less than 3 characters and more than 32");
         expectedErrorLogs.add("Product name should be unique]");
         expectedErrorLogs.add("Product price must be greater than 0");
-        expectedErrorLogs.add("[Product discount value must be in the range from 0 to 100");
-        expectedErrorLogs.add("A discount can be set for products with a price greater than 20.00]");
+        expectedErrorLogs.add("[Product discount value must be in the range from 0.0 to 100");
+        expectedErrorLogs.add("A discount can be set for products with a price greater than 20.0]");
         expectedErrorLogs.add("Product`s description should be shorter then 100 symbols");
         return expectedErrorLogs;
     }

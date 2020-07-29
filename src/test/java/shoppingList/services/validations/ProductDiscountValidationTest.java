@@ -23,7 +23,7 @@ public class ProductDiscountValidationTest {
     public void validateExceptionLessThanLowerLimit() {
         assertThatThrownBy(() -> discountValidation.validate(productDto(20.00, -0.01)))
                 .isInstanceOf(ProductValidationException.class)
-                .hasMessage("[Product discount value must be in the range from 0 to 100]");
+                .hasMessage("[Product discount value must be in the range from 0.0 to 100]");
     }
 
     @Test
@@ -35,14 +35,14 @@ public class ProductDiscountValidationTest {
     public void validateExceptionMoreThanUpperLimit() {
         assertThatThrownBy(() -> discountValidation.validate(productDto(20.00, 100.01)))
                 .isInstanceOf(ProductValidationException.class)
-                .hasMessage("[Product discount value must be in the range from 0 to 100]");
+                .hasMessage("[Product discount value must be in the range from 0.0 to 100]");
     }
 
     @Test
     public void validateExceptionProductPrice() {
         assertThatThrownBy(() -> discountValidation.validate(productDto(19.85, 25.05)))
                 .isInstanceOf(ProductValidationException.class)
-                .hasMessage("[A discount can be set for products with a price greater than 20.00]");
+                .hasMessage("[A discount can be set for products with a price greater than 20.0]");
     }
 
     private ProductDto productDto(Double price, Double discount) {

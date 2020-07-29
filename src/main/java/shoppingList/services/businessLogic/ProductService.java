@@ -61,12 +61,8 @@ public class ProductService implements TemplateService<ProductDto> {
 
     @Override
     public ProductDto findProductByID(Long id) throws ProductNotFoundException {
-        Optional<ProductEntity> productEntity = productRepository.findProductByID(id);
-        if (productEntity.isPresent()) {
-            return productMapper.productToDto(productEntity.get());
-        } else {
-            throw new ProductNotFoundException(id);
-        }
+        return productMapper.productToDto((Optional.ofNullable(productRepository.findProductByID(id)
+                .orElseThrow(() -> new ProductNotFoundException(id)))).get());
     }
 
     @Override
