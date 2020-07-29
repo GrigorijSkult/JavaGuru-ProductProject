@@ -38,7 +38,7 @@ public class HibernateProductImpRepository implements ProductRepository {
         }
     }
 
-    @Override//ok - createria ubrat - ustatrevaet//a esli pusto ?
+    @Override
     public List<ProductEntity> listOfAllProducts() {
         return sessionFactory.getCurrentSession().createCriteria(ProductEntity.class)
                 .list();
@@ -47,10 +47,6 @@ public class HibernateProductImpRepository implements ProductRepository {
     @Override
     public Optional<ProductEntity> findProductByID(Long id) {
         return Optional.ofNullable(sessionFactory.getCurrentSession().find(ProductEntity.class, id));
-/*        ProductEntity entity = (ProductEntity) sessionFactory.getCurrentSession().createCriteria(ProductEntity.class)
-                .add(Restrictions.eq("id", id))
-                .uniqueResult();
-        return Optional.ofNullable(entity);*/
     }
 
     @Override
@@ -59,7 +55,7 @@ public class HibernateProductImpRepository implements ProductRepository {
         return updatedProduct;
     }
 
-    @Override//ok - create cretaria (proverka save product)
+    @Override
     public Optional<ProductEntity> findProductByName(String name) {
         ProductEntity productEntity = (ProductEntity) sessionFactory.getCurrentSession().createCriteria(ProductEntity.class)
                 .add(Restrictions.eq("name", name))
