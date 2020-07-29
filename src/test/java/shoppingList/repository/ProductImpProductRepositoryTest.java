@@ -10,6 +10,7 @@ import shoppingList.domain.ProductEntity;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static junit.framework.TestCase.*;
 
@@ -17,7 +18,7 @@ import static junit.framework.TestCase.*;
 public class ProductImpProductRepositoryTest {
 
     @InjectMocks
-    private ProductImpRepository repository;
+    private InMemoryProductImpRepository repository;
 
     @Test
     public void addProduct() {
@@ -27,9 +28,10 @@ public class ProductImpProductRepositoryTest {
     @Test
     public void removeProductByID() {
         repository.addProduct(newProductEntity());
-        repository.removeProductByID(1L);
+        boolean product = repository.removeProductByID(1L);
 
-        assertFalse(repository.existsByName(dbProductEntity()));
+        assertTrue(product);
+        assertFalse(repository.existsById(1L));
     }
 
     @Test
@@ -49,7 +51,7 @@ public class ProductImpProductRepositoryTest {
     public void findProductByID() {
         repository.addProduct(newProductEntity());
 
-        assertEquals(dbProductEntity(), repository.findProductByID(1L));
+        assertEquals(dbProductEntity(), repository.findProductByID(1L).get());
     }
 
     @Test
@@ -62,15 +64,15 @@ public class ProductImpProductRepositoryTest {
     }
 
     @Test
-    public void existsByNameTrue() {
+    public void findProductByNameTrue() {
         repository.addProduct(newProductEntity());
 
-        assertTrue(repository.existsByName(newProductEntity()));
+        assertEquals(Optional.of(dbProductEntity()), repository.findProductByName("Banana pack"));
     }
 
     @Test
-    public void existsByNameFalse() {
-        assertFalse(repository.existsByName(newProductEntity()));
+    public void findProductByNameFalse() {
+        assertEquals(Optional.empty(), repository.findProductByName("Banana pack"));
     }
 
     @Test

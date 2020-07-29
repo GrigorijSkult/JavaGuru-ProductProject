@@ -1,20 +1,23 @@
 package shoppingList.repository;
 
+import shoppingList.domain.ProductEntity;
+
 import java.util.List;
+import java.util.Optional;
 
-public interface ProductRepository<T> {
+public interface ProductRepository {
 
-    T addProduct(T newProduct);
+    ProductEntity addProduct(ProductEntity newProduct);
 
-    void removeProductByID(Long id);
+    boolean removeProductByID(Long id);
 
-    List<T> listOfAllProducts();
+    List<ProductEntity> listOfAllProducts();
 
-    T findProductByID(Long id);
+    Optional<ProductEntity> findProductByID(Long id);
 
-    T updateProduct(Long id, T updatedProduct);
+    ProductEntity updateProduct(Long id, ProductEntity updatedProduct);
 
-    boolean existsByName (T productEntity);
+    Optional<ProductEntity> findProductByName(String name);
 
-    boolean existsById (Long Id);
+    boolean existsById(Long Id);
 }

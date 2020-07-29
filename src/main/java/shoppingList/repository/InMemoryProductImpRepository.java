@@ -1,32 +1,32 @@
 package shoppingList.repository;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import shoppingList.domain.ProductEntity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
-public class ProductImpRepository implements ProductRepository<ProductEntity> {
+@Profile("inmemory")
+public class InMemoryProductImpRepository implements ProductRepository {
 
     private long newProductId = 1;
     private final Map<Long, ProductEntity> productsDB = new HashMap<>();
 
     @Override
     public ProductEntity addProduct(ProductEntity newProductEntity) {
-        ProductEntity productEntityCopy = new ProductEntity(newProductId, newProductEntity.getProductName(),
-                newProductEntity.getProductRegularPrice(), newProductEntity.getProductCategory(), newProductEntity.getProductDiscount(),
-                newProductEntity.getProductDescription());
+        ProductEntity productEntityCopy = new ProductEntity(newProductId, newProductEntity.getName(),
+                newProductEntity.getRegularPrice(), newProductEntity.getCategory(), newProductEntity.getDiscount(),
+                newProductEntity.getDescription());
         productsDB.put(newProductId, productEntityCopy);
         newProductId++;
         return productEntityCopy;
     }
 
     @Override
-    public void removeProductByID(Long id) {
+    public boolean removeProductByID(Long id) {
         productsDB.remove(id);
+        return true;
     }
 
     @Override
@@ -35,8 +35,8 @@ public class ProductImpRepository implements ProductRepository<ProductEntity> {
     }
 
     @Override
-    public ProductEntity findProductByID(Long id) {
-        return productsDB.get(id);
+    public Optional<ProductEntity> findProductByID(Long id) {
+        return Optional.ofNullable(productsDB.get(id));
     }
 
     @Override
@@ -46,13 +46,13 @@ public class ProductImpRepository implements ProductRepository<ProductEntity> {
     }
 
     @Override
-    public boolean existsByName(ProductEntity productEntity) {
-        for (ProductEntity value : productsDB.values()){
-            if (value.getProductName().equals(productEntity.getProductName())){
-                return true;
+    public Optional<ProductEntity> findProductByName(String name) {
+        for (ProductEntity value : productsDB.values()) {
+            if (value.getName().equals(name)) {
+                return Optional.of(value);
             }
         }
-        return false;
+        return Optional.empty();
     }
 
     @Override

@@ -54,12 +54,12 @@ public class ProductCategoryValidationTest {
 
     private ProductDto productDto() {
         ProductDto productDto = new ProductDto();
-        productDto.setProductId(1L);
-        productDto.setProductName("Banana pack");
-        productDto.setProductRegularPrice(BigDecimal.valueOf(22.46));
-        productDto.setProductCategory(ProductCategory.FRUITS);
-        productDto.setProductDiscount(BigDecimal.valueOf(25.0));
-        productDto.setProductDescription("Poland");
+        productDto.setId(1L);
+        productDto.setName("Banana pack");
+        productDto.setRegularPrice(BigDecimal.valueOf(22.46));
+        productDto.setCategory(ProductCategory.FRUITS);
+        productDto.setDiscount(BigDecimal.valueOf(25.0));
+        productDto.setDescription("Poland");
         return productDto;
     }
 }

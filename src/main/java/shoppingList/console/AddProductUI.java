@@ -63,11 +63,11 @@ public class AddProductUI implements UserInterfaceUnit {
             }
 
             ProductDto newProductDto = new ProductDto();
-            newProductDto.setProductName(newProductName);
-            newProductDto.setProductRegularPrice(newProductPrice);
-            newProductDto.setProductCategory(newProductCategory);
-            newProductDto.setProductDiscount(newProductDiscount);
-            newProductDto.setProductDescription(newProductDescription);
+            newProductDto.setName(newProductName);
+            newProductDto.setRegularPrice(newProductPrice);
+            newProductDto.setCategory(newProductCategory);
+            newProductDto.setDiscount(newProductDiscount);
+            newProductDto.setDescription(newProductDescription);
             System.out.println("New product is added to the DataBase: " + productService.addProductService(newProductDto));
         } catch (NumberFormatException e) {
             System.out.println("Please enter discount number with 'dot'. [For example 15.5]");

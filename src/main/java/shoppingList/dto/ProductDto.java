@@ -7,68 +7,68 @@ import java.util.Objects;
 
 public class ProductDto {
 
-    private Long productId;
-    private String productName;
-    private BigDecimal productRegularPrice;
-    private ProductCategory productCategory;
-    private BigDecimal productDiscount;
-    private String productDescription;
-    private BigDecimal productActualPrice;
+    private Long id;
+    private String name;
+    private BigDecimal regularPrice;
+    private ProductCategory category;
+    private BigDecimal discount;
+    private String description;
+    private BigDecimal actualPrice;
 
-    public Long getProductId() {
-        return productId;
+    public Long getId() {
+        return id;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public BigDecimal getProductRegularPrice() {
-        return productRegularPrice;
+    public BigDecimal getRegularPrice() {
+        return regularPrice;
     }
 
-    public void setProductRegularPrice(BigDecimal productRegularPrice) {
-        this.productRegularPrice = productRegularPrice;
+    public void setRegularPrice(BigDecimal regularPrice) {
+        this.regularPrice = regularPrice;
     }
 
-    public ProductCategory getProductCategory() {
-        return productCategory;
+    public ProductCategory getCategory() {
+        return category;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
+    public void setCategory(ProductCategory category) {
+        this.category = category;
     }
 
-    public BigDecimal getProductDiscount() {
-        return productDiscount;
+    public BigDecimal getDiscount() {
+        return discount;
     }
 
-    public void setProductDiscount(BigDecimal productDiscount) {
-        this.productDiscount = productDiscount;
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
     }
 
-    public String getProductDescription() {
-        return productDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public BigDecimal getProductActualPrice() {
-        return productActualPrice;
+    public BigDecimal getActualPrice() {
+        return actualPrice;
     }
 
-    public void setProductActualPrice(BigDecimal productActualPrice) {
-        this.productActualPrice = productActualPrice;
+    public void setActualPrice(BigDecimal actualPrice) {
+        this.actualPrice = actualPrice;
     }
 
     @Override
@@ -76,28 +76,28 @@ public class ProductDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductDto that = (ProductDto) o;
-        return Objects.equals(productId, that.productId) &&
-                Objects.equals(productName, that.productName) &&
-                Objects.equals(productRegularPrice, that.productRegularPrice) &&
-                productCategory == that.productCategory &&
-                Objects.equals(productDiscount, that.productDiscount) &&
-                Objects.equals(productDescription, that.productDescription);
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(regularPrice, that.regularPrice) &&
+                category == that.category &&
+                Objects.equals(discount, that.discount) &&
+                Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, productName, productRegularPrice, productCategory, productDiscount, productDescription);
+        return Objects.hash(id, name, regularPrice, category, discount, description);
     }
 
     @Override
     public String toString() {
-        return "ID = " + productId +
-                ", Product Name= '" + productName + '\'' +
-                ", Regular price= " + productRegularPrice + " EUR" +
-                ", Product category= '" + productCategory + '\'' +
-                ", Discount= " + productDiscount + " %" +
-                ", Actual price= " + productActualPrice + " EUR" +
-                ", Description= '" + productDescription +
+        return "ID = " + id +
+                ", Product Name= '" + name + '\'' +
+                ", Regular price= " + regularPrice + " EUR" +
+                ", Product category= '" + category + '\'' +
+                ", Discount= " + discount + " %" +
+                ", Actual price= " + actualPrice + " EUR" +
+                ", Description= '" + description +
                 '\'' + ";";
     }
 }
