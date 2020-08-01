@@ -2,6 +2,7 @@ package shoppingList.console;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import shoppingList.product.console.*;
 
 import java.util.ArrayList;
 import java.util.List;
