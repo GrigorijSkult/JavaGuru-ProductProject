@@ -22,7 +22,7 @@ public class ListOfAllProductsUI implements UserInterfaceUnit {
     }
 
     @Override
-    public String toString() {
+    public String title() {
         return "Show all products in the DB;";
     }
 }

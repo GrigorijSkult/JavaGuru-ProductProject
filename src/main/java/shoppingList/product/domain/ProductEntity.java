@@ -16,7 +16,7 @@ public class ProductEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "regularPrice")
+    @Column(name = "regular_price")
     private BigDecimal regularPrice;
 
     @Enumerated(EnumType.STRING)

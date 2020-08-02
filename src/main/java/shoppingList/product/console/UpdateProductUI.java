@@ -80,7 +80,7 @@ public class UpdateProductUI implements UserInterfaceUnit {
     }
 
     @Override
-    public String toString() {
+    public String title() {
         return "Update product by product ID;";
     }
 }

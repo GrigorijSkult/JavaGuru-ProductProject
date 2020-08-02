@@ -29,7 +29,7 @@ public class FindProductByIdUI implements UserInterfaceUnit {
     }
 
     @Override
-    public String toString() {
+    public String title() {
         return "Find product by ID;";
     }
 }

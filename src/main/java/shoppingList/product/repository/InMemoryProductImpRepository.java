@@ -24,9 +24,8 @@ public class InMemoryProductImpRepository implements ProductRepository {
     }
 
     @Override
-    public boolean removeProductByID(Long id) {
+    public void removeProductByID(Long id) {
         productsDB.remove(id);
-        return true;
     }
 
     @Override

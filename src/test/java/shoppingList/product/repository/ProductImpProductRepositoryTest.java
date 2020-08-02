@@ -28,9 +28,8 @@ public class ProductImpProductRepositoryTest {
     @Test
     public void removeProductByID() {
         repository.addProduct(newProductEntity());
-        boolean product = repository.removeProductByID(1L);
+       repository.removeProductByID(1L);
 
-        assertTrue(product);
         assertFalse(repository.existsById(1L));
     }
 

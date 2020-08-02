@@ -38,7 +38,7 @@ public class RemoveProductByIdUI implements UserInterfaceUnit {
     }
 
     @Override
-    public String toString() {
+    public String title() {
         return "Delete product by product ID;";
     }
 }

@@ -22,7 +22,7 @@ public class ExitUI implements UserInterfaceUnit {
     }
 
     @Override
-    public String toString() {
+    public String title() {
         return "End program.";
     }
 }

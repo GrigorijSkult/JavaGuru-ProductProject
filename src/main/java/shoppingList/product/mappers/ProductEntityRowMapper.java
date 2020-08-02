@@ -14,7 +14,7 @@ public class ProductEntityRowMapper implements RowMapper<ProductEntity> {
         ProductEntity entity = new ProductEntity();
         entity.setId(rs.getLong("id"));
         entity.setName(rs.getString("name"));
-        entity.setRegularPrice(rs.getBigDecimal("regularPrice"));
+        entity.setRegularPrice(rs.getBigDecimal("regular_price"));
         entity.setCategory(ProductCategory.valueOf(rs.getString("category")));
         entity.setDiscount(rs.getBigDecimal("discount"));
         entity.setDescription(rs.getString("description"));
