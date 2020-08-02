@@ -60,7 +60,7 @@ public class JDBCTemplateProductImpRepository implements ProductRepository {
     }
 
     @Override
-    public boolean removeProductByID(Long id) {
+    public void removeProductByID(Long id) {
         String query = "DELETE FROM products WHERE id = ?";
 
         jdbcTemplate.update(connection -> {
@@ -69,7 +69,6 @@ public class JDBCTemplateProductImpRepository implements ProductRepository {
             preparedStatement.execute();
             return preparedStatement;
         });
-        return true;
     }
 
     @Override

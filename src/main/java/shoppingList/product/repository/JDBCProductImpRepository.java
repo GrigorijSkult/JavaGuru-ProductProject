@@ -84,7 +84,7 @@ public class JDBCProductImpRepository implements ProductRepository {
     }
 
     @Override
-    public boolean removeProductByID(Long id) {
+    public void removeProductByID(Long id) {
         Connection connection = null;
         try {
             connection = getConnection();
@@ -93,7 +93,6 @@ public class JDBCProductImpRepository implements ProductRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             preparedStatement.execute();
-            return true;
         } catch (Throwable e) {
             System.out.println("Exception while trying to delete product by ID in DB");
             e.printStackTrace();

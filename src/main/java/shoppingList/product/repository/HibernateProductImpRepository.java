@@ -28,14 +28,8 @@ public class HibernateProductImpRepository implements ProductRepository {
     }
 
     @Override
-    public boolean removeProductByID(Long id) {
-        Optional<ProductEntity> productEntity = findProductByID(id);
-        if (productEntity.isPresent()) {
-            sessionFactory.getCurrentSession().delete(productEntity.get());
-            return true;
-        } else {
-            return false;
-        }
+    public void removeProductByID(Long id) {
+        sessionFactory.getCurrentSession().delete(findProductByID(id));
     }
 
     @Override
@@ -65,7 +59,6 @@ public class HibernateProductImpRepository implements ProductRepository {
 
     @Override
     public boolean existsById(Long id) {
-        Optional<ProductEntity> productEntity = Optional.ofNullable(sessionFactory.getCurrentSession().find(ProductEntity.class, id));
-        return productEntity.isPresent();
+        return sessionFactory.getCurrentSession().find(ProductEntity.class, id) != null;
     }
 }

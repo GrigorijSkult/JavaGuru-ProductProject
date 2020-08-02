@@ -9,7 +9,7 @@ public interface ProductRepository {
 
     ProductEntity addProduct(ProductEntity newProduct);
 
-    boolean removeProductByID(Long id);
+    void removeProductByID(Long id);
 
     List<ProductEntity> listOfAllProducts();
 

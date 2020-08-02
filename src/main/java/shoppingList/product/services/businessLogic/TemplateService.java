@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TemplateService<T> {
 
-    ProductDto addProductService(ProductDto newProductDto);
+    T addProductService(T newProductDto);
 
     boolean removeProductByIDService(Long id) throws ProductNotFoundException;
 
@@ -15,5 +15,5 @@ public interface TemplateService<T> {
 
     T findProductByID(Long id) throws ProductNotFoundException;
 
-    ProductDto updateProductService(Long id, ProductDto updatedProductDto) throws ProductNotFoundException;
+    T updateProductService(Long id, T updatedProductDto) throws ProductNotFoundException;
 }
