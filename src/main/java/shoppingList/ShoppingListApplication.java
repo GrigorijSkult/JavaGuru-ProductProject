@@ -3,7 +3,7 @@ package shoppingList;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import shoppingList.config.AppConfig;
-import shoppingList.console.ProductMainUI;
+import shoppingList.config.ProductMainUI;
 
 class ShoppingListApplication {
 
