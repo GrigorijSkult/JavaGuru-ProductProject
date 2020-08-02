@@ -1,15 +1,32 @@
 package shoppingList.domain;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Entity
+@Table(name = "products")
 public class ProductEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "regularPrice")
     private BigDecimal regularPrice;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "category")
     private ProductCategory category;
+
+    @Column(name = "discount")
     private BigDecimal discount;
+
+    @Column(name = "description")
     private String description;
 
     public ProductEntity() {
@@ -25,52 +42,52 @@ public class ProductEntity {
         this.description = description;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setRegularPrice(BigDecimal regularPrice) {
-        this.regularPrice = regularPrice;
-    }
-
-    public void setCategory(ProductCategory category) {
-        this.category = category;
-    }
-
-    public void setDiscount(BigDecimal discount) {
-        this.discount = discount;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public BigDecimal getRegularPrice() {
         return regularPrice;
+    }
+
+    public void setRegularPrice(BigDecimal regularPrice) {
+        this.regularPrice = regularPrice;
     }
 
     public ProductCategory getCategory() {
         return category;
     }
 
+    public void setCategory(ProductCategory category) {
+        this.category = category;
+    }
+
     public BigDecimal getDiscount() {
         return discount;
     }
 
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
