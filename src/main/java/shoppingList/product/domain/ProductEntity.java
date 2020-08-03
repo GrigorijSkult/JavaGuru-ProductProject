@@ -1,5 +1,7 @@
 package shoppingList.product.domain;
 
+import shoppingList.shoppingCart.domain.ShoppingCartEntity;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -28,6 +30,17 @@ public class ProductEntity {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "shopping_cart_id")
+    private Long shoppingCartId;
+
+    //<<<
+
+    @ManyToOne
+    @JoinColumn(name = "shopping_cart_id", insertable = false, updatable = false)
+    private ShoppingCartEntity shoppingCartEntity;
+
+    //>>>
 
     public ProductEntity() {
     }
@@ -90,31 +103,50 @@ public class ProductEntity {
         this.description = description;
     }
 
+    public Long getShoppingCartId() {
+        return shoppingCartId;
+    }
+
+    public void setShoppingCartId(Long shoppingCartId) {
+        this.shoppingCartId = shoppingCartId;
+    }
+
+    public ShoppingCartEntity getShoppingCartEntity() {
+        return shoppingCartEntity;
+    }
+
+    public void setShoppingCartEntity(ShoppingCartEntity shoppingCartEntity) {
+        this.shoppingCartEntity = shoppingCartEntity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductEntity productEntity = (ProductEntity) o;
-        return Objects.equals(name, productEntity.name) &&
-                Objects.equals(regularPrice, productEntity.regularPrice) &&
-                category == productEntity.category &&
-                Objects.equals(discount, productEntity.discount) &&
-                Objects.equals(description, productEntity.description);
+        ProductEntity that = (ProductEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(regularPrice, that.regularPrice) &&
+                category == that.category &&
+                Objects.equals(discount, that.discount) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(shoppingCartId, that.shoppingCartId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, regularPrice, category, discount, description);
+        return Objects.hash(id, name, regularPrice, category, discount, description, shoppingCartId);
     }
 
     @Override
     public String toString() {
         return "ID = " + id +
-                ", Product Name= '" + name + '\'' +
-                ", Regular price= " + regularPrice + " EUR" +
-                ", Product category= '" + category + '\'' +
-                ", Discount= " + discount + " %" +
-                ", Description= '" + description +
-                '\'' + ";";
+                ", name='" + name + '\'' +
+                ", regularPrice=" + regularPrice +
+                ", category=" + category +
+                ", discount=" + discount +
+                ", description='" + description + '\'' +
+                ", shoppingCartId=" + shoppingCartId +
+                '}';
     }
 }

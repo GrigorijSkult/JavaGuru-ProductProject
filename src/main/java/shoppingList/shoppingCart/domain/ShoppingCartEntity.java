@@ -18,9 +18,13 @@ public class ShoppingCartEntity {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
+    //<<<
+    //problem with request of all products
+    @OneToMany(fetch = FetchType.EAGER)//, mappedBy = "shoppingCartEntity")
+    @JoinColumn(name = "shopping_cart_id")
     private Set<ProductEntity> products;
+
+    //>>>
 
     public Long getId() {
         return id;

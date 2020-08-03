@@ -45,7 +45,7 @@ public class HibernateShoppingCartRepositoryImpRepository implements ShoppingCar
 
     @Override
     public List<ShoppingCartEntity> listOfAllShoppingCarts() {
-        return sessionFactory.getCurrentSession().createCriteria(ProductEntity.class)
+        return sessionFactory.getCurrentSession().createCriteria(ShoppingCartEntity.class)
                 .list();
     }
 
