@@ -2,6 +2,7 @@ package shoppingList.shoppingCart.console;
 
 import org.springframework.stereotype.Component;
 import shoppingList.console.UserInterfaceUnit;
+import shoppingList.shoppingCart.domain.ShoppingCartEntity;
 import shoppingList.shoppingCart.service.businessLogic.ShoppingCartService;
 
 @Component
@@ -15,10 +16,8 @@ public class ListOfAllShoppingCartsUI implements UserInterfaceUnit {
 
     @Override
     public void execute() {
-//        shoppingCartService.listOfAllShoppingCartService()
-//                .forEach(System.out::println);
-        for (Object o : shoppingCartService.listOfAllShoppingCartService()) {
-            System.out.println(o);
+        for (ShoppingCartEntity shoppingCartEntity : shoppingCartService.listOfAllShoppingCartService()) {
+            System.out.println(shoppingCartEntity);
         }
     }
 

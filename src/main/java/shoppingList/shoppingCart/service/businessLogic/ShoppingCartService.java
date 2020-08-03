@@ -1,12 +1,12 @@
 package shoppingList.shoppingCart.service.businessLogic;
 
 import org.springframework.stereotype.Service;
+import shoppingList.product.domain.ProductEntity;
 import shoppingList.product.services.validations.exception.ProductNotFoundException;
 import shoppingList.shoppingCart.domain.ShoppingCartEntity;
 import shoppingList.shoppingCart.repository.ShoppingCartRepository;
 import shoppingList.shoppingCart.service.businessLogic.exception.ShoppingCartNotFoundException;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +21,12 @@ public class ShoppingCartService {
 
     public ShoppingCartEntity addShoppingCartService(ShoppingCartEntity newShoppingCart) {
         return shoppingCartRepository.addShoppingCart(newShoppingCart);
+    }
+
+    public ShoppingCartEntity addProductEntityToShoppingCart(Long shoppingCartId, ProductEntity productEntity) {
+        ShoppingCartEntity shoppingCartEntity = findShoppingCartByID(shoppingCartId);
+        shoppingCartEntity.getProducts().add(productEntity);
+        return shoppingCartRepository.updateShoppingCart(shoppingCartEntity);
     }
 
     public boolean removeShoppingCartByIdService(Long id) throws ShoppingCartNotFoundException {
@@ -38,7 +44,7 @@ public class ShoppingCartService {
             return Collections.emptyList();
         } else {
             System.out.println("Shopping Carts list:");
-            return new ArrayList<>(shoppingCartRepository.listOfAllShoppingCarts());
+            return shoppingCartRepository.listOfAllShoppingCarts();
         }
     }
 
@@ -47,7 +53,7 @@ public class ShoppingCartService {
                 .orElseThrow(() -> new ShoppingCartNotFoundException(id));
     }
 
-    public ShoppingCartEntity updateProductService(Long id, ShoppingCartEntity updatedShoppingCart) throws ProductNotFoundException {
+    public ShoppingCartEntity updatedShoppingCartService(Long id, ShoppingCartEntity updatedShoppingCart) throws ProductNotFoundException {
         if (shoppingCartRepository.findShoppingCartById(id).isPresent()) {
             shoppingCartRepository.updateShoppingCart(updatedShoppingCart);
             return updatedShoppingCart;

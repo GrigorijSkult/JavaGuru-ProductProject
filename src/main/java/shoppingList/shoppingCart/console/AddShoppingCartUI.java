@@ -18,7 +18,7 @@ public class AddShoppingCartUI implements UserInterfaceUnit {
 
     @Override
     public void execute() {
-        System.out.println("Please enter new shopping cart description: ");
+        System.out.print("Please enter new shopping cart description: ");
         Scanner scanner = new Scanner(System.in);
         String description = scanner.nextLine();
 
