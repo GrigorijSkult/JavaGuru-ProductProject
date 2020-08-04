@@ -19,8 +19,8 @@ public class ShoppingCartEntity {
     private String description;
 
     //<<<
-    //problem with request of all products
-    @OneToMany(fetch = FetchType.EAGER)//, mappedBy = "shoppingCartEntity")
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "shoppingCartEntity")
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "shopping_cart_id")
     private Set<ProductEntity> products;
 

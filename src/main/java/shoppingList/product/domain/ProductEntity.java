@@ -103,14 +103,6 @@ public class ProductEntity {
         this.description = description;
     }
 
-    public Long getShoppingCartId() {
-        return shoppingCartId;
-    }
-
-    public void setShoppingCartId(Long shoppingCartId) {
-        this.shoppingCartId = shoppingCartId;
-    }
-
     public ShoppingCartEntity getShoppingCartEntity() {
         return shoppingCartEntity;
     }
@@ -129,13 +121,12 @@ public class ProductEntity {
                 Objects.equals(regularPrice, that.regularPrice) &&
                 category == that.category &&
                 Objects.equals(discount, that.discount) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(shoppingCartId, that.shoppingCartId);
+                Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, regularPrice, category, discount, description, shoppingCartId);
+        return Objects.hash(id, name, regularPrice, category, discount, description);
     }
 
     @Override
@@ -146,7 +137,6 @@ public class ProductEntity {
                 ", category=" + category +
                 ", discount=" + discount +
                 ", description='" + description + '\'' +
-                ", shoppingCartId=" + shoppingCartId +
                 '}';
     }
 }
