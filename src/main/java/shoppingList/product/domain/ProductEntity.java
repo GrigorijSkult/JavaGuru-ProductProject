@@ -8,6 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "products")
+//@Table(name = "products2")//ManyToMany
 public class ProductEntity {
 
     @Id
@@ -31,15 +32,18 @@ public class ProductEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "shopping_cart_id")
-    private Long shoppingCartId;
-
     //<<<
-
+    //---ProductEntity ManyToOne - ShoppingCartEntity OneToMany---
     @ManyToOne
     @JoinColumn(name = "shopping_cart_id", insertable = false, updatable = false)
     private ShoppingCartEntity shoppingCartEntity;
 
+    //---ManyToMany---
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "products_in_shopping_carts",
+//            joinColumns = @JoinColumn(name = "products_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id"))
+//    private Set<ShoppingCartEntity> shoppingCarts;
     //>>>
 
     public ProductEntity() {
@@ -110,6 +114,14 @@ public class ProductEntity {
     public void setShoppingCartEntity(ShoppingCartEntity shoppingCartEntity) {
         this.shoppingCartEntity = shoppingCartEntity;
     }
+
+//    public Set<ShoppingCartEntity> getShoppingCarts() {
+//        return shoppingCarts;
+//    }
+//
+//    public void setShoppingCarts(Set<ShoppingCartEntity> shoppingCarts) {
+//        this.shoppingCarts = shoppingCarts;
+//    }
 
     @Override
     public boolean equals(Object o) {

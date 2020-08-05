@@ -1,4 +1,4 @@
-CREATE SCHEMA product_repository;
+REATE SCHEMA product_repository;
 
 USE product_repository;
 
@@ -51,8 +51,8 @@ CREATE TABLE shopping_carts
 
 CREATE TABLE products_in_shopping_carts
 (
-    shopping_cart_id BIGINT,
-    products_id      BIGINT,
+    shopping_cart_id BIGINT NOT NULL ,
+    products_id      BIGINT NOT NULL,
 
     FOREIGN KEY (shopping_cart_id) REFERENCES shopping_carts (id),
     FOREIGN KEY (products_id) REFERENCES products (id)

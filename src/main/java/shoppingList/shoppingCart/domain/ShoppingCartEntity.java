@@ -8,6 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "shopping_carts")
+//@Table(name = "shopping_carts2")//ManyToMany
 public class ShoppingCartEntity {
 
     @Id
@@ -19,11 +20,18 @@ public class ShoppingCartEntity {
     private String description;
 
     //<<<
+    //---ProductEntity ManyToOne - ShoppingCartEntity OneToMany---
+    //Problem with saving a new dependence
 //    @OneToMany(fetch = FetchType.EAGER, mappedBy = "shoppingCartEntity")
+    //All ok
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "shopping_cart_id")
     private Set<ProductEntity> products;
 
+    //---ManyToMany---
+//    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "shoppingCarts")
+////    @JoinColumn(table = "products_in_shopping_carts",name = "shopping_cart_id", insertable = false, updatable = false)
+//    private Set<ProductEntity> products;
     //>>>
 
     public Long getId() {

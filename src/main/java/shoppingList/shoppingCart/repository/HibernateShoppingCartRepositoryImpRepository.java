@@ -4,7 +4,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import shoppingList.product.domain.ProductEntity;
 import shoppingList.shoppingCart.domain.ShoppingCartEntity;
 
 import java.util.List;

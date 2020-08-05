@@ -1,12 +1,9 @@
-package shoppingList.shoppingCart.console;
+package shoppingList.console;
 
 import org.springframework.stereotype.Component;
-import shoppingList.console.UserInterfaceUnit;
-import shoppingList.product.mappers.ProductMapper;
-import shoppingList.product.services.businessLogic.ProductService;
 import shoppingList.product.services.validations.exception.ProductNotFoundException;
+import shoppingList.service.businessLogic.ProductShoppingCartService;
 import shoppingList.shoppingCart.domain.ShoppingCartEntity;
-import shoppingList.shoppingCart.service.businessLogic.ShoppingCartService;
 import shoppingList.shoppingCart.service.businessLogic.exception.ShoppingCartNotFoundException;
 
 import java.util.Scanner;
@@ -14,14 +11,10 @@ import java.util.Scanner;
 @Component
 public class AddProductToShoppingCart implements UserInterfaceUnit {
 
-    private final ProductService productService;
-    private final ShoppingCartService shoppingCartService;
-    private final ProductMapper productMapper;
+    private final ProductShoppingCartService productShoppingCartService;
 
-    public AddProductToShoppingCart(ProductService productService, ShoppingCartService shoppingCartService, ProductMapper productMapper) {
-        this.productService = productService;
-        this.shoppingCartService = shoppingCartService;
-        this.productMapper = productMapper;
+    public AddProductToShoppingCart(ProductShoppingCartService productShoppingCartService) {
+        this.productShoppingCartService = productShoppingCartService;
     }
 
     @Override
@@ -33,7 +26,7 @@ public class AddProductToShoppingCart implements UserInterfaceUnit {
         Long shoppingCartId = scanner.nextLong();
 
         try {
-            ShoppingCartEntity shoppingCartEntity = shoppingCartService.addProductEntityToShoppingCart(shoppingCartId, productMapper.productToEntity(productService.findProductByID(productId)));
+            ShoppingCartEntity shoppingCartEntity = productShoppingCartService.addProductEntityToShoppingCart(shoppingCartId, productId);
             System.out.println("Product is added to shopping cart: " + shoppingCartEntity);
         } catch (ProductNotFoundException e) {
             System.out.println("Product wont be added: " + e.getItemNotFoundMessage());
