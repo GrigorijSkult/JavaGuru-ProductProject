@@ -41,6 +41,7 @@ public class ProductImpProductRepositoryTest {
 
         List<ProductEntity> entityList = new ArrayList<>();
         entityList.add(dbProductEntity());
+        apple.setId(2L);
         entityList.add(apple);
 
         assertEquals(entityList, repository.listOfAllProducts());

@@ -1,7 +1,6 @@
 package shoppingList.shoppingCart.service.businessLogic;
 
 import org.springframework.stereotype.Service;
-import shoppingList.product.domain.ProductEntity;
 import shoppingList.product.services.validations.exception.ProductNotFoundException;
 import shoppingList.shoppingCart.domain.ShoppingCartEntity;
 import shoppingList.shoppingCart.repository.ShoppingCartRepository;
@@ -21,12 +20,6 @@ public class ShoppingCartService {
 
     public ShoppingCartEntity addShoppingCartService(ShoppingCartEntity newShoppingCart) {
         return shoppingCartRepository.addShoppingCart(newShoppingCart);
-    }
-
-    public ShoppingCartEntity addProductEntityToShoppingCart(Long shoppingCartId, ProductEntity productEntity) {
-        ShoppingCartEntity shoppingCartEntity = findShoppingCartByID(shoppingCartId);
-        shoppingCartEntity.getProducts().add(productEntity);
-        return shoppingCartRepository.updateShoppingCart(shoppingCartEntity);
     }
 
     public boolean removeShoppingCartByIdService(Long id) throws ShoppingCartNotFoundException {
