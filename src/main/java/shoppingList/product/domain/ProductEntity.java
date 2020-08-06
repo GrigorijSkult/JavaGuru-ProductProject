@@ -145,12 +145,14 @@ public class ProductEntity {
 
     @Override
     public String toString() {
-        return "ID = " + id +
+        return "ProductEntity{" +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", regularPrice=" + regularPrice +
                 ", category=" + category +
                 ", discount=" + discount +
                 ", description='" + description + '\'' +
+                ", shopping_cart=" + shopping_cart +
                 '}';
     }
 }

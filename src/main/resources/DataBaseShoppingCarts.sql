@@ -28,7 +28,7 @@ CREATE TABLE shopping_carts
 );
 
 -- ManyToMany
-CREATE TABLE products
+CREATE TABLE products2
 (
     id            BIGINT      NOT NULL AUTO_INCREMENT,
     name          VARCHAR(32) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE products
     UNIQUE (name)
 );
 
-CREATE TABLE shopping_carts
+CREATE TABLE shopping_carts2
 (
     id          BIGINT NOT NULL AUTO_INCREMENT,
     description VARCHAR(50),

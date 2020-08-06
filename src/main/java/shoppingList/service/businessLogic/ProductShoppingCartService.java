@@ -27,7 +27,7 @@ public class ProductShoppingCartService {
     public void addProductEntityToShoppingCart(Long shoppingCartId, Long productEntityId) {
         ShoppingCartEntity shoppingCartEntity = shoppingCartService.findShoppingCartByID(shoppingCartId);
         ProductEntity productEntity = productMapper.productToEntity(productService.findProductByID(productEntityId));
-        //variant with changing in productEntity
+
         Set<ShoppingCartEntity> s = new HashSet<>(Collections.emptySet());
 //        Optional<Set<ShoppingCartEntity>> shopping_cart = Optional.ofNullable(productEntity.getShopping_cart());
 //        if (shopping_cart.isPresent()){
@@ -38,8 +38,9 @@ public class ProductShoppingCartService {
         productService.updateProductService(productEntityId, productEntity);
 
 
-        shoppingCartEntity.getProducts().add(productEntity);
-        shoppingCartService.updatedShoppingCartService(shoppingCartId, shoppingCartEntity);
+        //variant with changing in productEntity
+//        shoppingCartEntity.getProducts().add(productEntity);
+//        shoppingCartService.updatedShoppingCartService(shoppingCartId, shoppingCartEntity);
 
         //variant with changing in shoppingCartEntity - does not has problem with DTO
 //        shoppingCartEntity.getProducts().add(productEntity);
