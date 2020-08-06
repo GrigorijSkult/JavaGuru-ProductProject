@@ -3,6 +3,7 @@ package shoppingList.console;
 import org.springframework.stereotype.Component;
 import shoppingList.product.services.validations.exception.ProductNotFoundException;
 import shoppingList.service.businessLogic.ProductShoppingCartService;
+import shoppingList.shoppingCart.domain.ShoppingCartEntity;
 import shoppingList.shoppingCart.service.businessLogic.exception.ShoppingCartNotFoundException;
 
 import java.util.Scanner;

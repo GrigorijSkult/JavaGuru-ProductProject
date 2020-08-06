@@ -12,7 +12,7 @@ public class ShoppingCartEntity {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy =GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "description")
@@ -26,12 +26,11 @@ public class ShoppingCartEntity {
 //    @JoinColumn(name = "shopping_cart_id")
 //    private Set<ProductEntity> products;
 
-  //  ---ManyToMany---
+    //  ---ManyToMany---
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "shopping_cart")
-//    @JoinColumn(table = "products_in_shopping_carts",name = "shopping_cart_id", insertable = false, updatable = false)
     private Set<ProductEntity> products;
 
-
+       //>>>
 
     public Long getId() {
         return id;
