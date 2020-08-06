@@ -104,10 +104,9 @@ public class ProductServiceTest {
     @Test
     public void updateProductService() {
         when(inMemoryProductImpRepository.existsById(anyLong())).thenReturn(true);
-        when(productMapper.productToEntity(any())).thenReturn(productEntity());
         when(inMemoryProductImpRepository.updateProduct(anyLong(), any())).thenReturn(productEntity());
         when(productMapper.productToDto(any())).thenReturn(productDto(1L));
-        ProductDto result = victim.updateProductService(1L, productDto(5L));
+        ProductDto result = victim.updateProductService(1L, productEntity(5L));
 
         verify(validationService).validate(any());
         assertEquals(productDto(1L), result);
@@ -117,7 +116,7 @@ public class ProductServiceTest {
     public void updateProductServiceProductNotFoundException() {
         when(inMemoryProductImpRepository.existsById(anyLong())).thenReturn(false);
 
-        assertThatThrownBy(() -> victim.updateProductService(1L, productDto(1L)))
+        assertThatThrownBy(() -> victim.updateProductService(1L, productEntity(1L)))
                 .isInstanceOf(ProductNotFoundException.class);
     }
 
@@ -134,5 +133,16 @@ public class ProductServiceTest {
         productDto.setDiscount(BigDecimal.valueOf(25.0));
         productDto.setDescription("Poland");
         return productDto;
+    }
+
+    private ProductEntity productEntity(Long id) {
+        ProductEntity productEntity = new ProductEntity();
+        productEntity.setId(id);
+        productEntity.setName("Banana pack");
+        productEntity.setRegularPrice(BigDecimal.valueOf(22.46));
+        productEntity.setCategory(ProductCategory.FRUITS);
+        productEntity.setDiscount(BigDecimal.valueOf(25.0));
+        productEntity.setDescription("Poland");
+        return productEntity;
     }
 }
