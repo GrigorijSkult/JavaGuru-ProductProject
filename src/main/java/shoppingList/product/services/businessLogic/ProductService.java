@@ -11,7 +11,6 @@ import shoppingList.product.services.validations.exception.ProductNotFoundExcept
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService implements TemplateService<ProductDto> {
@@ -62,15 +61,14 @@ public class ProductService implements TemplateService<ProductDto> {
     @Override
     public ProductDto findProductByID(Long id) throws ProductNotFoundException {
         ProductEntity productEntity = productRepository.findProductByID(id)
-                .orElseThrow(()-> new ProductNotFoundException(id));
+                .orElseThrow(() -> new ProductNotFoundException(id));
         return productMapper.productToDto(productEntity);
     }
 
     @Override
-    public ProductDto updateProductService(Long id, ProductDto updatedProductDto) throws ProductNotFoundException {
+    public ProductDto updateProductService(Long id, ProductEntity updatedProductEntity) throws ProductNotFoundException {
         if (productRepository.existsById(id)) {
-            validationService.validate(updatedProductDto);
-            ProductEntity updatedProductEntity = productMapper.productToEntity(updatedProductDto);
+            validationService.validate(productMapper.productToDto(updatedProductEntity));
             return productMapper.productToDto((productRepository.updateProduct(id, updatedProductEntity)));
         } else {
             throw new ProductNotFoundException(id);

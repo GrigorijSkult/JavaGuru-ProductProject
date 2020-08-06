@@ -5,10 +5,11 @@ import shoppingList.shoppingCart.domain.ShoppingCartEntity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "products")
-//@Table(name = "products2")//ManyToMany
+//@Table(name = "products")
+@Table(name = "products2")//ManyToMany
 public class ProductEntity {
 
     @Id
@@ -34,16 +35,15 @@ public class ProductEntity {
 
     //<<<
     //---ProductEntity ManyToOne - ShoppingCartEntity OneToMany---
-    @ManyToOne
-    @JoinColumn(name = "shopping_cart_id", insertable = false, updatable = false)
-    private ShoppingCartEntity shoppingCartEntity;
+//    @ManyToOne
+//    private ShoppingCartEntity shopping_cart;
 
     //---ManyToMany---
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "products_in_shopping_carts",
-//            joinColumns = @JoinColumn(name = "products_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id"))
-//    private Set<ShoppingCartEntity> shoppingCarts;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "products_in_shopping_carts",
+            joinColumns = @JoinColumn(name = "products_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id"))
+    private Set<ShoppingCartEntity> shopping_cart;
     //>>>
 
     public ProductEntity() {
@@ -107,21 +107,23 @@ public class ProductEntity {
         this.description = description;
     }
 
-    public ShoppingCartEntity getShoppingCartEntity() {
-        return shoppingCartEntity;
+    //---ProductEntity ManyToOne - ShoppingCartEntity OneToMany---
+/*    public ShoppingCartEntity getShopping_cart() {
+        return shopping_cart;
     }
 
-    public void setShoppingCartEntity(ShoppingCartEntity shoppingCartEntity) {
-        this.shoppingCartEntity = shoppingCartEntity;
+    public void setShopping_cart(ShoppingCartEntity shopping_cart) {
+        this.shopping_cart = shopping_cart;
+    }*/
+
+    //---ManyToMany---
+    public Set<ShoppingCartEntity> getShopping_cart() {
+        return shopping_cart;
     }
 
-//    public Set<ShoppingCartEntity> getShoppingCarts() {
-//        return shoppingCarts;
-//    }
-//
-//    public void setShoppingCarts(Set<ShoppingCartEntity> shoppingCarts) {
-//        this.shoppingCarts = shoppingCarts;
-//    }
+    public void setShopping_cart(Set<ShoppingCartEntity> shopping_cart) {
+        this.shopping_cart = shopping_cart;
+    }
 
     @Override
     public boolean equals(Object o) {

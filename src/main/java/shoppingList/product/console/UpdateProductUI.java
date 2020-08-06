@@ -3,6 +3,7 @@ package shoppingList.product.console;
 import org.springframework.stereotype.Component;
 import shoppingList.console.UserInterfaceUnit;
 import shoppingList.product.dto.ProductDto;
+import shoppingList.product.mappers.ProductMapper;
 import shoppingList.product.services.businessLogic.ProductCategoryChoiceService;
 import shoppingList.product.services.businessLogic.ProductService;
 import shoppingList.product.services.validations.exception.ProductNotFoundException;
@@ -16,10 +17,12 @@ public class UpdateProductUI implements UserInterfaceUnit {
 
     private final ProductService productService;
     private final ProductCategoryChoiceService productCategoryChoiceService;
+    private final ProductMapper productMapper;
 
-    public UpdateProductUI(ProductService productService, ProductCategoryChoiceService productCategoryChoiceService) {
+    public UpdateProductUI(ProductService productService, ProductCategoryChoiceService productCategoryChoiceService, ProductMapper productMapper) {
         this.productService = productService;
         this.productCategoryChoiceService = productCategoryChoiceService;
+        this.productMapper = productMapper;
     }
 
     @Override
@@ -66,7 +69,7 @@ public class UpdateProductUI implements UserInterfaceUnit {
                 if (!productDescription.isEmpty()) {
                     updatedProductDto.setDescription(productDescription);
                 }
-                System.out.println("Product is updated : " + productService.updateProductService(id, updatedProductDto));
+                System.out.println("Product is updated : " + productService.updateProductService(id, productMapper.productToEntity(updatedProductDto)));
             } else {
                 System.out.println("Operation is canceled. Product wont be updated;");
             }
