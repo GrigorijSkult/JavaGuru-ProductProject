@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-//@Table(name = "products")
+//@Table(name = "products")//---ProductEntity ManyToOne - ShoppingCartEntity OneToMany---
 @Table(name = "products2")//ManyToMany
 public class ProductEntity {
 
@@ -33,13 +33,11 @@ public class ProductEntity {
     @Column(name = "description")
     private String description;
 
-    //<<<
     //---ProductEntity ManyToOne - ShoppingCartEntity OneToMany---
 //    @ManyToOne
 //    private ShoppingCartEntity shopping_cart;
 
     //---ManyToMany---
-//    @ManyToMany(cascade = CascadeType.ALL)
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                     CascadeType.PERSIST,
@@ -49,7 +47,6 @@ public class ProductEntity {
             joinColumns = @JoinColumn(name = "products_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id"))
     private Set<ShoppingCartEntity> shopping_cart;
-    //>>>
 
     public ProductEntity() {
     }
@@ -157,7 +154,6 @@ public class ProductEntity {
                 ", category=" + category +
                 ", discount=" + discount +
                 ", description='" + description + '\'' +
-                ", shopping_cart=" + shopping_cart +
                 '}';
     }
 }

@@ -1,9 +1,11 @@
 package shoppingList.product.dto;
 
 import shoppingList.product.domain.ProductCategory;
+import shoppingList.shoppingCart.domain.ShoppingCartEntity;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.Set;
 
 public class ProductDto {
 
@@ -14,6 +16,15 @@ public class ProductDto {
     private BigDecimal discount;
     private String description;
     private BigDecimal actualPrice;
+    private Set<ShoppingCartEntity> shopping_cart;
+
+    public Set<ShoppingCartEntity> getShopping_cart() {
+        return shopping_cart;
+    }
+
+    public void setShopping_cart(Set<ShoppingCartEntity> shopping_cart) {
+        this.shopping_cart = shopping_cart;
+    }
 
     public Long getId() {
         return id;
@@ -81,23 +92,27 @@ public class ProductDto {
                 Objects.equals(regularPrice, that.regularPrice) &&
                 category == that.category &&
                 Objects.equals(discount, that.discount) &&
-                Objects.equals(description, that.description);
+                Objects.equals(description, that.description) &&
+                Objects.equals(actualPrice, that.actualPrice) &&
+                Objects.equals(shopping_cart, that.shopping_cart);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, regularPrice, category, discount, description);
+        return Objects.hash(id, name, regularPrice, category, discount, description, actualPrice, shopping_cart);
     }
 
     @Override
     public String toString() {
-        return "ID = " + id +
-                ", Product Name= '" + name + '\'' +
-                ", Regular price= " + regularPrice + " EUR" +
-                ", Product category= '" + category + '\'' +
-                ", Discount= " + discount + " %" +
-                ", Actual price= " + actualPrice + " EUR" +
-                ", Description= '" + description +
-                '\'' + ";";
+        return "ProductDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", regularPrice=" + regularPrice +
+                ", category=" + category +
+                ", discount=" + discount +
+                ", description='" + description + '\'' +
+                ", actualPrice=" + actualPrice +
+                ", shopping_cart=" + shopping_cart +
+                '}';
     }
 }
