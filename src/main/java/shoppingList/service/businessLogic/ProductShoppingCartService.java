@@ -29,7 +29,7 @@ public class ProductShoppingCartService {
         shoppingCartEntity.getProducts().add(productEntity);
         shoppingCartService.updatedShoppingCartService(shoppingCartId, shoppingCartEntity);
 
-        productEntity.getShopping_cart().add(shoppingCartEntity);//NullPointExeption
+        productEntity.getShopping_cart().add(shoppingCartEntity);
         productService.updateProductService(productEntityId, productEntity);
 
         //---ProductEntity ManyToOne - ShoppingCartEntity OneToMany---

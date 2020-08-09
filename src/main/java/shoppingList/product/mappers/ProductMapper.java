@@ -16,12 +16,15 @@ public class ProductMapper {
         productDto.setCategory(productEntity.getCategory());
         productDto.setDiscount(productEntity.getDiscount());
         productDto.setDescription(productEntity.getDescription());
+        productDto.setShopping_cart(productEntity.getShopping_cart());
         productDto.setActualPrice(new ProductActualPriceCalculation().calculateProductActualPrice(productDto));
         return productDto;
     }
 
     public ProductEntity productToEntity(ProductDto productDto){
-        return new ProductEntity(productDto.getId(), productDto.getName(), productDto.getRegularPrice(),
+        ProductEntity productEntity = new ProductEntity(productDto.getId(), productDto.getName(), productDto.getRegularPrice(),
                 productDto.getCategory(), productDto.getDiscount(), productDto.getDescription());
+        productEntity.setShopping_cart(productDto.getShopping_cart());
+        return productEntity;
     }
 }

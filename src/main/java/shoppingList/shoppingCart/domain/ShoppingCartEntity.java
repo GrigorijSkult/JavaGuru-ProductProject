@@ -36,8 +36,6 @@ public class ShoppingCartEntity {
             mappedBy = "shopping_cart")
     private Set<ProductEntity> products;
 
-       //>>>
-
     public Long getId() {
         return id;
     }
@@ -83,7 +81,7 @@ public class ShoppingCartEntity {
         return "ShoppingCartEntity{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-//                ", products=" + products +
+                ", products=" + products +
                 '}';
     }
 }
