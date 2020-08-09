@@ -1,5 +1,6 @@
 package shoppingList.shoppingCart.domain;
 
+import org.springframework.transaction.annotation.Transactional;
 import shoppingList.product.domain.ProductEntity;
 
 import javax.persistence.*;
@@ -27,7 +28,12 @@ public class ShoppingCartEntity {
 //    private Set<ProductEntity> products;
 
     //  ---ManyToMany---
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "shopping_cart")
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "shopping_cart")
     private Set<ProductEntity> products;
 
        //>>>
@@ -71,12 +77,13 @@ public class ShoppingCartEntity {
         return Objects.hash(id, description, products);
     }
 
+    @Transactional
     @Override
     public String toString() {
         return "ShoppingCartEntity{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", products=" + products +
+//                ", products=" + products +
                 '}';
     }
 }
