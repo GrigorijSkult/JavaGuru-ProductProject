@@ -39,7 +39,12 @@ public class ProductEntity {
 //    private ShoppingCartEntity shopping_cart;
 
     //---ManyToMany---
-    @ManyToMany(cascade = CascadeType.ALL)
+//    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
     @JoinTable(name = "products_in_shopping_carts",
             joinColumns = @JoinColumn(name = "products_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id"))
