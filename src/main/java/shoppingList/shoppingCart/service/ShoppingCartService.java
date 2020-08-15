@@ -1,10 +1,10 @@
-package shoppingList.shoppingCart.service.businessLogic;
+package shoppingList.shoppingCart.service;
 
 import org.springframework.stereotype.Service;
 import shoppingList.product.services.validations.exception.ProductNotFoundException;
 import shoppingList.shoppingCart.domain.ShoppingCartEntity;
 import shoppingList.shoppingCart.repository.ShoppingCartRepository;
-import shoppingList.shoppingCart.service.businessLogic.exception.ShoppingCartNotFoundException;
+import shoppingList.shoppingCart.service.exception.ShoppingCartNotFoundException;
 
 import java.util.Collections;
 import java.util.List;

@@ -1,4 +1,4 @@
-package shoppingList.product.services.businessLogic;
+package shoppingList.product.services;
 
 import shoppingList.product.dto.ProductDto;
 

@@ -2,7 +2,7 @@ package shoppingList.product.console;
 
 import org.springframework.stereotype.Component;
 import shoppingList.console.UserInterfaceUnit;
-import shoppingList.product.services.businessLogic.ProductService;
+import shoppingList.product.services.ProductService;
 import shoppingList.product.services.validations.exception.ProductNotFoundException;
 
 import java.util.Scanner;

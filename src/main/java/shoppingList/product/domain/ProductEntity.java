@@ -29,6 +29,21 @@ public class ProductEntity {
     @Column(name = "description")
     private String description;
 
+    //---ProductEntity ManyToOne - ShoppingCartEntity OneToMany---
+//    @ManyToOne
+//    private ShoppingCartEntity shopping_cart;
+
+    //---ManyToMany---
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "products_in_shopping_carts",
+            joinColumns = @JoinColumn(name = "products_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id"))
+    private Set<ShoppingCartEntity> shoppingCart;
+
     public ProductEntity() {
     }
 
@@ -90,26 +105,46 @@ public class ProductEntity {
         this.description = description;
     }
 
+    //---ProductEntity ManyToOne - ShoppingCartEntity OneToMany---
+/*    public ShoppingCartEntity getShopping_cart() {
+        return shopping_cart;
+    }
+
+    public void setShopping_cart(ShoppingCartEntity shopping_cart) {
+        this.shopping_cart = shopping_cart;
+    }*/
+
+    //---ManyToMany---
+    public Set<ShoppingCartEntity> getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(Set<ShoppingCartEntity> shopping_cart) {
+        this.shoppingCart = shopping_cart;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductEntity productEntity = (ProductEntity) o;
-        return Objects.equals(name, productEntity.name) &&
-                Objects.equals(regularPrice, productEntity.regularPrice) &&
-                category == productEntity.category &&
-                Objects.equals(discount, productEntity.discount) &&
-                Objects.equals(description, productEntity.description);
+        ProductEntity that = (ProductEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(regularPrice, that.regularPrice) &&
+                category == that.category &&
+                Objects.equals(discount, that.discount) &&
+                Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, regularPrice, category, discount, description);
+        return Objects.hash(id, name, regularPrice, category, discount, description);
     }
 
     @Override
     public String toString() {
-        return "id=" + id +
+        return "ProductEntity{" +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", regularPrice=" + regularPrice +
                 ", category=" + category +

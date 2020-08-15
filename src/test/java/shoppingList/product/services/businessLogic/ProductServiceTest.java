@@ -10,6 +10,7 @@ import shoppingList.product.domain.ProductEntity;
 import shoppingList.product.dto.ProductDto;
 import shoppingList.product.mappers.ProductMapper;
 import shoppingList.product.repository.InMemoryProductImpRepository;
+import shoppingList.product.services.ProductService;
 import shoppingList.product.services.validations.ProductValidationService;
 import shoppingList.product.services.validations.exception.ProductNotFoundException;
 

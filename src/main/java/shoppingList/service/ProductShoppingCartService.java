@@ -1,13 +1,11 @@
-package shoppingList.service.businessLogic;
+package shoppingList.service;
 
 import org.springframework.stereotype.Service;
 import shoppingList.product.domain.ProductEntity;
 import shoppingList.product.mappers.ProductMapper;
-import shoppingList.product.services.businessLogic.ProductService;
+import shoppingList.product.services.ProductService;
 import shoppingList.shoppingCart.domain.ShoppingCartEntity;
-import shoppingList.shoppingCart.service.businessLogic.ShoppingCartService;
-
-import java.util.Set;
+import shoppingList.shoppingCart.service.ShoppingCartService;
 
 @Service
 public class ProductShoppingCartService {
@@ -29,7 +27,7 @@ public class ProductShoppingCartService {
         shoppingCartEntity.getProducts().add(productEntity);
         shoppingCartService.updatedShoppingCartService(shoppingCartId, shoppingCartEntity);
 
-        productEntity.getShopping_cart().add(shoppingCartEntity);
+        productEntity.getShoppingCart().add(shoppingCartEntity);
         productService.updateProductService(productEntityId, productEntity);
 
         //---ProductEntity ManyToOne - ShoppingCartEntity OneToMany---

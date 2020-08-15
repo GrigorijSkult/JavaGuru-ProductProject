@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 import shoppingList.product.dto.ProductDto;
+import shoppingList.product.services.ProductActualPriceCalculation;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

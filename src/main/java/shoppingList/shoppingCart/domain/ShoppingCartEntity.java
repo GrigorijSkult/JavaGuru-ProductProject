@@ -33,7 +33,7 @@ public class ShoppingCartEntity {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             },
-            mappedBy = "shopping_cart")
+            mappedBy = "shoppingCart")
     private Set<ProductEntity> products;
 
     public Long getId() {

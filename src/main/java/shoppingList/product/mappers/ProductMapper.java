@@ -3,7 +3,7 @@ package shoppingList.product.mappers;
 import org.springframework.stereotype.Component;
 import shoppingList.product.domain.ProductEntity;
 import shoppingList.product.dto.ProductDto;
-import shoppingList.product.services.businessLogic.ProductActualPriceCalculation;
+import shoppingList.product.services.ProductActualPriceCalculation;
 
 @Component
 public class ProductMapper {
@@ -16,7 +16,7 @@ public class ProductMapper {
         productDto.setCategory(productEntity.getCategory());
         productDto.setDiscount(productEntity.getDiscount());
         productDto.setDescription(productEntity.getDescription());
-        productDto.setShopping_cart(productEntity.getShopping_cart());
+        productDto.setShopping_cart(productEntity.getShoppingCart());
         productDto.setActualPrice(new ProductActualPriceCalculation().calculateProductActualPrice(productDto));
         return productDto;
     }
@@ -24,7 +24,7 @@ public class ProductMapper {
     public ProductEntity productToEntity(ProductDto productDto){
         ProductEntity productEntity = new ProductEntity(productDto.getId(), productDto.getName(), productDto.getRegularPrice(),
                 productDto.getCategory(), productDto.getDiscount(), productDto.getDescription());
-        productEntity.setShopping_cart(productDto.getShopping_cart());
+        productEntity.setShoppingCart(productDto.getShopping_cart());
         return productEntity;
     }
 }

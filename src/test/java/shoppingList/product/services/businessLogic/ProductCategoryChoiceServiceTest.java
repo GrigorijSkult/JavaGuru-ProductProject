@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import shoppingList.product.domain.ProductCategory;
+import shoppingList.product.services.ProductCategoryChoiceService;
 import shoppingList.product.services.validations.ProductCategoryValidation;
 import shoppingList.product.services.validations.exception.ProductValidationException;
 

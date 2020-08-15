@@ -1,4 +1,4 @@
-package shoppingList.product.services.businessLogic;
+package shoppingList.product.services;
 
 import org.springframework.stereotype.Service;
 import shoppingList.product.domain.ProductEntity;

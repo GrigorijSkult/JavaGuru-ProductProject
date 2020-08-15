@@ -1,4 +1,4 @@
-package shoppingList.shoppingCart.service.businessLogic.exception;
+package shoppingList.shoppingCart.service.exception;
 
 public class ShoppingCartNotFoundException extends RuntimeException {
 

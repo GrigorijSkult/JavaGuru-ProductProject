@@ -3,7 +3,7 @@ package shoppingList.product.console;
 import org.springframework.stereotype.Component;
 import shoppingList.console.UserInterfaceUnit;
 import shoppingList.product.dto.ProductDto;
-import shoppingList.product.services.businessLogic.ProductService;
+import shoppingList.product.services.ProductService;
 
 @Component
 public class ListOfAllProductsUI implements UserInterfaceUnit {

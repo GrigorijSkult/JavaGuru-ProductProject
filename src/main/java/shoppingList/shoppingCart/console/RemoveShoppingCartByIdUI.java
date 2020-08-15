@@ -2,8 +2,8 @@ package shoppingList.shoppingCart.console;
 
 import org.springframework.stereotype.Component;
 import shoppingList.console.UserInterfaceUnit;
-import shoppingList.shoppingCart.service.businessLogic.ShoppingCartService;
-import shoppingList.shoppingCart.service.businessLogic.exception.ShoppingCartNotFoundException;
+import shoppingList.shoppingCart.service.ShoppingCartService;
+import shoppingList.shoppingCart.service.exception.ShoppingCartNotFoundException;
 
 import java.util.Scanner;
 

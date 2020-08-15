@@ -4,8 +4,8 @@ import org.springframework.stereotype.Component;
 import shoppingList.console.UserInterfaceUnit;
 import shoppingList.product.dto.ProductDto;
 import shoppingList.product.mappers.ProductMapper;
-import shoppingList.product.services.businessLogic.ProductCategoryChoiceService;
-import shoppingList.product.services.businessLogic.ProductService;
+import shoppingList.product.services.ProductCategoryChoiceService;
+import shoppingList.product.services.ProductService;
 import shoppingList.product.services.validations.exception.ProductNotFoundException;
 import shoppingList.product.services.validations.exception.ProductValidationException;
 
