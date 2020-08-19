@@ -2,8 +2,9 @@ package shoppingList.services.validations;
 
 import org.springframework.stereotype.Component;
 import shoppingList.constants.ValidationConstants;
-import shoppingList.dto.ProductDto;
-import shoppingList.services.validations.exception.ProductValidationException;
+import shoppingList.product.dto.ProductDto;
+import shoppingList.product.services.validations.ValidationRule;
+import shoppingList.product.services.validations.exception.ProductValidationException;
 
 @Component
 public class ProductDescriptionValidation implements ValidationRule<ProductDto> {

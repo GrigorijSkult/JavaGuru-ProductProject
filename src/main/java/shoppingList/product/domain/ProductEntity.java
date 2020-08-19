@@ -1,11 +1,15 @@
 package shoppingList.product.domain;
 
+import shoppingList.shoppingCart.domain.ShoppingCartEntity;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "products")
+//@Table(name = "products")//---ProductEntity ManyToOne - ShoppingCartEntity OneToMany---
+@Table(name = "products2")//ManyToMany
 public class ProductEntity {
 
     @Id
@@ -42,7 +46,7 @@ public class ProductEntity {
     @JoinTable(name = "products_in_shopping_carts",
             joinColumns = @JoinColumn(name = "products_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id"))
-    private Set<ShoppingCartEntity> shoppingCart;
+    private Set<ShoppingCartEntity> shopping_cart;
 
     public ProductEntity() {
     }
@@ -115,12 +119,12 @@ public class ProductEntity {
     }*/
 
     //---ManyToMany---
-    public Set<ShoppingCartEntity> getShoppingCart() {
-        return shoppingCart;
+    public Set<ShoppingCartEntity> getShopping_cart() {
+        return shopping_cart;
     }
 
-    public void setShoppingCart(Set<ShoppingCartEntity> shopping_cart) {
-        this.shoppingCart = shopping_cart;
+    public void setShopping_cart(Set<ShoppingCartEntity> shopping_cart) {
+        this.shopping_cart = shopping_cart;
     }
 
     @Override

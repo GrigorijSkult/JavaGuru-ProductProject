@@ -1,9 +1,9 @@
-package shoppingList.services.validations;
+package shoppingList.product.services.validations;
 
 import org.springframework.stereotype.Component;
 import shoppingList.constants.ValidationConstants;
-import shoppingList.dto.ProductDto;
-import shoppingList.services.validations.exception.ProductValidationException;
+import shoppingList.product.dto.ProductDto;
+import shoppingList.product.services.validations.exception.ProductValidationException;
 
 import java.math.BigDecimal;
 

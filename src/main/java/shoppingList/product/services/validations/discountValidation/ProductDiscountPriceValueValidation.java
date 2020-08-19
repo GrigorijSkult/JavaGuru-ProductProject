@@ -1,9 +1,9 @@
-package shoppingList.services.validations.discountValidation;
+package shoppingList.product.services.validations.discountValidation;
 
 import shoppingList.constants.ValidationConstants;
-import shoppingList.dto.ProductDto;
-import shoppingList.services.validations.ValidationRule;
-import shoppingList.services.validations.exception.ProductValidationException;
+import shoppingList.product.dto.ProductDto;
+import shoppingList.product.services.validations.ValidationRule;
+import shoppingList.product.services.validations.exception.ProductValidationException;
 
 import java.math.BigDecimal;
 
